@@ -238,7 +238,7 @@ jQuery(document).ready(function ($) {
   }
   function getTotal() {
     $.ajax({
-      url: origin + "/search/search.php",
+      url: origin + "/opb/search/search.php",
       type: "POST",
       dataType: "json",
       data: {
@@ -336,7 +336,7 @@ jQuery(document).ready(function ($) {
       data["sort"] = sortCondition;
     }
     $.ajax({
-      url: origin + "/search/search.php",
+      url: origin + "/opb/search/search.php",
       type: "POST",
       dataType: "json",
       data: data,
@@ -438,7 +438,7 @@ jQuery(document).ready(function ($) {
     }
 
     $.ajax({
-      url: origin + "/search/search.php",
+      url: origin + "/opb/search/search.php",
       type: "POST",
       dataType: "json",
       data: data,
@@ -526,7 +526,7 @@ jQuery(document).ready(function ($) {
     }
 
     $.ajax({
-      url: origin + "/search/search.php",
+      url: origin + "/opb/search/search.php",
       type: "POST",
       dataType: "json",
       data: data,
@@ -991,7 +991,7 @@ jQuery(document).ready(function ($) {
       $button = $(this);
       $.ajax({
         type: "GET",
-        url: origin + "/form/form-more-v1.php",
+        url: origin + "/opb/form/form-more-v1.php",
         success: function (result) {
           $form_list.append(result);
         },
@@ -1004,7 +1004,7 @@ jQuery(document).ready(function ($) {
       $button = $(this);
       $.ajax({
         type: "GET",
-        url: origin + "/form/form-more-v2.php",
+        url: origin + "/opb/form/form-more-v2.php",
         success: function (result) {
           $form_list.append(result);
         },
@@ -1016,7 +1016,7 @@ jQuery(document).ready(function ($) {
       $button = $(this);
       $.ajax({
         type: "GET",
-        url: origin + "/form/form-more-v3.php",
+        url: origin + "/opb/form/form-more-v3.php",
         success: function (result) {
           $form_list.append(result);
         },
@@ -1028,7 +1028,7 @@ jQuery(document).ready(function ($) {
       $button = $(this);
       $.ajax({
         type: "GET",
-        url: origin + "/form/form-more-v4.php",
+        url: origin + "/opb/form/form-more-v4.php",
         success: function (result) {
           $form_list.append(result);
         },
@@ -1040,7 +1040,7 @@ jQuery(document).ready(function ($) {
       $button = $(this);
       $.ajax({
         type: "GET",
-        url: origin + "/form/form-more-v5.php",
+        url: origin + "/opb/form/form-more-v5.php",
         success: function (result) {
           $form_list.append(result);
         },
@@ -1184,7 +1184,7 @@ jQuery(document).ready(function ($) {
       if (val) {
         var req = $.ajax({
           type: "GET",
-          url: origin + "/form/form-more-v2.php",
+          url: origin + "/opb/form/form-more-v2.php",
           data: { selectPageVal: "" + val + "" },
           success: function (htmlresponse) {
             $("#form-list-v2").html(htmlresponse);
@@ -1208,7 +1208,7 @@ jQuery(document).ready(function ($) {
       if (val) {
         var req = $.ajax({
           type: "GET",
-          url: origin + "/form/form-more-v3.php",
+          url: origin + "/opb/form/form-more-v3.php",
           data: { selectPageVal: "" + val + "" },
           success: function (htmlresponse) {
             $("#form-list-v3").html(htmlresponse);
@@ -1232,7 +1232,7 @@ jQuery(document).ready(function ($) {
       if (val) {
         var req = $.ajax({
           type: "GET",
-          url: origin + "/form/form-more-v4.php",
+          url: origin + "/opb/form/form-more-v4.php",
           data: { selectPageVal: "" + val + "" },
           success: function (htmlresponse) {
             $("#form-list-v4").html(htmlresponse);
@@ -1256,7 +1256,7 @@ jQuery(document).ready(function ($) {
       if (val) {
         var req = $.ajax({
           type: "GET",
-          url: origin + "/form/form-more-v5.php",
+          url: origin + "/opb/form/form-more-v5.php",
           data: { selectPageVal: "" + val + "" },
           success: function (htmlresponse) {
             $("#form-list-v5").html(htmlresponse);
