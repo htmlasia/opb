@@ -5,6 +5,8 @@ jQuery(document).ready(function ($) {
   var pathname = window.location.pathname; // Returns path only (/path/example.html)
   var url = window.location.href; // Returns full URL (https://example.com/path/example.html)
   var origin = window.location.origin; // Returns base URL (https://example.com)
+  var pathOne = window.location.pathname.split("/");
+  var originPathOne = window.location.origin + "/" + pathOne[1];
   // console.log(origin);
 
   function appHeight() {
@@ -103,6 +105,31 @@ jQuery(document).ready(function ($) {
   // search0215();
   // searchAll();
 
+  $("#search-data").keypress(function (event) {
+    if (event.which === 13) {
+      let $form = $("#search-page-form");
+      var valid = $form.hasClass("is-input");
+      var error_free = true;
+      if (!valid) {
+        $(".opb-search-page .input-warning").addClass("is-active");
+        error_free = false;
+      }
+      if (!error_free) {
+        event.preventDefault();
+      } else {
+        event.preventDefault();
+        const searchValue = $(".opb-search-page .opb-form-text").val();
+        if (searchValue) {
+          if (typeActive == "all") {
+            searchAll();
+          } else {
+            searchByType(typeActive);
+          }
+          search0215();
+        }
+      }
+    }
+  });
   $(".opb-page-header").insertBefore("#carouselHomepageIndicators");
   function initEvent() {
     $(".c-tab-menu_list li:first-child").addClass("item-active");
@@ -129,6 +156,7 @@ jQuery(document).ready(function ($) {
         }
       }
     });
+
     $("select[name='selectPage']").on("change", function () {
       var val = $(this).val();
       if (val) {
@@ -238,7 +266,7 @@ jQuery(document).ready(function ($) {
   }
   function getTotal() {
     $.ajax({
-      url: origin + "/opb/search/search.php",
+      url: originPathOne + "/search/search.php",
       type: "POST",
       dataType: "json",
       data: {
@@ -336,7 +364,7 @@ jQuery(document).ready(function ($) {
       data["sort"] = sortCondition;
     }
     $.ajax({
-      url: origin + "/opb/search/search.php",
+      url: originPathOne + "/search/search.php",
       type: "POST",
       dataType: "json",
       data: data,
@@ -432,13 +460,12 @@ jQuery(document).ready(function ($) {
     };
     var $input = $(".opb-search-page .opb-form-text");
     const searchData = $input.val();
-    console.log("thanh", searchData);
     if (searchData != "") {
       data["searchData"] = searchData;
     }
 
     $.ajax({
-      url: origin + "/opb/search/search.php",
+      url: originPathOne + "/search/search.php",
       type: "POST",
       dataType: "json",
       data: data,
@@ -526,7 +553,7 @@ jQuery(document).ready(function ($) {
     }
 
     $.ajax({
-      url: origin + "/opb/search/search.php",
+      url: originPathOne + "/search/search.php",
       type: "POST",
       dataType: "json",
       data: data,
@@ -735,7 +762,7 @@ jQuery(document).ready(function ($) {
       if ($item.length == 1) {
         t(".opb-homepage-controls").hide();
         t(".opb-page-header").addClass("is-one");
-        t('#carouselHomepageIndicators').addClass('is-one');
+        t("#carouselHomepageIndicators").addClass("is-one");
       }
       var e = t("#carouselHomepageIndicators")
         .getElem(".carousel-item")
@@ -772,7 +799,9 @@ jQuery(document).ready(function ($) {
         a.find(n).addClass("active");
         o.html(i.attr("data-slide-title"));
         v.html(i.attr("data-slide-desc"));
-        t(".opb-page-header").getElem("a").attr( "intial-position", e.to + 1 );
+        t(".opb-page-header")
+          .getElem("a")
+          .attr("intial-position", e.to + 1);
         if (i.attr("data-slide-desc") == "") {
           v.addClass("is-none");
         } else {
@@ -794,12 +823,12 @@ jQuery(document).ready(function ($) {
     function checkWidth() {
       var windowsize = $(window).width();
       if (windowsize < 768) {
-        $('#carouselHomepageIndicators').carousel({
-          interval: false
+        $("#carouselHomepageIndicators").carousel({
+          interval: false,
         });
       } else {
-        $('#carouselHomepageIndicators').carousel({
-          interval: 5000
+        $("#carouselHomepageIndicators").carousel({
+          interval: 5000,
         });
       }
     }

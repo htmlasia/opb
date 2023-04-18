@@ -242,7 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 case 'getAll':
                     $page = $_POST['page'];
                     $limit = $_POST['limit'];
-                    $searchData = $_POST['searchData'];
+                    $searchData = isset($_POST['searchData']) ? $_POST['searchData'] : '';
                     $result = getAll($page, $limit, $searchData);
                     echo json_encode(array('data' => $result));
                     break;
@@ -253,10 +253,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 case 'getByType':
                     $page = $_POST['page'];
                     $limit = $_POST['limit'];
-                    $searchData = $_POST['searchData'];
+                    $searchData = isset($_POST['searchData']) ? $_POST['searchData'] : '';
                     $category = $_POST['category'];
                     $type = $_POST['type'];
-                    $sort = $_POST['sort'];
+                    $sort = isset($_POST['sort']) ? $_POST['sort'] : '';;
                     $result = getByType($page, $limit, $searchData, $type, $category, $sort);
                     echo json_encode(array('data' => $result));
                     break;
