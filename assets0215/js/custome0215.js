@@ -386,6 +386,16 @@ jQuery(document).ready(function ($) {
         ) {
           if (pagesType !== "form" && pagesType !== "publications") {
             $(".cat-more").addClass("hideBtn");
+          } else if (pagesType == "form" || pagesType == "publications") {
+            if (!isInitialSearch) {
+              searchByType(typeActive);
+            } else {
+              addLoadingClasses();
+              setTimeout(() => {
+                removeLoadingClasses();
+              }, 500);
+            }
+            isInitialSearch = true;
           }
           $(".c-tab-menu_list li").removeClass("item-active");
           $(".txt-num").empty();
@@ -1356,10 +1366,7 @@ jQuery(document).ready(function ($) {
       dataType: "json",
       data: data,
       beforeSend: function () {
-        $(".opb-search-page .loading").show();
-        $(".opb-search-page .cat-more").addClass("loada");
-        $("#all-data").addClass("loada");
-        $("#form-list-v1").addClass("loada");
+        addLoadingClasses();
       },
       success: function (response) {
         let dataFilter = response.data,
@@ -2017,10 +2024,7 @@ jQuery(document).ready(function ($) {
           isCustomized = true;
           search0215();
           setItemImageHeight();
-          $(".opb-search-page .loading").hide();
-          $(".opb-search-page .cat-more").removeClass("loada");
-          $("#all-data").removeClass("loada");
-          $("#form-list-v1").removeClass("loada");
+          removeLoadingClasses();
         }, 1000);
       },
     });
@@ -2074,10 +2078,7 @@ jQuery(document).ready(function ($) {
       dataType: "json",
       data: data,
       beforeSend: function () {
-        $(".opb-search-page .loading").show();
-        $(".opb-search-page .cat-more").addClass("loada");
-        $("#all-data").addClass("loada");
-        $("#form-list-v1").addClass("loada");
+        addLoadingClasses();
       },
       success: function (response) {
         if (response && response.data) {
@@ -2181,10 +2182,7 @@ jQuery(document).ready(function ($) {
               search0215();
               setItemImageHeight();
             }
-            $(".opb-search-page .loading").hide();
-            $(".opb-search-page .cat-more").removeClass("loada");
-            $("#all-data").removeClass("loada");
-            $("#form-list-v1").removeClass("loada");
+            removeLoadingClasses();
           }, 1000);
         }
       },
@@ -3225,4 +3223,21 @@ jQuery(document).ready(function ($) {
     let div = divs.eq(index);
     div.attr("xlink:href", "#icon-search-clear");
   });
+  function addLoadingClasses() {
+    $(".opb-search-page .loading").show();
+    $(".opb-search-page .cat-more").addClass("loada");
+    $("#all-data").addClass("loada");
+    $("#form-list-v1").addClass("loada");
+    $(".note").addClass("loada");
+    $("html").addClass("disableScroll");
+  }
+
+  function removeLoadingClasses() {
+    $(".opb-search-page .loading").hide();
+    $(".opb-search-page .cat-more").removeClass("loada");
+    $("#all-data").removeClass("loada");
+    $("#form-list-v1").removeClass("loada");
+    $(".note").removeClass("loada");
+    $("html").removeClass("disableScroll");
+  }
 });
