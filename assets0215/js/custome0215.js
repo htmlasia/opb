@@ -2,128 +2,273 @@
  ********************************************** */
 jQuery(document).ready(function ($) {
   var t = $;
-  var pathname = window.location.pathname; // Returns path only (/path/example.html)
-  var url = window.location.href; // Returns full URL (https://example.com/path/example.html)
-  var origin = window.location.origin; // Returns base URL (https://example.com)
+
   var pathOne = window.location.pathname.split("/");
+
   var originPathOne = window.location.origin + "/" + pathOne[1];
-  // console.log(origin);
+  // var originPathOne = window.location.origin;
+
+  let searchjson = originPathOne + "/search/search.json";
+
+  let searchParams = new URLSearchParams(window.location.search);
+  let newURL = new URL(window.location.href);
+
+  if ($("#content").attr("data-page") != undefined) {
+    var pagesType = $("#content").data("page");
+  }
 
   function appHeight() {
     const doc = document.documentElement;
     doc.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
   }
 
-  const limit = 5;
+  const limit = 20;
   let page = 1;
+  let localValue = "";
+  let isCustomized = false;
 
   const type = {
     all: "All",
     page: "Pages",
-    articles: "Articles",
     forms: "Forms",
     publications: "Publications",
+    articles: "Articles",
   };
   const typeNumber = {
     all: "01",
     page: "02",
-    articles: "03",
-    forms: "04",
-    publications: "05",
+    forms: "03",
+    publications: "04",
+    articles: "05",
   };
 
-  const typeArticle = {
-    news: "Articles - News",
-    letter: "Articles - Newsletter",
-    blog: "Articles - Blog",
-  };
-
-  const typeCategoryPage = {
-    "01": "all",
-    "02": "member_pages",
-    "03": "current_pages",
-    "04": "retired_members",
-    "05": "employers",
-  };
-
-  const typeCategoryArticles = {
-    "01": "all",
-    "02": "news",
-    "03": "letter",
-    "04": "blog",
-  };
-
-  const typeCategoryForms = {
-    "01": "all",
-    "02": "opb",
-    "03": "fsco",
-    "04": "fsra",
-    "05": "cowan",
-    "06": "canada",
-  };
-
-  const typeForms = {
-    opb: "OPB Form",
-    fsco: "FSCO / FSRA Waivers Form",
-    fsra: "FSRA Family Law Form",
-    cowan: "Cowan Form",
-    canada: "Canada Life Form",
-  };
-
-  const typePublications = {
-    booklet: "Booklets",
-    fyler: "Flyer and Brochures",
-    obp: "OPB News for Members",
-    annual_en: "Annual Reports - EN",
-    annual_fr: "Annual Reports - FR",
-    financial_en: "Financial Reports - EN",
-    financial_fr: "Financial Reports - FR",
-    business_en: "Business Plans - EN",
-  };
-  const typeCatPublications = {
-    "01": "all",
-    "02": "booklet",
-    "03": "flyer",
-    "04": "obp",
-    "05": "annual_en",
-    "06": "annual_fr",
-    "07": "financial_en",
-    "08": "financial_fr",
-    "09": "business_en",
-    "010": "business_fr",
-  };
   let typeActive = "all";
-
   window.addEventListener("resize", appHeight);
   appHeight();
-  getTotal();
+  if (pagesType == "form" || pagesType == "publications") {
+    if (pagesType == "form") {
+      typeActive = "forms";
+    } else {
+      typeActive = "publications";
+    }
+    if (searchParams.has("type")) {
+      let typeCate = searchParams.get("cate"),
+        typeName = searchParams.get("group"),
+        typeActive = searchParams.get("type"),
+        textSearch = searchParams.get("s");
+      $("#search-data").val(textSearch);
+      searchByType(typeActive, typeCate, null, typeName);
+    } else {
+      searchByType(typeActive);
+    }
+  } else {
+    getTotal();
+    if (searchParams.get("s") === "undefined") {
+      searchParams.delete("s");
+    }
+  }
 
   // $(".c-tab-menu_list li:first-child").addClass("item-active");
   headerSearch0215();
+  headerSearch0216();
   homepage0215();
   initEvent();
   // search0215();
   // searchAll();
+  let isInitialSearch = false;
 
-  $("#search-data").keypress(function (event) {
+  $("#search-data, #search-data2, #search-data3").keypress(function (event) {
     if (event.which === 13) {
+      let inputId = event.target.id;
+      let searchValue = localStorage.getItem("searchValue");
+      let $input = $("#search-page-form .opb-form-text");
+      if (!$input.val()) {
+        localStorage.setItem("changePage", true);
+      } else {
+        localStorage.removeItem("changePage");
+      }
+
+      let changePage = localStorage.getItem("changePage");
+      if (changePage && changePage !== null) {
+        localStorage.removeItem("changePage");
+        $(".c-tab-menu_list li:first-child").removeClass("item-active");
+      }
+
+      if (!searchValue) {
+        searchValue = $("#search-header .opb-form-text").val();
+        localStorage.setItem("searchValue", searchValue);
+      } else {
+        localStorage.setItem("changePage", true);
+        // $(".c-tab-menu_list li:first-child").removeClass("item-active");
+      }
+
+      if (inputId === "search-data") {
+        localStorage.removeItem("searchValue");
+        localStorage.setItem("searchValue", $("#search-data").val());
+      } else if (inputId === "search-data3") {
+        localStorage.removeItem("searchValue");
+        searchValue = $(
+          ".search-header-from #search-header .opb-form-text"
+        ).val();
+        localStorage.setItem("searchValue", searchValue);
+        currentURL = $(location).attr("href");
+        if (currentURL.localeCompare(originPathOne + "/search/") !== 0) {
+          if ($("#" + inputId).val() == "") {
+            localStorage.setItem("changePage", true);
+          }
+          // window.location.href = originPathOne + "/search/";
+          let getSearch = searchValue ? "?s=" + searchValue : "";
+          window.location.href = originPathOne + "/search/" + getSearch;
+        } else {
+          if ($("#" + inputId).val() == "") {
+            $(".cat-more").addClass("hideBtn");
+            if (pagesType !== "form" || pagesType !== "publications") {
+              $(".c-tab-menu_list li").removeClass("item-active");
+              $(".txt-num").empty();
+              $("#all-data")
+                .empty()
+                .html(
+                  "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+                );
+            }
+          } else {
+            $(".search-header-from #search-header .opb-form-text").val(
+              searchValue
+            );
+            searchAll();
+          }
+        }
+      } else if (inputId === "search-data2") {
+        let currentURL = $(location).attr("href");
+        if (currentURL.localeCompare(originPathOne + "/search/") !== 0) {
+          if ($("#" + inputId).val() == "") {
+            localStorage.setItem("changePage", true);
+          }
+          // window.location.href = originPathOne + "/search/";
+          let getSearch = searchValue ? "?s=" + searchValue : "";
+          window.location.href = originPathOne + "/search/" + getSearch;
+        } else {
+          if ($("#" + inputId).val() == "") {
+            $(".cat-more").addClass("hideBtn");
+            if (pagesType !== "form" || pagesType !== "publications") {
+              $(".c-tab-menu_list li").removeClass("item-active");
+              $(".txt-num").empty();
+              $("#all-data")
+                .empty()
+                .html(
+                  "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+                );
+            }
+          } else {
+            searchAll();
+          }
+        }
+        $("#search-header .opb-form-text").val(searchValue);
+      }
       let $form = $("#search-page-form");
       var valid = $form.hasClass("is-input");
       var error_free = true;
+
       if (!valid) {
-        $(".opb-search-page .input-warning").addClass("is-active");
+        if (inputId === "search-data" && $input.val() == "") {
+          $(".opb-search-page .input-warning").addClass("is-active");
+        }
+        if (!isInitialSearch) {
+          if (inputId === "search-data" && !$("#" + inputId).val() == "") {
+            if (pagesType == "form") {
+              typeActive = "forms";
+            }
+            if (pagesType == "publications") {
+              typeActive = "publications";
+            }
+            if (typeActive == "all") {
+              searchAll();
+            } else {
+              if (searchParams.has("type")) {
+                let typeCate = searchParams.get("cate"),
+                  typeName = searchParams.get("group"),
+                  typeActive = searchParams.get("type"),
+                  textSearch = searchParams.get("s");
+                if ($("#search-data").val() == "" && textSearch) {
+                  $("#search-data").val(textSearch);
+                }
+                searchByType(typeActive, typeCate, null, typeName);
+              } else {
+                searchByType(typeActive);
+              }
+            }
+          } else if (
+            (inputId === "search-data2" && !$("#" + inputId).val() == "") ||
+            (inputId === "search-data3" && !$("#" + inputId).val() == "")
+          ) {
+            if (pagesType == "form") {
+              typeActive = "forms";
+            }
+            if (pagesType == "publications") {
+              typeActive = "publications";
+            }
+            if (typeActive == "all") {
+              searchAll();
+            } else {
+              if (searchParams.has("type")) {
+                let typeCate = searchParams.get("cate"),
+                  typeName = searchParams.get("group"),
+                  typeActive = searchParams.get("type"),
+                  textSearch = searchParams.get("s");
+                if ($("#search-data").val() == "" && textSearch) {
+                  $("#search-data").val(textSearch);
+                }
+                searchByType(typeActive, typeCate, null, typeName);
+              } else {
+                searchByType(typeActive);
+              }
+            }
+          } else if (pagesType !== "form" || pagesType !== "publications") {
+            $(".cat-more").addClass("hideBtn");
+            $(".c-tab-menu_list li").removeClass("item-active");
+            $(".txt-num").empty();
+            $("#all-data")
+              .empty()
+              .html(
+                "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+              );
+          }
+
+          isInitialSearch = true;
+        }
         error_free = false;
       }
       if (!error_free) {
         event.preventDefault();
       } else {
         event.preventDefault();
-        const searchValue = $(".opb-search-page .opb-form-text").val();
+        isInitialSearch = false;
+        const searchValue = $("#search-page-form .opb-form-text").val();
         if (searchValue) {
+          if (pagesType == "form") {
+            event.preventDefault();
+            typeActive = "forms";
+          }
+          if (pagesType == "publications") {
+            event.preventDefault();
+            typeActive = "publications";
+          }
+
           if (typeActive == "all") {
             searchAll();
           } else {
-            searchByType(typeActive);
+            if (searchParams.has("type")) {
+              let typeCate = searchParams.get("cate"),
+                typeName = searchParams.get("group"),
+                typeActive = searchParams.get("type"),
+                textSearch = searchParams.get("s");
+              if ($("#search-data").val() == "" && textSearch) {
+                $("#search-data").val(textSearch);
+              }
+              searchByType(typeActive, typeCate, null, typeName);
+            } else {
+              searchByType(typeActive);
+            }
           }
           search0215();
         }
@@ -132,25 +277,157 @@ jQuery(document).ready(function ($) {
   });
   $(".opb-page-header").insertBefore("#carouselHomepageIndicators");
   function initEvent() {
+    $("#search-header .opb-btn-submit").click(function (event) {
+      event.preventDefault();
+
+      let changePage = localStorage.getItem("changePage");
+      if (changePage && changePage !== null) {
+        localStorage.removeItem("changePage");
+      }
+      localStorage.removeItem("searchValue");
+      let searchValue = $(this)
+        .closest("#search-header")
+        .find(".opb-form-text")
+        .val();
+      if (searchValue !== "") {
+        localStorage.setItem("searchValue", searchValue);
+        searchParams.set("s", searchValue);
+      } else {
+        localStorage.setItem("changePage", true);
+        $(".c-tab-menu_list li:first-child").removeClass("item-active");
+      }
+      // if (valid) {
+      let currentURL = $(location).attr("href");
+      let getSearch = searchValue ? "?s=" + searchValue : "";
+      if (currentURL.localeCompare(originPathOne + "/search/") !== 0) {
+        window.location.href = originPathOne + "/search/" + getSearch;
+      } else {
+        newURL.search = searchParams.toString();
+        let updatedURL = newURL.toString();
+        window.history.pushState({ path: updatedURL }, "", updatedURL);
+        searchAll();
+        if (window.innerWidth < 769) {
+          $(".search-header-icon, .search-header-from").toggleClass(
+            "is-active"
+          );
+          $("html").toggleClass("is-hidden");
+        }
+        return false;
+      }
+    });
+    // let searchGetValue = localStorage.getItem("searchValue");
+    // if (searchGetValue) {
+    //   $("#search-header .opb-form-text").val(searchGetValue);
+    // }
     $(".c-tab-menu_list li:first-child").addClass("item-active");
-    var $form = $("#search-page-form");
-    var $input = $(".opb-search-page .opb-form-text");
-    $(".opb-btn-submit").click(function (event) {
-      var valid = $form.hasClass("is-input");
-      var error_free = true;
+    let $form = $("#search-page-form");
+    let $input = $("#search-page-form .opb-form-text");
+    $("#search-page-form .opb-btn-submit").click(function (event) {
+      window.scrollTo(0, 0);
+      localStorage.removeItem("searchValue");
+      if (!$input.val()) {
+        localStorage.setItem("changePage", true);
+      } else {
+        localStorage.removeItem("changePage");
+      }
+      let changePage = localStorage.getItem("changePage");
+      if (changePage !== null) {
+        $(".c-tab-menu_list li:first-child").addClass("item-active");
+      }
+
+      localStorage.setItem("searchValue", $("#search-data").val());
+      let valid = $form.hasClass("is-input");
+      let error_free = true;
       if (!valid) {
-        $(".opb-search-page .input-warning").addClass("is-active");
+        if ($input.val() == "") {
+          $(".opb-search-page .input-warning").addClass("is-active");
+        }
+        if (!isInitialSearch && $input.val() !== "") {
+          if (pagesType == "form") {
+            typeActive = "forms";
+          }
+          if (pagesType == "publications") {
+            typeActive = "publications";
+          }
+          if (typeActive == "all") {
+            if ($input.val() == "") {
+              if (pagesType !== "form" && pagesType !== "publications") {
+                $(".cat-more").addClass("hideBtn");
+              }
+              $(".c-tab-menu_list li").removeClass("item-active");
+              $(".txt-num").empty();
+              $("#all-data")
+                .empty()
+                .html(
+                  "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+                );
+            } else {
+              searchAll();
+            }
+          } else {
+            if (searchParams.has("type")) {
+              let typeCate = searchParams.get("cate"),
+                typeName = searchParams.get("group"),
+                typeActive = searchParams.get("type"),
+                textSearch = searchParams.get("s");
+              if ($("#search-data").val() == "" && textSearch) {
+                $("#search-data").val(textSearch);
+              }
+              searchByType(typeActive, typeCate, null, typeName);
+            } else {
+              searchByType(typeActive);
+            }
+          }
+
+          isInitialSearch = true;
+        } else if (
+          (pagesType !== "form" && $(this).val() == "") ||
+          (pagesType !== "publications" && $(this).val() == "")
+        ) {
+          if (pagesType !== "form" && pagesType !== "publications") {
+            $(".cat-more").addClass("hideBtn");
+          }
+          $(".c-tab-menu_list li").removeClass("item-active");
+          $(".txt-num").empty();
+          $("#all-data")
+            .empty()
+            .html(
+              "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+            );
+        }
         error_free = false;
       }
       if (!error_free) {
         event.preventDefault();
       } else {
+        isInitialSearch = false;
         const searchValue = $input.val();
-        if (searchValue) {
+        if (searchValue && searchValue !== "") {
+          if (pagesType == "form") {
+            event.preventDefault();
+            typeActive = "forms";
+          }
+          if (pagesType == "publications") {
+            event.preventDefault();
+            typeActive = "publications";
+          }
           if (typeActive == "all") {
             searchAll();
           } else {
-            searchByType(typeActive);
+            if (searchParams.has("type")) {
+              let typeCate = searchParams.get("cate"),
+                typeName = searchParams.get("group"),
+                typeActive = searchParams.get("type"),
+                textSearch = searchParams.get("s");
+              if ($input.val() !== "") {
+                searchParams.set("s", $input.val());
+              } else if ($input.val() == "" && textSearch) {
+                $input.val(textSearch);
+              }
+              searchByType(typeActive, typeCate, null, typeName);
+            } else {
+              searchByType(typeActive);
+            }
           }
           search0215();
         }
@@ -158,46 +435,287 @@ jQuery(document).ready(function ($) {
     });
 
     $("select[name='selectPage']").on("change", function () {
-      var val = $(this).val();
-      if (val) {
-        if (val == "01") searchByType(typeActive);
-        else searchByType(typeActive, typeCategoryPage[val]);
-      }
+      selectPageChange();
     });
 
     $("select[name='selectArticle']").on("change", function () {
-      var val = $(this).val();
-      if (val) {
-        const activeCondition = document.querySelector(
-          ".cat-filter-sort-list.sort-articles li.is-active"
-        );
-        const sortCondition = activeCondition.id;
-        if (val == "01") searchByType(typeActive, null, sortCondition);
-        else searchByType(typeActive, typeCategoryArticles[val], sortCondition);
-      }
+      selectArticleChange();
     });
 
-    $("select[name='selectForm']").on("change", function () {
-      var val = $(this).val();
-      if (val) {
-        const activeCondition = document.querySelector(
-          ".cat-filter-sort-list.sort-forms li.is-active"
-        );
+    $("select[name='formsSelectCategory']").on("change", function () {
+      handleSelectChange();
+    });
 
-        const sortCondition = activeCondition.id;
-        if (val == "01") searchByType(typeActive, null, sortCondition);
-        else searchByType(typeActive, typeCategoryForms[val], sortCondition);
+    $("select[name='formsSelectCode']").on("change", function () {
+      handleSelectChange();
+    });
+
+    $("select[name='publicationsSelectCategory']").on("change", function () {
+      handleSelectChangePublications();
+    });
+
+    $("select[name='publicationsSelectType']").on("change", function () {
+      handleSelectChangePublications();
+    });
+
+    $(".cat-filter-item.item-page .content-body_btn a").on(
+      "click",
+      function () {
+        $(".cat-filter-advanced_ttl span span span").empty();
+        let radioButtons = $("input[name=filter-advanced-page]");
+        let selectedRadio = null;
+        radioButtons.each(function () {
+          if ($(this).prop("checked")) {
+            selectedRadio = $(this);
+            return false; // break out of the each loop
+          }
+        });
+
+        if (selectedRadio) {
+          $(".cat-filter-advanced_ttl span span span").append(
+            selectedRadio.next("label").text()
+          );
+          let val = selectedRadio.attr("dt-value");
+          if (val) {
+            if (val == "all") searchByType(typeActive);
+            else searchByType(typeActive, val);
+          }
+        } else {
+          console.log("No radio selected.");
+        }
+      }
+    );
+    // -----------------------------------------------------------------
+    $(".cat-filter-item.item-articles .content-body_btn a").on(
+      "click",
+      function () {
+        $(".cat-filter-advanced_ttl span span span").empty();
+        let radioButtons = $("input[name=filter-advanced-article]");
+        let selectedRadio = null;
+        radioButtons.each(function () {
+          if ($(this).prop("checked")) {
+            selectedRadio = $(this);
+            return false; // break out of the each loop
+          }
+        });
+        let radioButtonsSort = $("input[name=soft-advanced-article]");
+        let selectedRadioSort = null;
+        radioButtonsSort.each(function () {
+          if ($(this).prop("checked")) {
+            selectedRadioSort = $(this);
+            return false; // break out of the each loop
+          }
+        });
+        if (selectedRadio) {
+          $(".cat-filter-advanced_ttl span span span").append(
+            selectedRadio.next("label").text()
+          );
+          let val = selectedRadio.attr("dt-value");
+          if (val) {
+            if (val == "all") searchByType(typeActive);
+            else searchByType(typeActive, val);
+          }
+        } else {
+          console.log("No radio selected.");
+        }
+      }
+    );
+    $(
+      ".cat-filter-item.item-forms .content-body_btn a, .opb-page-header-form .cat-filter-advanced_content .content-body_btn a,.opb-page-header-form .code-filter-advanced_content .content-body_btn a"
+    ).on("click", function () {
+      $(".item-forms .cat-filter-advanced_ttl span span").empty();
+
+      let radioButtons = $("input[name=filter-advanced-form]");
+      let selectedRadio = null;
+      radioButtons.each(function () {
+        if ($(this).prop("checked")) {
+          selectedRadio = $(this);
+          return false; // break out of the each loop
+        }
+      });
+      let radioButtonsCode = $("input[name=code-advanced-form]");
+      let selectedRadioCode = null;
+      radioButtonsCode.each(function () {
+        if ($(this).prop("checked")) {
+          selectedRadioCode = $(this);
+          return false; // break out of the each loop
+        }
+      });
+      if (selectedRadio || selectedRadioCode) {
+        $(
+          ".cat-filter-item.item-forms .cat-filter-advanced_ttl span span"
+        ).append(selectedRadio.next("label").text());
+        if ($(".code-filter-advanced_ttl span span").length > 0) {
+          $(".code-filter-advanced_ttl span span").append(
+            selectedRadioCode.next("label").text()
+          );
+        }
+
+        let val = selectedRadio.attr("dt-value");
+        let valcode = null;
+        if (radioButtonsCode.length > 0) {
+          valcode = selectedRadioCode.attr("dt-value");
+        }
+        if (pagesType == "form") {
+          $(".cat-filter-advanced_ttl span span").empty();
+          $(".code-filter-advanced_ttl span span").empty();
+          $(".cat-filter-advanced_ttl span span ").append(
+            selectedRadio.next("label").text()
+          );
+          if ($(".code-filter-advanced_ttl span span ").length > 0) {
+            $(".code-filter-advanced_ttl span span ").append(
+              selectedRadioCode.next("label").text()
+            );
+          }
+          let sortCondition, activeCondition;
+          if (pagesType == "form") {
+            typeActive = "forms";
+          }
+
+          activeCondition = $(".page-sub-soft li.active");
+          if (activeCondition.length > 0) {
+            sortCondition =
+              activeCondition.text() + "-" + activeCondition.attr("data-sort");
+          } else {
+            sortCondition = "Title-asc";
+          }
+
+          if (val && valcode) {
+            if (val == "all" && valcode == "all") {
+              searchByType(typeActive, null, sortCondition, null);
+            } else if (val == "all" && valcode != "all") {
+              searchByType(typeActive, null, sortCondition, valcode);
+            } else if (val != "all" && valcode == "all") {
+              searchByType(typeActive, val, sortCondition, null);
+            } else {
+              searchByType(typeActive, val, sortCondition, valcode);
+            }
+          }
+        } else {
+          if ($(".item-forms.is-active").length > 0) {
+            $(".item-forms .code-filter-advanced_ttl span span").empty();
+            $(".item-forms .cat-filter-advanced_ttl span span").empty();
+            $(".item-forms .code-filter-advanced_ttl span span ").append(
+              selectedRadioCode.next("label").text()
+            );
+            $(".item-forms .cat-filter-advanced_ttl span span ").append(
+              selectedRadio.next("label").text()
+            );
+          }
+          if (val && valcode) {
+            if (val == "all" && valcode == "all") {
+              searchByType(typeActive, null, "asc", null);
+            } else if (val == "all" && valcode != "all") {
+              searchByType(typeActive, null, "asc", valcode);
+            } else if (val != "all" && valcode == "all") {
+              searchByType(typeActive, val, "asc", null);
+            } else {
+              searchByType(typeActive, val, "asc", valcode);
+            }
+          }
+        }
+      } else {
+        console.log("No radio selected.");
       }
     });
-    $("select[name='selectPublications']").on("change", function () {
-      var val = $(this).val();
-      if (val) {
-        const activeCondition = document.querySelector(
-          ".cat-filter-sort-list.sort-publications li.is-active"
+    $(
+      ".cat-filter-item.item-publications .content-body_btn a,.cat-filter-item.item-publications .cat-filter-advanced_content .content-body_btn a,.cat-filter-item.item-publications .code-filter-advanced_content .content-body_btn a,.title-ublications .cat-filter-advanced_content .content-body_btn a,.title-ublications .code-filter-advanced_content .content-body_btn a"
+    ).on("click", function () {
+      $(".item-publications .cat-filter-advanced_ttl span span").empty();
+      let radioButtons = $("input[name=filter-advanced-publications]");
+      let selectedRadio = null;
+      radioButtons.each(function () {
+        if ($(this).prop("checked")) {
+          selectedRadio = $(this);
+          return false; // break out of the each loop
+        }
+      });
+      let radioButtonsCode = $("input[name=code-advanced-publications]");
+      let selectedRadioCode = null;
+      radioButtonsCode.each(function () {
+        if ($(this).prop("checked")) {
+          selectedRadioCode = $(this);
+          return false; // break out of the each loop
+        }
+      });
+      if (selectedRadio || selectedRadioCode) {
+        $(".item-publications .cat-filter-advanced_ttl span span").append(
+          selectedRadio.next("label").text()
         );
-        const sortCondition = activeCondition.id;
-        if (val == "01") searchByType(typeActive, null, sortCondition);
-        else searchByType(typeActive, typeCatPublications[val], sortCondition);
+        if (
+          $(".item-publications .code-filter-advanced_ttl span span ").length >
+          0
+        ) {
+          $(".item-publications .code-filter-advanced_ttl span span ").append(
+            selectedRadioCode.next("label").text()
+          );
+        }
+
+        let val = selectedRadio.attr("dt-value");
+        let valcode = null;
+        if (radioButtonsCode.length > 0) {
+          valcode = selectedRadioCode.attr("dt-value");
+        }
+        if (pagesType == "publications") {
+          $(".cat-filter-advanced_ttl span span").empty();
+          $(".code-filter-advanced_ttl span span").empty();
+          $(".cat-filter-advanced_ttl span span ").append(
+            selectedRadio.next("label").text()
+          );
+          if ($(".code-filter-advanced_ttl span span ").length > 0) {
+            $(".code-filter-advanced_ttl span span ").append(
+              selectedRadioCode.next("label").text()
+            );
+          }
+          let sortCondition, activeCondition;
+
+          if (pagesType == "publications") {
+            typeActive = "publications";
+          }
+          activeCondition = $(".page-sub-soft li.active");
+          if (activeCondition.length > 0) {
+            sortCondition =
+              activeCondition.text() + "-" + activeCondition.attr("data-sort");
+          } else {
+            sortCondition = "Title-asc";
+          }
+
+          if (val && valcode) {
+            if (val == "all" && valcode == "all") {
+              searchByType(typeActive, null, sortCondition, null);
+            } else if (val == "all" && valcode != "all") {
+              searchByType(typeActive, null, sortCondition, valcode);
+            } else if (val != "all" && valcode == "all") {
+              searchByType(typeActive, val, sortCondition, null);
+            } else {
+              searchByType(typeActive, val, sortCondition, valcode);
+            }
+          }
+        } else {
+          if ($(".item-publications.is-active").length > 0) {
+            $(".item-publications .code-filter-advanced_ttl span span").empty();
+            $(".item-publications .cat-filter-advanced_ttl span span").empty();
+            $(".item-publications .code-filter-advanced_ttl span span ").append(
+              selectedRadioCode.next("label").text()
+            );
+            $(".item-publications .cat-filter-advanced_ttl span span ").append(
+              selectedRadio.next("label").text()
+            );
+          }
+          if (val && valcode) {
+            if (val == "all" && valcode == "all") {
+              searchByType(typeActive, null, "asc", null);
+            } else if (val == "all" && valcode != "all") {
+              searchByType(typeActive, null, "asc", valcode);
+            } else if (val != "all" && valcode == "all") {
+              searchByType(typeActive, val, "asc", null);
+            } else {
+              searchByType(typeActive, val, "asc", valcode);
+            }
+          }
+        }
+      } else {
+        console.log("No radio selected.");
       }
     });
     /* Sort Select
@@ -234,7 +752,7 @@ jQuery(document).ready(function ($) {
       );
 
       const sortCondition = activeCondition.id;
-      var val = $("select[name='selectForm']").val();
+      var val = $("select[name='formsSelectCategory']").val();
       if (val) {
         if (val == "01") searchByType(typeActive, null, sortCondition);
         else searchByType(typeActive, typeCategoryArticles[val], sortCondition);
@@ -254,319 +772,1719 @@ jQuery(document).ready(function ($) {
         ".cat-filter-sort-list.sort-publications li.is-active"
       );
       const sortCondition = activeCondition.id;
-      var val = $("select[name='selectPublications']").val();
+      var val = $("select[name='publicationsSelectCategory']").val();
       if (val) {
         if (val == "01") searchByType(typeActive, null, sortCondition);
-        else searchByType(typeActive, typeCatPublications[val], sortCondition);
+        else searchByType(typeActive, val, sortCondition);
         return;
       }
       searchByType(typeActive, "", sortCondition);
       // return false;
     });
+    $(".page-sub-soft ul").on("click", "li", function () {
+      let $this = $(this);
+      let sortClass = $this.attr("data-sort") ? $this.attr("data-sort") : "asc";
+      if (sortClass === "asc") {
+        sortClass = "desc";
+      } else {
+        sortClass = "asc";
+      }
+      $("li").removeClass("active");
+      $this.addClass("active").attr("data-sort", sortClass);
+
+      if (pagesType == "publications") {
+        handleSelectChangePublications();
+      } else if (pagesType == "form") {
+        handleSelectChange();
+      }
+    });
+
+    $(window).scroll(function () {
+      var fixedDiv = $(
+        ".opb-page-header-form-fixed,.opb-page-header-main-fixed"
+      );
+      if (fixedDiv.length > 0) {
+        var fixedDivPosition = fixedDiv.offset().top - 104;
+        if (fixedDivPosition < $(window).scrollTop()) {
+          fixedDiv.addClass("active");
+        } else {
+          fixedDiv.removeClass("active");
+        }
+      }
+    });
+    $(".cat-filter").removeClass("is-active");
+    headerSearch0215();
+    if (pagesType !== "form" && pagesType !== "publications") {
+      btnLoad();
+    }
+  }
+  function handleSelectChangePublications() {
+    if (pagesType == "publications") {
+      typeActive = "publications";
+    }
+    if (window.innerWidth < 991) {
+      var val = $(
+        '.list input[name="filter-advanced-publications"]:checked'
+      ).attr("dt-value");
+      var valCode = $(
+        '.list input[name="code-advanced-publications"]:checked'
+      ).attr("dt-value");
+    } else {
+      var val = $("select[name='publicationsSelectCategory']").val();
+      var valCode = $("select[name='publicationsSelectType']").val();
+    }
+
+    let sortCondition, activeCondition;
+
+    if (pagesType == "publications") {
+      activeCondition = $(".page-sub-soft li.active");
+      if (activeCondition.length > 0) {
+        sortCondition =
+          activeCondition.text() + "-" + activeCondition.attr("data-sort");
+      } else {
+        sortCondition = "Title-asc";
+      }
+    } else {
+      activeCondition = $(
+        ".cat-filter-sort-list.sort-publications li.is-active"
+      );
+      sortCondition = activeCondition ? activeCondition.id : "asc";
+    }
+
+    if (val === "all" && valCode === "all") {
+      searchByType(typeActive, null, sortCondition, null);
+    } else {
+      var typeCategory = null;
+      var codeCategory = null;
+
+      if (val !== "all") {
+        typeCategory = val;
+      }
+
+      if (valCode !== "all") {
+        codeCategory = valCode;
+      }
+      searchByType(typeActive, typeCategory, sortCondition, codeCategory);
+    }
+  }
+  function handleSelectChange() {
+    if (pagesType == "form") {
+      typeActive = "forms";
+    }
+    let val, valCode;
+    if (window.innerWidth < 991) {
+      val = $('.list input[name="filter-advanced-form"]:checked').attr(
+        "dt-value"
+      );
+      valCode = $('.list input[name="code-advanced-form"]:checked').attr(
+        "dt-value"
+      );
+    } else {
+      val = $("select[name='formsSelectCategory']").val();
+      valCode = $("select[name='formsSelectCode']").val();
+    }
+    let sortCondition, activeCondition;
+
+    if (pagesType == "form") {
+      activeCondition = $(".page-sub-soft li.active");
+      if (activeCondition.length > 0) {
+        sortCondition =
+          activeCondition.text() + "-" + activeCondition.attr("data-sort");
+      } else {
+        sortCondition = "Title-asc";
+      }
+    } else {
+      activeCondition = $(".cat-filter-sort-list.sort-forms li.is-active");
+      sortCondition = activeCondition ? activeCondition.id : "asc";
+    }
+    if (val === "all" && valCode === "all") {
+      searchByType(typeActive, null, sortCondition, null);
+    } else {
+      let typeCategory = null;
+      let codeCategory = null;
+
+      if (val !== "all") {
+        typeCategory = val;
+      }
+
+      if (valCode !== "all") {
+        codeCategory = valCode;
+      }
+      searchByType(typeActive, typeCategory, sortCondition, codeCategory);
+    }
+  }
+  function selectPageChange() {
+    let val = $("select[name='selectPage']").val();
+    if (val) {
+      if (val == "all") searchByType(typeActive);
+      else searchByType(typeActive, val);
+    }
+  }
+  function selectArticleChange() {
+    let val = $("select[name='selectArticle']").val();
+    if (val) {
+      if (val == "all") searchByType(typeActive);
+      else searchByType(typeActive, val);
+    }
+  }
+  function customizeSelect() {
+    $(".js-select-nws").each(function () {
+      var $this = $(this);
+      var $select = $this.find("select");
+      var $options = $select.find("option");
+
+      var $selectSelected = $("<div>", {
+        class: "select-selected",
+        html: $options.eq($select.prop("selectedIndex")).html(),
+      });
+      $this.append($selectSelected);
+
+      var $selectItems = $("<div>", {
+        class: "select-items select-hide",
+      });
+      $options.each(function (i) {
+        var $option = $(this);
+        var $item = $("<p>", {
+          class: "item",
+          html: $option.html(),
+          value: $option.val(),
+        });
+        $item.click(function () {
+          $select.prop("selectedIndex", i);
+          $selectSelected.html($option.html());
+          if ($(".item-forms.is-active").length > 0 || pagesType == "form") {
+            handleSelectChange();
+          } else if (
+            $(".item-publications.is-active").length > 0 ||
+            pagesType == "publications"
+          ) {
+            handleSelectChangePublications();
+          } else if ($(".item-page.is-active").length > 0) {
+            selectPageChange();
+          } else if ($(".item-articles.is-active").length > 0) {
+            selectArticleChange();
+          }
+          $item
+            .addClass("same-as-selected")
+            .siblings()
+            .removeClass("same-as-selected");
+          $selectSelected.click();
+        });
+        $selectItems.append($item);
+      });
+      $this.append($selectItems);
+
+      $selectSelected.click(function (e) {
+        e.stopPropagation();
+        $(".select-items").addClass("select-hide");
+        $selectItems.toggleClass("select-hide");
+        $(this).toggleClass("select-arrow-active");
+      });
+    });
+
+    $(document).click(function () {
+      $(".select-items").addClass("select-hide");
+      $(".select-selected").removeClass("select-arrow-active");
+    });
   }
   function getTotal() {
     $.ajax({
-      url: originPathOne + "/search/search.php",
-      type: "POST",
+      url: searchjson,
+      type: "GET",
       dataType: "json",
       data: {
         action: "getTotal",
       },
-      success: function (data) {
-        const dataRender = data?.data || {};
+      success: function (response) {
+        const result = {};
+        response.data.forEach((element) => {
+          if (!result[element.type]) {
+            result[element.type] = 0;
+          }
+          result[element.type]++;
+        });
+        result.all = response.data.length;
+
+        const dataRender = result || {};
         let liHtml = ``;
+        let changePage = localStorage.getItem("changePage");
+        let count = 0;
+
         for (const [key, value] of Object.entries(type)) {
-          liHtml += `<li class="c-tab-menu_item${
-            key === "all" ? " item-active" : ""
-          }"><a href="#cat-${typeNumber[key]}">
-          <svg class="icon-resize opb-icon opb-icon-search-${key}" viewBox="0 0 16 16">
-            <use xlink:href="#icon-search-${key}"></use>
-          </svg>
-          <span>${value} <span class="txt-num">(${
-            dataRender[key] || 0
-          })</span></span></a>
-          </li>`;
+          count++;
+          var $menuItem = $(
+            ".c-tab-menu_item:nth-child(" + count + ") a > span"
+          );
+          if (searchParams.has("type") && searchParams.get("type") == key) {
+            $(".c-tab-menu_item:nth-child(" + count + ")").addClass(
+              "item-active"
+            );
+          } else if (changePage !== null) {
+            $(".c-tab-menu_item").removeClass("item-active");
+          } else {
+            $(".c-tab-menu_item:nth-child(" + count + ")").removeClass(
+              "item-active"
+            );
+          }
         }
-        const html = `<div class="c-tab-menu"><ul class="c-tab-menu_list">${liHtml}</ul></div>`;
-        $("#menu-tab-id").html(html);
-        searchAll("all");
+        var $input = $("#search-page-form .opb-form-text");
+        let searchData = $input.val();
+        if (searchData !== "" && searchData) {
+          searchParams.set("s", searchData);
+        } else {
+          if (searchParams.has("s")) {
+            $("#search-data").val(searchParams.get("s"));
+          }
+        }
+
+        if (searchParams.has("type")) {
+          let typeCate = searchParams.has("cate")
+              ? searchParams.get("cate")
+              : null,
+            typeName = searchParams.has("group")
+              ? searchParams.get("group")
+              : null,
+            typeActive = searchParams.get("type");
+          searchByType(typeActive, typeCate, null, typeName);
+        } else {
+          searchAll();
+        }
+        if (typeActive !== "all") {
+          $(".opb-page-content").addClass("cs-padding");
+        } else {
+          $(".opb-page-content").removeClass("cs-padding");
+        }
         handleClickFromTab();
       },
     });
   }
+  function changeTabBookMark() {
+    typeActive = searchParams.get("type");
+    $(".cat-filter").addClass("is-active");
+    if ($(".cat-filter-item.item-" + typeActive).length > 0) {
+      $(".cat-filter-item.item-" + typeActive).addClass("is-active");
+    }
+  }
+  function fistLoad() {
+    // $(".opb-search-page .input-warning").addClass("is-active");
+    $(".cat-more").addClass("hideBtn");
+    $(".txt-num").empty();
+    if (pagesType !== "form" && pagesType !== "publications") {
+      // $(".c-tab-menu_list li").removeClass("item-active");
+      $("#all-data")
+        .empty()
+        .html(
+          "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+        );
+    }
+  }
 
   function handleClickFromTab() {
-    const $input = $(".opb-search-page .opb-form-text");
+    let changePage = localStorage.getItem("changePage");
     $(".c-tab-menu_list li a").click(function () {
+      isCustomized = false;
+      $(".select-selected, .select-items").remove();
+      $(".cat-filter select").empty();
+      $(".cat-filter-item ul.list").empty();
+      // localStorage.removeItem("changePage");
       var item = $(this).attr("href");
       $(".c-tab-menu_list li").removeClass("item-active");
+      if (changePage == null) {
+        $(".input-warning").removeClass("is-active");
+      }
       $(this).parent().addClass("item-active");
+
       const index = $(this).parent().index();
-      // $(".cat-filter-sort-list li.is-active").removeClass("is-active");
+
       if ($(".cat-filter-item").length > 0) {
-        const searchValue = $input.val();
+        if (index !== 0) {
+          $(".opb-page-content").addClass("cs-padding");
+        } else {
+          $(".opb-page-content").removeClass("cs-padding");
+        }
+        $(".cat-filter").addClass("is-active");
         page = 1;
         switch (index) {
           case 0:
             typeActive = "all";
-            searchAll("all");
+            searchAll();
             $(".cat-filter-item").removeClass("is-active");
+            $(".cat-filter").removeClass("is-active");
             break;
           case 1:
             typeActive = "page";
             searchByType("page");
+            $(".cat-more-btn").attr("id", "cat-more-" + typeActive);
             $("#selectPage").prop("selectedIndex", 0);
             $(".cat-filter-item").removeClass("is-active");
             $(".cat-filter-item.item-page").addClass("is-active");
-            break;
-          case 2:
-            typeActive = "articles";
-            searchByType("articles");
-            $(".cat-filter-item").removeClass("is-active");
-            $(".cat-filter-item.item-articles").addClass("is-active");
-            break;
-          case 3:
-            typeActive = "forms";
-            searchByType("forms");
-            $(".cat-filter-item").removeClass("is-active");
-            $(".cat-filter-item.item-forms").addClass("is-active");
+            $(
+              ".cat-filter-item.item-page .cat-filter-advanced_ttl span span span"
+            ).empty();
+            $(
+              ".cat-filter-item.item-page .cat-filter-advanced_ttl span span span"
+            ).append("All web pages");
+            $('input[name="filter-advanced-page"]:first').prop("checked", true);
+
+            $(".cat-filter-select .select-selected").text("All web pages");
+            $('input[name="selectPage"]:first').prop("checked", true);
             break;
           case 4:
+            typeActive = "articles";
+            searchByType("articles");
+            $(".cat-more-btn").attr("id", "cat-more-" + typeActive);
+            $(".cat-filter-item").removeClass("is-active");
+            $(".cat-filter-item.item-articles").addClass("is-active");
+            $(
+              ".cat-filter-item.item-articles .cat-filter-advanced_ttl span span span"
+            ).empty();
+            $(
+              ".cat-filter-item.item-articles .cat-filter-advanced_ttl span span span"
+            ).append("All articles");
+            $('input[name="filter-advanced-article"]:first').prop(
+              "checked",
+              true
+            );
+            $(".cat-filter-select .select-selected").text("All articles");
+            $('input[name="selectArticle"]:first').prop("checked", true);
+            break;
+          case 2:
+            typeActive = "forms";
+            searchByType("forms");
+            $(".cat-more-btn").attr("id", "cat-more-" + typeActive);
+            $(".cat-filter-item").removeClass("is-active");
+            $(".cat-filter-item.item-forms").addClass("is-active");
+            $(
+              ".cat-filter-item.item-forms .cat-filter-advanced_ttl span span"
+            ).empty();
+            $(
+              ".cat-filter-item.item-forms .cat-filter-advanced_ttl span span"
+            ).append("All categories");
+            $('input[name="filter-advanced-forms"]:first').prop(
+              "checked",
+              true
+            );
+            $(".cat-filter-select .select-selected").text("All categories");
+            $(".code-filter-selectV1 .select-selected").text("All code groups");
+            $(
+              ".cat-filter-item.item-forms .code-filter-advanced_ttl span span"
+            ).empty();
+            $(
+              ".cat-filter-item.item-forms .code-filter-advanced_ttl span span"
+            ).append("All code groups");
+            $('input[name="code-advanced-forms"]:first').prop("checked", true);
+            if (pagesType == "form") {
+              $(
+                ".cat-filter-item.item-forms .cat-filter-advanced_ttl span span, .code-filter-item.item-forms .cat-filter-advanced_ttl span span"
+              ).empty();
+            }
+            break;
+          case 3:
             typeActive = "publications";
             searchByType("publications");
+            $(".cat-more-btn").attr("id", "cat-more-" + typeActive);
             $(".cat-filter-item").removeClass("is-active");
             $(".cat-filter-item.item-publications").addClass("is-active");
+            $(
+              ".cat-filter-item.item-publications .cat-filter-advanced_ttl span span,.cat-filter-item.item-publications .code-filter-advanced_ttl span span "
+            ).empty();
+            $(
+              ".cat-filter-item.item-publications .cat-filter-advanced_ttl span span "
+            ).append("All publications");
+
+            $(
+              ".cat-filter-item.item-publications .code-filter-advanced_ttl span span"
+            ).append("All types");
+            $('input[name="code-advanced-publications"]:first').prop(
+              "checked",
+              true
+            );
+            $('input[name="filter-advanced-publications"]:first').prop(
+              "checked",
+              true
+            );
+            $(".cat-filter-select .select-selected").text("All publications");
+            $(".code-filter-select .select-selected").text("All type");
+            if (pagesType == "publications") {
+              $(
+                ".cat-filter-item.item-publications .cat-filter-advanced_ttl span span, .code-filter-item.item-publications .cat-filter-advanced_ttl span span"
+              ).empty();
+              $(
+                ".cat-filter-item.item-publications .cat-filter-advanced_ttl span span"
+              ).append("All publications");
+            }
             break;
         }
       }
+
       $(".opb-search-page-body .opb-search-page-cat").removeClass("is-active");
       $(item).addClass("is-active");
       return false;
     });
   }
 
-  function searchByType(type = "", category = "", sortCondition = null) {
-    // console.log(type);
-    page = 1;
+  function searchByType(
+    type = "",
+    category = "",
+    sortCondition = null,
+    name = ""
+  ) {
     const data = {
       action: "getByType",
       type: type,
       category: category,
       page: page,
       limit: limit,
+      name: name,
     };
-    var $input = $(".opb-search-page .opb-form-text");
-    const searchData = $input.val();
+    let $input = $("#search-page-form .opb-form-text");
+    let searchData = $input.val();
+    let activeCondition;
+
+    if (localValue != "" && localValue == searchData) {
+      searchData = localValue;
+    }
     if (searchData) {
       data["searchData"] = searchData;
     }
+
+    if (type !== "") {
+      searchParams.set("type", type);
+    } else {
+      searchParams.delete("type");
+    }
+    if (searchData !== "" && searchData) {
+      searchParams.set("s", searchData);
+    } else {
+      searchParams.delete("s");
+    }
+    if (category !== "" && category !== null) {
+      searchParams.set("cate", category);
+    } else {
+      searchParams.delete("cate");
+    }
+
+    if (name !== "" && name !== null) {
+      searchParams.set("group", name);
+    } else {
+      searchParams.delete("group");
+    }
+    newURL.search = searchParams.toString();
+    let updatedURL = newURL.toString();
+
+    window.history.pushState({ path: updatedURL }, "", updatedURL);
+    if (searchParams.has("type")) {
+      typeActive = searchParams.get("type");
+      changeTabBookMark();
+    }
+
     if (sortCondition) {
       data["sort"] = sortCondition;
     }
+    if (type == "forms") {
+      if (pagesType == "form") {
+        activeCondition = $(".page-sub-soft li.active");
+        if (activeCondition.length > 0) {
+          sortCondition =
+            activeCondition.text() + "-" + activeCondition.attr("data-sort");
+        } else {
+          sortCondition = "Title-asc";
+        }
+        if (sortCondition) {
+          data["sort"] = sortCondition;
+        }
+      } else {
+        activeCondition = document.querySelector(
+          ".cat-filter-sort-list.sort-forms li.is-active"
+        );
+        if (activeCondition) {
+          sortCondition = activeCondition.id;
+        } else {
+          sortCondition = "asc";
+        }
+        if (sortCondition) {
+          data["sort"] = null;
+        }
+      }
+      let val = $("select[name='formsSelectCategory']").val();
+      if (val) {
+        if (val !== "all") data["category"] = val;
+      }
+      let valCode = $("select[name='formsSelectCode']").val();
+      if (valCode) {
+        if (valCode !== "all") data["name"] = valCode;
+      }
+    }
+
+    if (type == "publications") {
+      if (pagesType == "publications") {
+        activeCondition = $(".page-sub-soft li.active");
+        if (activeCondition.length > 0) {
+          sortCondition =
+            activeCondition.text() + "-" + activeCondition.attr("data-sort");
+        } else {
+          sortCondition = "Title-asc";
+        }
+        if (sortCondition) {
+          data["sort"] = sortCondition;
+        }
+      } else {
+        activeCondition = document.querySelector(
+          ".cat-filter-sort-list.sort-publications li.is-active"
+        );
+        if (activeCondition) {
+          sortCondition = activeCondition.id;
+        } else {
+          sortCondition = "asc";
+        }
+        if (sortCondition) {
+          data["sort"] = null;
+        }
+      }
+      let val = $("select[name='publicationsSelectCategory']").val();
+      if (val) {
+        if (val !== "all") data["category"] = val;
+      }
+      let valCode = $("select[name='publicationsSelectType']").val();
+      if (valCode) {
+        if (valCode !== "all") data["name"] = valCode;
+      }
+    }
     $.ajax({
-      url: originPathOne + "/search/search.php",
-      type: "POST",
+      url: searchjson,
+      type: "GET",
       dataType: "json",
       data: data,
-      success: function (data) {
-        const values = data?.data || [];
+      beforeSend: function () {
+        $(".opb-search-page .loading").show();
+        $(".opb-search-page .cat-more").addClass("loada");
+        $("#all-data").addClass("loada");
+        $("#form-list-v1").addClass("loada");
+      },
+      success: function (response) {
+        let dataFilter = response.data,
+          dataFilterCate = response.data;
+        dataFilter = dataFilter.filter(function (item) {
+          return item.type.toLowerCase().indexOf(type.toLowerCase()) !== -1;
+        });
+        dataFilterCate = dataFilter.filter(function (item) {
+          return item.type.toLowerCase().indexOf(type.toLowerCase()) !== -1;
+        });
+        if (data["sort"] === "desc") {
+          dataFilter.sort(function (a, b) {
+            return b.title.localeCompare(a.title);
+          });
+        } else if (data["sort"] === "asc") {
+          dataFilter.sort(function (a, b) {
+            return a.title.localeCompare(b.title);
+          });
+        }
+        if (
+          type === "forms" ||
+          (type === "publications" &&
+            data["sort"] &&
+            data["sort"].trim().length > 0)
+        ) {
+          if (
+            data["sort"] !== "desc" &&
+            data["sort"] !== "asc" &&
+            data["sort"] !== null
+          ) {
+            const [sortType, sortVal] = data["sort"].split("-");
+            const sortFunctions = {
+              Title: {
+                desc: (a, b) => b.title.localeCompare(a.title),
+                asc: (a, b) => a.title.localeCompare(b.title),
+              },
+              Category: {
+                desc: (a, b) => b.category.slug.localeCompare(a.category.slug),
+                asc: (a, b) => a.category.slug.localeCompare(b.category.slug),
+              },
+              Code: {
+                desc: (a, b) => b.code.localeCompare(a.code),
+                asc: (a, b) => a.code.localeCompare(b.code),
+              },
+              Type: {
+                desc: (a, b) => b.name.slug.localeCompare(a.name.slug),
+
+                asc: (a, b) => a.name.slug.localeCompare(b.name.slug),
+              },
+            };
+
+            if (
+              sortFunctions.hasOwnProperty(sortType) &&
+              sortFunctions[sortType].hasOwnProperty(sortVal)
+            ) {
+              dataFilter.sort(sortFunctions[sortType][sortVal]);
+            }
+          }
+        }
+        if (category && category !== "") {
+          dataFilter = dataFilter.filter(function (item) {
+            return (
+              item.category.slug
+                .toLowerCase()
+                .indexOf(category.toLowerCase()) !== -1
+            );
+          });
+        }
+        if (pagesType === "form" || pagesType === "publications") {
+          if (data["searchData"] && data["searchData"] !== "") {
+            dataFilter = dataFilter.filter(function (item) {
+              return (
+                item.title
+                  .toLowerCase()
+                  .indexOf(data["searchData"].toLowerCase()) !== -1
+              );
+            });
+          }
+        }
+
+        if (name && name !== "") {
+          dataFilter = dataFilter.filter(function (item) {
+            return (
+              item.name.slug.toLowerCase().indexOf(name.toLowerCase()) !== -1
+            );
+          });
+        }
+
+        let totalResults = dataFilter.length;
+
+        let startIndex = (page - 1) * limit;
+        let endIndex = startIndex + limit;
+        let responseData = dataFilter.slice(startIndex, endIndex);
+        let displayedResults = responseData.length;
+
+        const values = responseData || [];
+
         let dynamicHtml = "";
+
+        let groupedData = {};
+        let uniqueCategories = [];
+        let groupedDataCode = {};
+        let uniqueCode = [];
         values?.forEach((item) => {
           const htmlRedner = renderSubItemForGetAll(item);
           dynamicHtml += htmlRedner;
         });
+        const listCate = dataFilterCate || [];
+        listCate?.forEach((item) => {
+          let categorySlug = item.category.slug;
 
-        let render = "";
-        switch (type) {
-          case "page":
-            render = `<div id="cat-02" class="opb-search-page-cat">
+          if (!groupedData[categorySlug]) {
+            groupedData[categorySlug] = [];
+          }
+          groupedData[categorySlug].push(item);
+
+          if (!uniqueCategories.includes(categorySlug)) {
+            uniqueCategories.push(categorySlug);
+          }
+
+          let codeSlug = item.name ? item.name.slug : [];
+          if (!groupedDataCode[codeSlug]) {
+            groupedDataCode[codeSlug] = [];
+          }
+          groupedDataCode[codeSlug].push(item);
+
+          if (!uniqueCode.includes(codeSlug)) {
+            uniqueCode.push(codeSlug);
+          }
+        });
+        if (searchData != "") {
+          getSearchText = " for “" + searchData + "”";
+        }
+        let changePage = localStorage.getItem("changePage");
+        setTimeout(() => {
+          // $(".cat-more-btn").attr("id", "cat-more-" + typeActive);
+          if (displayedResults < limit) {
+            $(".cat-more").addClass("hideBtn");
+          } else {
+            $(".cat-more").removeClass("hideBtn");
+          }
+          let render = "";
+          switch (type) {
+            case "page":
+              if (!isCustomized) {
+                let getCate = searchParams.get("cate");
+                let $select = $("#selectPage");
+                let $radioSP = $(".cat-filter-item.item-page ul.list");
+
+                let selectOptionHTML = `<option ${
+                  getCate == null ? "selected" : ""
+                } value="all">All web pages</option>`;
+                let radioInputHTML = `<li><input type="radio" name="filter-advanced-page" id="filter-advanced-1" dt-value="all" ${
+                  getCate == null ? "checked" : ""
+                }>`;
+                radioInputHTML += `<label for="filter-advanced-1">All web pages</label></li>`;
+
+                $select.append(selectOptionHTML);
+                $radioSP.append(radioInputHTML);
+
+                let htmlOptions = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                        getCate && getCate === categorySlug ? "selected" : "",
+                      checked =
+                        getCate && getCate === categorySlug ? "checked" : "";
+
+                    let optionHTML = `<option value="${categorySlug}" ${selected}>${categoryName}</option>`;
+                    let radioHTML = `<li><input type="radio" name="filter-advanced-page" id="filter-advanced-${
+                      index + 2
+                    }" dt-value="${categorySlug}" ${checked}><label for="filter-advanced-${
+                      index + 2
+                    }">${categoryName}</label></li>`;
+                    getCate && getCate === categorySlug
+                      ? $(
+                          ".cat-filter-item.item-page .cat-filter-advanced_ttl span span span"
+                        )
+                          .empty()
+                          .text(categoryName)
+                      : "";
+
+                    return {
+                      option: optionHTML,
+                      radio: radioHTML,
+                    };
+                  }
+                );
+
+                $select.append(
+                  htmlOptions.map((option) => option.option).join("")
+                );
+                $radioSP.append(
+                  htmlOptions.map((option) => option.radio).join("")
+                );
+              }
+              render = `<div id="cat-02" class="opb-search-page-cat">
                           <div class="cat-inner">
-                            <h3 class="body-ttl">Pages search results for “2022 pay dates”</h3>
+                            <h3 class="body-ttl">Pages search results ${
+                              searchData != "" ? getSearchText : ""
+                            }</h3>
                             <div class="cat-list">${dynamicHtml}</div>
-                            <div class="cat-more">
-                              <a href="#" id="cat-more-page" class="cat-more-btn">
-                                <span>Load more results</span>
-                                <svg class="opb-icon opb-icon-search-more" viewBox="0 0 16 16">
-                                  <use xlink:href="#icon-search-more"></use>
-                                </svg>
-                              </a>
-                            </div>
                           </div>
                         </div>`;
-            break;
-          case "articles":
-            render = `<div id="cat-03" class="opb-search-page-cat">
+              break;
+            case "articles":
+              if (!isCustomized) {
+                let getCate = searchParams.get("cate");
+                let $select = $("#selectArticle");
+                let $radioSP = $(".cat-filter-item.item-articles ul.list");
+                let selectOptionHTML = `<option ${
+                  getCate == null ? "selected" : ""
+                } value="all">All articles</option>`;
+                let radioInputHTML = `<li><input type="radio" name="filter-advanced-article" id="filter-advanced-article-1" dt-value="all" ${
+                  getCate == null ? "checked" : ""
+                }>`;
+                radioInputHTML += `<label for="filter-advanced-article-1">All articles</label></li>`;
+
+                $select.append(selectOptionHTML);
+                $radioSP.append(radioInputHTML);
+
+                let htmlOptions = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                        getCate && getCate === categorySlug ? "selected" : "",
+                      checked =
+                        getCate && getCate === categorySlug ? "checked" : "";
+
+                    let optionHTML = `<option value="${categorySlug}" ${selected}>${categoryName}</option>`;
+                    let radioHTML = `<li><input type="radio" name="filter-advanced-article" id="filter-advanced-article-${
+                      index + 2
+                    }" dt-value="${categorySlug}" ${checked}><label for="filter-advanced-article-${
+                      index + 2
+                    }">${categoryName}</label></li>`;
+                    getCate && getCate === categorySlug
+                      ? $(
+                          ".cat-filter-item.item-articles .cat-filter-advanced_ttl span span span"
+                        )
+                          .empty()
+                          .text(categoryName)
+                      : "";
+                    return {
+                      option: optionHTML,
+                      radio: radioHTML,
+                    };
+                  }
+                );
+
+                $select.append(
+                  htmlOptions.map((option) => option.option).join("")
+                );
+                $radioSP.append(
+                  htmlOptions.map((option) => option.radio).join("")
+                );
+              }
+              render = `<div id="cat-05" class="opb-search-page-cat">
                       <div class="cat-inner">
-                        <h3 class="body-ttl">Articles search results for “2022 pay dates”</h3>
+                        <h3 class="body-ttl">Articles search results ${
+                          searchData != "" ? getSearchText : ""
+                        }</h3>
                         <div class="cat-list">${dynamicHtml}</div>
-                        <div class="cat-more">
-                          <a href="#" id="cat-more-articles" class="cat-more-btn">
-                            <span>Load more results</span>
-                            <svg class="opb-icon opb-icon-search-more" viewBox="0 0 16 16">
-                              <use xlink:href="#icon-search-more"></use>
-                            </svg>
-                          </a>
-                        </div>
                       </div>
                     </div>`;
-            break;
-          case "forms":
-            render = `<div id="cat-04" class="opb-search-page-cat">
-                        <div class="cat-inner">
-                          <h3 class="body-ttl">Forms search results for “2022 pay dates”</h3>
-                          <div class="cat-list">${dynamicHtml}</div>
-                          <div class="cat-more">
-                            <a href="#" id="cat-more-forms" class="cat-more-btn">
-                              <span>Load more results</span>
-                              <svg class="opb-icon opb-icon-search-more" viewBox="0 0 16 16">
-                                <use xlink:href="#icon-search-more"></use>
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>`;
-            break;
-          case "publications":
-            render = `<div id="cat-05" class="opb-search-page-cat">
-                        <div class="cat-inner">
-                          <h3 class="body-ttl">Publications search results for “2022 pay dates”</h3>
-                          <div class="cat-list">${dynamicHtml}</div>
-                          <div class="cat-more">
-                            <a href="#" id="cat-more-forms" class="cat-more-btn">
-                              <span>Load more results</span>
-                              <svg class="opb-icon opb-icon-search-more" viewBox="0 0 16 16">
-                                <use xlink:href="#icon-search-more"></use>
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>`;
-            break;
-          default:
-            break;
-        }
+              break;
+            case "forms":
+              if (!isCustomized) {
+                let getCate = searchParams.get("cate");
+                let getCode = searchParams.get("group");
 
-        $("#all-data").html(render);
-        search0215();
+                let $select = $("#formsSelectCategory");
+                let $selectCode = $("#formsSelectCode");
+                let $radioSP, $radioCodeSP;
+
+                if (pagesType === "form") {
+                  $radioSP = $(".filter-advanced-content .content-cat ul.list");
+                  $radioCodeSP = $(
+                    ".filter-advanced-content .content-code ul.list"
+                  );
+                } else {
+                  $radioSP = $(
+                    ".cat-filter-item.item-forms .content-cat ul.list"
+                  );
+                  $radioCodeSP = $(
+                    ".cat-filter-item.item-forms .content-code ul.list"
+                  );
+                }
+
+                let selectOptionHTML = [];
+                let radioInputHTML = [];
+
+                if (getCate == null) {
+                  selectOptionHTML.push(
+                    '<option selected value="all">All categories</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-1" dt-value="all" checked>',
+                    '<label for="filter-advanced-form-1">All categories</label></li>'
+                  );
+                } else {
+                  selectOptionHTML.push(
+                    '<option value="all">All categories</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-1" dt-value="all">',
+                    '<label for="filter-advanced-form-1">All categories</label></li>'
+                  );
+                }
+
+                $select.append(selectOptionHTML.join(""));
+                $radioSP.append(radioInputHTML.join(""));
+
+                selectOptionHTML = [];
+                radioInputHTML = [];
+
+                if (getCode == null) {
+                  selectOptionHTML.push(
+                    '<option selected value="all">All code groups</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="code-advanced-form" id="code-advanced-form-1" dt-value="all" checked>',
+                    '<label for="code-advanced-form-1">All code groups</label></li>'
+                  );
+                } else {
+                  selectOptionHTML.push(
+                    '<option value="all">All code groups</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="code-advanced-form" id="code-advanced-form-1" dt-value="all">',
+                    '<label for="code-advanced-form-1">All code groups</label></li>'
+                  );
+                }
+
+                $selectCode.append(selectOptionHTML.join(""));
+                $radioCodeSP.append(radioInputHTML.join(""));
+
+                let selectOptionHTMLArray = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                      getCate && getCate === categorySlug ? "selected" : "";
+
+                    return `<option ${selected} value="${categorySlug}">${categoryName}</option>`;
+                  }
+                );
+
+                let radioInputHTMLArray = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                      getCate && getCate === categorySlug ? "checked" : "";
+                    getCate && getCate === categorySlug
+                      ? $(
+                          ".cat-filter-item.item-forms .cat-filter-advanced_ttl span span,.cat-filter-advanced .list .cat-filter-advanced_ttl span span"
+                        )
+                          .empty()
+                          .text(categoryName)
+                      : "";
+                    return `<li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-${
+                      index + 2
+                    }" dt-value="${categorySlug}" ${selected}><label for="filter-advanced-form-${
+                      index + 2
+                    }">${categoryName}</label></li>`;
+                  }
+                );
+
+                $select.append(selectOptionHTMLArray.join(""));
+                $radioSP.append(radioInputHTMLArray.join(""));
+
+                let selectCodeOptionHTMLArray = uniqueCode.map(
+                  (codeSlug, index) => {
+                    let codeItems = groupedDataCode[codeSlug];
+                    let codeName = codeItems[0].name.name;
+                    let selected =
+                      getCode && getCode === codeSlug ? "selected" : "";
+
+                    return `<option ${selected} value="${codeSlug}">${codeName}</option>`;
+                  }
+                );
+
+                let radioCodeInputHTMLArray = uniqueCode.map(
+                  (codeSlug, index) => {
+                    let codeItems = groupedDataCode[codeSlug];
+                    let codeName = codeItems[0].name.name;
+                    let selected =
+                      getCode && getCode === codeSlug ? "checked" : "";
+                    getCode && getCode === codeSlug
+                      ? $(
+                          ".cat-filter-item.item-forms .code-filter-advanced_ttl span span,.cat-filter-advanced .code-filter-advanced_ttl span span"
+                        )
+                          .empty()
+                          .text(codeName)
+                      : "";
+                    return `<li><input type="radio" name="code-advanced-form" id="code-advanced-form-${
+                      index + 2
+                    }" dt-value="${codeSlug}" ${selected}><label for="code-advanced-form-${
+                      index + 2
+                    }">${codeName}</label></li>`;
+                  }
+                );
+
+                $selectCode.append(selectCodeOptionHTMLArray.join(""));
+                $radioCodeSP.append(radioCodeInputHTMLArray.join(""));
+              }
+              if (pagesType == "form") {
+                render = `<div id="cat-03" class="opb-search-page-cat">
+                        <div class="cat-inner">
+                          <div class="cat-list">${dynamicHtml}</div>
+                        </div>
+                      </div>`;
+              } else {
+                render = `<div id="cat-03" class="opb-search-page-cat opb-search-page-form ">
+                        <div class="cat-inner">
+                          <h3 class="body-ttl">Forms search results ${
+                            searchData != "" ? getSearchText : ""
+                          }</h3>
+                          <div class="cat-list">${dynamicHtml}</div>
+                        </div>
+                      </div>`;
+              }
+              break;
+            case "publications":
+              if (!isCustomized) {
+                let getCate = searchParams.get("cate");
+                let getCode = searchParams.get("group");
+
+                let $select = $("#publicationsSelectCategory");
+                let $selectCode = $("#publicationsSelectType");
+                let $radioSP, $radioCodeSP;
+
+                if (pagesType === "publications") {
+                  $radioSP = $(".filter-advanced-content .content-cat ul.list");
+                  $radioCodeSP = $(
+                    ".filter-advanced-content .content-code ul.list"
+                  );
+                } else {
+                  $radioSP = $(
+                    ".cat-filter-item.item-publications .content-cat ul.list"
+                  );
+                  $radioCodeSP = $(
+                    ".cat-filter-item.item-publications .content-code ul.list"
+                  );
+                }
+
+                let selectOptionHTML = [];
+                let radioInputHTML = [];
+
+                if (getCate == null) {
+                  selectOptionHTML.push(
+                    '<option selected value="all">All categories</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-1" dt-value="all" checked>',
+                    '<label for="filter-advanced-publications-1">All categories</label></li>'
+                  );
+                } else {
+                  selectOptionHTML.push(
+                    '<option value="all">All categories</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-1" dt-value="all">',
+                    '<label for="filter-advanced-publications-1">All categories</label></li>'
+                  );
+                }
+
+                $select.append(selectOptionHTML.join(""));
+                $radioSP.append(radioInputHTML.join(""));
+
+                selectOptionHTML = [];
+                radioInputHTML = [];
+
+                if (getCode == null) {
+                  selectOptionHTML.push(
+                    '<option selected value="all">All types</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-1" dt-value="all" checked>',
+                    '<label for="code-advanced-publications-1">All types</label></li>'
+                  );
+                } else {
+                  selectOptionHTML.push(
+                    '<option value="all">All types</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-1" dt-value="all">',
+                    '<label for="code-advanced-publications-1">All types</label></li>'
+                  );
+                }
+
+                $selectCode.append(selectOptionHTML.join(""));
+                $radioCodeSP.append(radioInputHTML.join(""));
+
+                let selectOptionHTMLArray = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                      getCate && getCate === categorySlug ? "selected" : "";
+
+                    return `<option ${selected} value="${categorySlug}">${categoryName}</option>`;
+                  }
+                );
+
+                let radioInputHTMLArray = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                      getCate && getCate === categorySlug ? "checked" : "";
+                    getCate && getCate === categorySlug
+                      ? $(
+                          ".cat-filter-item.item-publications .cat-filter-advanced_ttl span span, .cat-filter-advanced .list .cat-filter-advanced_ttl span span"
+                        )
+                          .empty()
+                          .text(categoryName)
+                      : "";
+                    return `<li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-${
+                      index + 2
+                    }" dt-value="${categorySlug}" ${selected}><label for="filter-advanced-publications-${
+                      index + 2
+                    }">${categoryName}</label></li>`;
+                  }
+                );
+
+                $select.append(selectOptionHTMLArray.join(""));
+                $radioSP.append(radioInputHTMLArray.join(""));
+
+                let selectCodeOptionHTMLArray = uniqueCode.map(
+                  (codeSlug, index) => {
+                    let codeItems = groupedDataCode[codeSlug];
+                    let codeName = codeItems[0].name.name;
+                    let selected =
+                      getCode && getCode === codeSlug ? "selected" : "";
+
+                    return `<option ${selected} value="${codeSlug}">${codeName}</option>`;
+                  }
+                );
+
+                let radioCodeInputHTMLArray = uniqueCode.map(
+                  (codeSlug, index) => {
+                    let codeItems = groupedDataCode[codeSlug];
+                    let codeName = codeItems[0].name.name;
+                    let selected =
+                      getCode && getCode === codeSlug ? "checked" : "";
+                    getCode && getCode === codeSlug
+                      ? $(
+                          ".cat-filter-item.item-publications .code-filter-advanced_ttl span span,.cat-filter-advanced .code-filter-advanced_ttl span span"
+                        )
+                          .empty()
+                          .text(codeName)
+                      : "";
+                    return `<li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-${
+                      index + 2
+                    }" dt-value="${codeSlug}" ${selected}><label for="code-advanced-publications-${
+                      index + 2
+                    }">${codeName}</label></li>`;
+                  }
+                );
+
+                $selectCode.append(selectCodeOptionHTMLArray.join(""));
+                $radioCodeSP.append(radioCodeInputHTMLArray.join(""));
+              }
+
+              if (pagesType == "publications") {
+                render = `<div id="cat-04" class="opb-search-page-cat">
+                        <div class="cat-inner">
+                          <div class="cat-list">${dynamicHtml}</div>
+                        </div>
+                      </div>`;
+              } else {
+                render = `<div id="cat-04" class="opb-search-page-cat opb-search-page-form ">
+                        <div class="cat-inner">
+                          <h3 class="body-ttl">Publications search results ${
+                            searchData != "" ? getSearchText : ""
+                          }</h3>
+                          <div class="cat-list">${dynamicHtml}</div>
+                        </div>
+                      </div>`;
+              }
+              break;
+            default:
+              break;
+          }
+          let $allData = $("#all-data");
+          if (pagesType == "form" || pagesType == "publications") {
+            $allData = $("#form-list-v1");
+          }
+          if (totalResults == 0 && searchData != "") {
+            let $nextElement = $allData.next();
+
+            $allData.addClass("none");
+            $nextElement.find(".type").text(typeActive);
+            $nextElement
+              .find(".keysearch")
+              .text(searchData !== "" ? getSearchText : "");
+            render = ``;
+          } else {
+            $allData.removeClass("none");
+          }
+          $(".cat-more-btn").attr("id", "cat-more-" + typeActive);
+          if (pagesType == "form" || pagesType == "publications") {
+            changePage = null;
+          }
+          if (
+            changePage == null ||
+            (name && name != null) ||
+            (category && category != null)
+          ) {
+            if (pagesType == "form" || pagesType == "publications") {
+              let current = displayedResults;
+              $(".itemofshow").html(
+                `Showing <span>${current}</span> of ${
+                  totalResults || 0
+                } results`
+              );
+              $("#form-list-v1").html(render);
+            } else {
+              if (changePage !== null || searchData === "") {
+                $(".cat-more").addClass("hideBtn");
+                $(".txt-num").empty();
+                render = `<h3 class='search-null'>How can we help you? Please enter a search term.</h3>`;
+              } else {
+                const listNumbResult = [
+                  response.totalCount,
+                  response.pagesCount,
+                  response.formsCount,
+                  response.pubCount,
+                  response.newsCount,
+                ];
+
+                const $txtNumElements = $(".txt-num");
+                $txtNumElements.empty();
+
+                $txtNumElements.each(function (i) {
+                  $(this).append("(" + listNumbResult[i] + ")");
+                });
+              }
+
+              $("#all-data").html(render);
+            }
+            $(".opb-search-page .input-warning").removeClass("is-active");
+            localStorage.removeItem("changePage");
+            btnLoad();
+          } else {
+            fistLoad();
+          }
+
+          if (!isCustomized) {
+            customizeSelect();
+          }
+          isCustomized = true;
+          search0215();
+          setItemImageHeight();
+          $(".opb-search-page .loading").hide();
+          $(".opb-search-page .cat-more").removeClass("loada");
+          $("#all-data").removeClass("loada");
+          $("#form-list-v1").removeClass("loada");
+        }, 1000);
       },
     });
   }
+
   function searchAll() {
-    page = 1;
     const data = {
       action: "getAll",
       page: page,
       limit: limit,
     };
-    var $input = $(".opb-search-page .opb-form-text");
-    const searchData = $input.val();
+    let $input = $("#search-page-form .opb-form-text");
+    let searchData = $input.val();
+    let searchValue = localStorage.getItem("searchValue");
+    let changePage = localStorage.getItem("changePage");
+    if (searchParams.has("type") && typeActive == "all") {
+      searchParams.delete("type");
+      searchParams.delete("group");
+      searchParams.delete("cate");
+    }
+    if (searchData !== "" && searchData) {
+      searchParams.set("s", searchData);
+    }
+    newURL.search = searchParams.toString();
+    let updatedURL = newURL.toString();
+
+    window.history.pushState({ path: updatedURL }, "", updatedURL);
+
+    if (searchParams.has("s") && typeActive == "all") {
+      searchData = searchParams.get("s");
+      $input.val(searchParams.get("s"));
+    }
+
+    if (searchValue) {
+      localValue = searchValue;
+      setTimeout(() => {
+        localStorage.removeItem("searchValue");
+      }, 500);
+    }
+    if (localValue != "") {
+      searchData = localValue;
+    }
     if (searchData != "") {
       data["searchData"] = searchData;
     }
+    data["sort"] = null;
 
     $.ajax({
-      url: originPathOne + "/search/search.php",
-      type: "POST",
+      url: searchjson,
+      type: "GET",
       dataType: "json",
       data: data,
-      success: function (data) {
-        const values = data?.data || [];
-        let dynamicHtml = "";
-        values?.forEach((item) => {
-          const htmlRedner = renderSubItemForGetAll(item);
-          dynamicHtml += htmlRedner;
-        });
+      beforeSend: function () {
+        $(".opb-search-page .loading").show();
+        $(".opb-search-page .cat-more").addClass("loada");
+        $("#all-data").addClass("loada");
+        $("#form-list-v1").addClass("loada");
+      },
+      success: function (response) {
+        if (response && response.data) {
+          var responseData = response.data;
+          if (data["sort"] != null) {
+            responseData.sort(function (a, b) {
+              if (a.date && b.date) {
+                return new Date(a.date) - new Date(b.date);
+              }
+              return 0;
+            });
+          }
 
-        const render = `<div id="cat-01" class="opb-search-page-cat is-active">
-                            <div class="cat-inner">
-                              <h3 class="body-ttl">All search results for “2022 pay dates</h3>
-                              <div class="cat-list"> ${dynamicHtml} </div>
-                              <div class="cat-more">
-                                <a href="#" id="cat-more-all" class="cat-more-btn">
-                                  <span>Load more results</span>
-                                  <svg class="opb-icon opb-icon-search-more" viewBox="0 0 16 16">
-                                    <use xlink:href="#icon-search-more"></use>
-                                  </svg>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        `;
-        $("#all-data").html(render);
-        search0215();
+          if (pagesType === "form" || pagesType === "publications") {
+            if (searchData) {
+              responseData = responseData.filter(function (item) {
+                return (
+                  item.title.toLowerCase().indexOf(searchData.toLowerCase()) !==
+                  -1
+                );
+              });
+            }
+          }
+
+          var slicedData = responseData.slice((page - 1) * limit, page * limit);
+          let totalResults = slicedData.length,
+            render;
+          var displayedResults = responseData.length;
+          const values = slicedData || [];
+          let dynamicHtml = "",
+            getSearchText = "";
+          values?.forEach((item) => {
+            const htmlRedner = renderSubItemForGetAll(item);
+            dynamicHtml += htmlRedner;
+          });
+          setTimeout(() => {
+            if (searchData != "") {
+              getSearchText = " for “" + searchData + "”";
+              $("#menu-tab-id .c-tab-menu_item:nth-child(1)").addClass(
+                "item-active"
+              );
+            }
+            $(".cat-more-btn").attr("id", "cat-more-all");
+            if (displayedResults < limit) {
+              $(".cat-more").addClass("hideBtn");
+            } else {
+              $(".cat-more").removeClass("hideBtn");
+            }
+            if (totalResults == 0 && searchData != "") {
+              var $allData = $("#all-data");
+              var $nextElement = $allData.next();
+
+              $allData.addClass("none");
+              $nextElement.find(".type").text(typeActive);
+              $nextElement
+                .find(".keysearch")
+                .text(searchData !== "" ? getSearchText : "");
+              render = ``;
+              if (!$input.val()) {
+                fistLoad();
+              }
+            } else if (changePage !== null || searchData === "") {
+              $(".cat-more").addClass("hideBtn");
+              // $("#menu-tab-id .c-tab-menu_item:nth-child(1)").removeClass(
+              //   "item-active"
+              // );
+              $(".txt-num").empty();
+              render = `<h3 class='search-null'>How can we help you? Please enter a search term.</h3>`;
+            } else {
+              $("#all-data").removeClass("none");
+
+              render = `<div id="cat-01" class="opb-search-page-cat is-active">
+                  <div class="cat-inner">
+                    <h3 class="body-ttl">All search results ${
+                      searchData != null ? getSearchText : ""
+                    }</h3>
+                    <div class="cat-list"> ${dynamicHtml} </div>
+                  </div>
+                </div>
+              `;
+              const listNumbResult = [
+                response.totalCount,
+                response.pagesCount,
+                response.formsCount,
+                response.pubCount,
+                response.newsCount,
+              ];
+
+              const $txtNumElements = $(".txt-num");
+              $txtNumElements.empty();
+
+              $txtNumElements.each(function (i) {
+                $(this).append("(" + listNumbResult[i] + ")");
+              });
+            }
+            if (changePage !== null) {
+              fistLoad();
+              // $(".c-tab-menu_list li").removeClass("item-active");
+            } else {
+              $("#all-data").html(render);
+              search0215();
+              setItemImageHeight();
+            }
+            $(".opb-search-page .loading").hide();
+            $(".opb-search-page .cat-more").removeClass("loada");
+            $("#all-data").removeClass("loada");
+            $("#form-list-v1").removeClass("loada");
+          }, 1000);
+        }
       },
     });
   }
+
   function loadMore(searchData = "", type = "") {
     const data = {
       page: page,
       limit: limit,
     };
-
+    data["name"] = null;
+    data["category"] = null;
     if (type) {
       data["type"] = type;
       data["action"] = "getByType";
     } else {
       data["action"] = "getAll";
     }
-
+    if (localValue != "") {
+      searchData = localValue;
+    }
     if (searchData) {
       data["searchData"] = searchData;
     }
 
     if (type == "articles") {
-      const activeCondition = document.querySelector(
-        ".cat-filter-sort-list.sort-articles li.is-active"
-      );
-      const sortCondition = activeCondition.id;
-      if (sortCondition) {
-        data["sort"] = sortCondition;
-      }
-      var val = $("select[name='selectArticle']").val();
+      let val = $("select[name='selectPage']").val();
       if (val) {
-        if (val !== "01") data["category"] = typeCategoryArticles[val];
+        if (val !== "01") data["category"] = val;
+      }
+    } else if (type == "page") {
+      let val = $("select[name='selectArticle']").val();
+      if (val) {
+        if (val !== "01") data["category"] = val;
       }
     } else if (type == "forms") {
-      const activeCondition = document.querySelector(
-        ".cat-filter-sort-list.sort-forms li.is-active"
-      );
-      const sortCondition = activeCondition.id;
-      if (sortCondition) {
-        data["sort"] = sortCondition;
+      let sortCondition;
+      let activeCondition;
+      if (pagesType == "form") {
+        activeCondition = $(".page-sub-soft li.active");
+        if (activeCondition.length > 0) {
+          sortCondition =
+            activeCondition.text() + "-" + activeCondition.attr("data-sort");
+        } else {
+          sortCondition = "Title-asc";
+        }
+        if (sortCondition) {
+          data["sort"] = sortCondition;
+        }
+      } else {
+        activeCondition = document.querySelector(
+          ".cat-filter-sort-list.sort-forms li.is-active"
+        );
+        if (activeCondition) {
+          sortCondition = activeCondition.id;
+        } else {
+          sortCondition = "asc";
+        }
+        if (sortCondition) {
+          data["sort"] = null;
+        }
       }
-      var val = $("select[name='selectForm']").val();
+      let val, valCode;
+      if (window.innerWidth < 991) {
+        val = $('.list input[name="filter-advanced-form"]:checked').attr(
+          "dt-value"
+        );
+        valCode = $('.list input[name="code-advanced-form"]:checked').attr(
+          "dt-value"
+        );
+      } else {
+        val = $("select[name='formsSelectCategory']").val();
+        valCode = $("select[name='formsSelectCode']").val();
+      }
       if (val) {
-        if (val !== "01") data["category"] = typeCategoryArticles[val];
+        if (val !== "all") data["category"] = val;
+      }
+      if (valCode) {
+        if (valCode !== "all") data["name"] = valCode;
       }
     } else if (type == "publications") {
-      const activeCondition = document.querySelector(
-        ".cat-filter-sort-list.sort-publications li.is-active"
-      );
-      const sortCondition = activeCondition.id;
-      if (sortCondition) {
-        data["sort"] = sortCondition;
+      let sortCondition;
+      let activeCondition;
+      if (pagesType == "publications") {
+        activeCondition = $(".page-sub-soft li.active");
+        if (activeCondition.length > 0) {
+          sortCondition =
+            activeCondition.text() + "-" + activeCondition.attr("data-sort");
+        } else {
+          sortCondition = "Title-asc";
+        }
+        if (sortCondition) {
+          data["sort"] = sortCondition;
+        }
+      } else {
+        activeCondition = document.querySelector(
+          ".cat-filter-sort-list.sort-publications li.is-active"
+        );
+        if (activeCondition) {
+          sortCondition = activeCondition.id;
+        } else {
+          sortCondition = "asc";
+        }
+        if (sortCondition) {
+          data["sort"] = null;
+        }
       }
-      var val = $("select[name='selectPublications']").val();
+      let val, valCode;
+      if (window.innerWidth < 991) {
+        val = $(
+          '.list input[name="filter-advanced-publications"]:checked'
+        ).attr("dt-value");
+        valCode = $(
+          '.list input[name="code-advanced-publications"]:checked'
+        ).attr("dt-value");
+      } else {
+        val = $("select[name='publicationsSelectCategory']").val();
+        valCode = $("select[name='publicationsSelectType']").val();
+      }
       if (val) {
-        if (val !== "01") data["category"] = typePublications[val];
+        if (val !== "all") data["category"] = val;
+      }
+      if (valCode) {
+        if (valCode !== "all") data["name"] = valCode;
       }
     }
-
     $.ajax({
-      url: originPathOne + "/search/search.php",
-      type: "POST",
+      url: searchjson,
+      type: "GET",
       dataType: "json",
       data: data,
-      success: function (data) {
-        const values = data?.data || {};
+      beforeSend: function () {
+        $(".fa-spin").show();
+        $(".opb-icon-search-more").hide();
+      },
+      success: function (response) {
+        let dataFilter = response.data;
+        dataFilter = dataFilter.filter(function (item) {
+          return item.type.toLowerCase().indexOf(type.toLowerCase()) !== -1;
+        });
+        if (
+          ((type === "articles" || type === "publications") && !data["sort"]) ||
+          data["sort"] === null
+        ) {
+          dataFilter.sort(function (a, b) {
+            return new Date(b.date) - new Date(a.date);
+          });
+        } else if (
+          (type === "articles" || type === "publications") &&
+          data["sort"] === null
+        ) {
+          dataFilter.sort(function (a, b) {
+            return new Date(a.date) - new Date(b.date);
+          });
+        } else if (data["sort"] === "desc") {
+          dataFilter.sort(function (a, b) {
+            return b.title.localeCompare(a.title);
+          });
+        } else if (data["sort"] === "asc") {
+          dataFilter.sort(function (a, b) {
+            return new Date(a.date) - new Date(b.date);
+          });
+        }
+
+        if (
+          type === "forms" ||
+          (type === "publications" &&
+            data["sort"] &&
+            data["sort"].trim().length > 0)
+        ) {
+          if (
+            data["sort"] !== "desc" &&
+            data["sort"] !== "asc" &&
+            data["sort"] !== null
+          ) {
+            const [sortType, sortVal] = data["sort"].split("-");
+            const sortFunctions = {
+              Title: {
+                desc: (a, b) => b.title.localeCompare(a.title),
+                asc: (a, b) => a.title.localeCompare(b.title),
+              },
+              Category: {
+                desc: (a, b) => b.category.slug.localeCompare(a.category.slug),
+                asc: (a, b) => a.category.slug.localeCompare(b.category.slug),
+              },
+              Code: {
+                desc: (a, b) =>
+                  type === "publications"
+                    ? b.name.slug.localeCompare(a.name.slug)
+                    : b.code.localeCompare(a.code),
+                asc: (a, b) =>
+                  type === "publications"
+                    ? a.name.slug.localeCompare(b.name.slug)
+                    : a.code.localeCompare(b.code),
+              },
+            };
+
+            if (
+              sortFunctions.hasOwnProperty(sortType) &&
+              sortFunctions[sortType].hasOwnProperty(sortVal)
+            ) {
+              dataFilter.sort(sortFunctions[sortType][sortVal]);
+            }
+          }
+        }
+        if (data["category"] && data["category"] !== "") {
+          dataFilter = dataFilter.filter(function (item) {
+            return (
+              item.category.slug
+                .toLowerCase()
+                .indexOf(category.toLowerCase()) !== -1
+            );
+          });
+        }
+        if (pagesType === "form" || pagesType === "publications") {
+          if (data["searchData"] && data["searchData"] !== "") {
+            dataFilter = dataFilter.filter(function (item) {
+              return (
+                item.title
+                  .toLowerCase()
+                  .indexOf(data["searchData"].toLowerCase()) !== -1
+              );
+            });
+            response.data = response.data.filter(function (item) {
+              return (
+                item.title
+                  .toLowerCase()
+                  .indexOf(data["searchData"].toLowerCase()) !== -1
+              );
+            });
+          }
+        }
+
+        if (data["name"] && data["name"] !== "") {
+          dataFilter = dataFilter.filter(function (item) {
+            return (
+              item.name.slug.toLowerCase().indexOf(name.toLowerCase()) !== -1
+            );
+          });
+        }
+        const listNumbResult = [
+          response.totalCount,
+          response.pagesCount,
+          response.formsCount,
+          response.pubCount,
+          response.newsCount,
+        ];
+        let totalResults;
+        let startIndex = (page - 1) * limit;
+        let endIndex = startIndex + limit;
+        let responseData = dataFilter.slice(startIndex, endIndex);
+        let displayedResults = responseData.length;
+        const values2 = responseData || [];
+
         let dynamicHtml = "";
-        values.forEach((item) => {
-          const htmlRedner = renderSubItemForGetAll(item);
+        values2.forEach((iitem) => {
+          const htmlRedner = renderSubItemForGetAll(iitem);
           dynamicHtml += htmlRedner;
         });
 
-        $cat_list = $(`#cat-${typeNumber[typeActive]} .cat-list`);
-        $cat_list.append(dynamicHtml);
+        setTimeout(() => {
+          if (pagesType == "form" || pagesType == "publications") {
+            totalResults = dataFilter.length;
+            let current = parseInt($(".itemofshow span").text());
+            current = current + displayedResults;
+            $(".itemofshow").html(
+              `Showing <span>${current}</span> of ${totalResults || 0} results`
+            );
+          } else {
+            switch (typeNumber[typeActive]) {
+              case "01":
+                totalResults = listNumbResult[0];
+                break;
+              case "02":
+                totalResults = listNumbResult[1];
+                break;
+              case "03":
+                totalResults = listNumbResult[2];
+                break;
+              case "04":
+                totalResults = listNumbResult[3];
+                break;
+              case "05":
+                totalResults = listNumbResult[4];
+                break;
+              default:
+                break;
+            }
+          }
+          let $cat_list = $(`#cat-${typeNumber[typeActive]} .cat-list`);
+
+          $cat_list.append(dynamicHtml);
+          $(".fa-spin").hide();
+          $(".opb-icon-search-more").show();
+          if (displayedResults < limit || endIndex >= totalResults) {
+            $(".cat-more").addClass("hideBtn");
+          }
+          setItemImageHeight();
+        }, 1000);
       },
     });
   }
@@ -577,37 +2495,64 @@ jQuery(document).ready(function ($) {
         let breadcrums = ``;
         if (item.breadcrums && item.breadcrums.length > 0) {
           item.breadcrums.forEach((bread) => {
-            breadcrums += `<li><a href="#">${bread}</a></li>`;
+            breadcrums += `<li><a href="${bread.link}">${bread.name}</a></li>`;
           });
         }
-        const htmlPage = `<div class="cat-item cat-item-01">
-                        <div class="item-inner">
-                          <div class="item-head">
-                            <h3 class="item-cat item-cat-page">
-                              <svg class="opb-icon opb-icon-search-page">
-                                <use xlink:href="#icon-search-page"></use>
-                              </svg>
-                              <strong>Web Page</strong>
-                            </h3>
-                            ${
-                              breadcrums
-                                ? `<div class="c-breadcrumb">
-                                              <ul class="c-breadcrumb_list">
-                                                ${breadcrums}
-                                              </ul>
-                                          </div>`
-                                : ""
-                            }
+        let htmlPage;
+        if (typeActive == "all") {
+          htmlPage = `<div class="cat-item cat-item-01">
+          <div class="item-inner">
+          <a href="${item.link}">
+          <div class="item-text">
+            <div class="item-head">
+              <h3 class="item-cat item-cat-page">
+                <svg class="opb-icon opb-icon-search-page">
+                  <use xlink:href="#icon-search-page"></use>
+                </svg>
+                <strong>Web Page</strong>
+              </h3>
+            </div>
+            <h2 class="item-ttl ">${item.title}</h2>
+            <div class="item-copy">
+              <p>${item.description}</p>
+            </div>
+            </div>
+            </a>
+            ${
+              breadcrums
+                ? `<div class="c-breadcrumb">
+                              <ul class="c-breadcrumb_list">
+                                ${breadcrums}
+                              </ul>
+                          </div>`
+                : ""
+            }
+          </div>
+        </div>`;
+        } else {
+          htmlPage = `<div class="cat-item cat-item-01">
+          <div class="item-inner">
+            <a href="${item.link}">
+              <div class="item-text">
+                <h2 class="item-ttl">${item.title}</h2>
+                <div class="item-copy">
+                  <p>${item.description}</p>
+                </div>
+              </div>
+            </a>
+            ${
+              breadcrums
+                ? `<div class="c-breadcrumb">
+                              <ul class="c-breadcrumb_list">
+                                ${breadcrums}
+                              </ul>
+                          </div>`
+                : ""
+            }
+          </div>
+        </div>`;
+        }
 
-                          </div>
-                          <h2 class="item-ttl"><a href="#">${
-                            item.title
-                          }</a></h2>
-                          <div class="item-copy">
-                            <p>${item.description}</p>
-                          </div>
-                        </div>
-                      </div>`;
         return htmlPage;
 
       case "articles":
@@ -617,133 +2562,260 @@ jQuery(document).ready(function ($) {
           day: "numeric",
           year: "numeric",
         });
-        const htmlArticles = `<div class="cat-item cat-item-02">
-                                <div class="item-inner">
-                                  <a href="#">
-                                    <div class="item-text">
-                                      <div class="item-head">
-                                        <h3 class="item-cat item-cat-articles">
-                                          <svg class="opb-icon opb-icon-search-articles">
-                                            <use xlink:href="#icon-search-articles"></use>
-                                          </svg>
-                                          <strong>${
-                                            typeArticle[item.category]
-                                          }</strong>
-                                        </h3>
-                                      </div>
-                                      <p class="item-date">${
-                                        item.date ? formattedDate : ""
-                                      }</p>
-                                      <h2 class="item-ttl">${item.title}</h2>
-                                      <p class="item-time">4 minute read</p>
-                                    </div>
-                                    <div class="item-image">
-                                      <figure><img src="${
-                                        item.image
-                                      }" alt=""></figure>
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>`;
+        let htmlArticles;
+        if (typeActive == "all") {
+          htmlArticles = `<div class="cat-item cat-item-02">
+              <div class="item-inner js_arti">
+                <a href="${item.link}">
+                  <div class="item-text">
+                    <div class="item-head">
+                      <h3 class="item-cat item-cat-articles">
+                        <svg class="opb-icon opb-icon-search-articles">
+                          <use xlink:href="#icon-search-articles"></use>
+                        </svg>
+                        <strong>${item.category.name}</strong>
+                      </h3>
+                    </div>
+
+                    <h2 class="item-ttl">${item.title}</h2>
+                    <div class="item-copy">
+                    <p>${item.description}</p>
+                  </div>
+                    <p class="item-date">${item.date ? formattedDate : ""}</p>
+                  </div>
+                  <div class="item-image">
+                    <figure><img src="${item.image}" alt=""></figure>
+                  </div>
+                </a>
+              </div>
+            </div>`;
+        } else {
+          htmlArticles = `<div class="cat-item cat-item-02">
+              <div class="item-inner arti-tab js_arti" >
+                <a href="${item.link}">
+                  <div class="item-text">
+                  <p class="item-date">${item.date ? formattedDate : ""}</p>
+                    <h2 class="item-ttl">${item.title}</h2>
+                    <div class="item-copy">
+                    <p>${item.description}</p>
+                  </div>
+                  <div class="item-head">
+                  <h3 class="item-cat item-cat-articles">
+                    <svg class="opb-icon opb-icon-search-articles">
+                      <use xlink:href="#icon-search-articles"></use>
+                    </svg>
+                    <strong>${
+                      item.category.name.split(" ")[1] === "letters"
+                        ? item.category.name.split(" ")[1]
+                        : item.category.name.split(" ")[0]
+                    }</strong>
+                  </h3>
+                </div>
+                  </div>
+                  <div class="item-image">
+                    <figure><img src="${item.image}" alt=""></figure>
+                  </div>
+                </a>
+              </div>
+            </div>`;
+        }
+
         return htmlArticles;
 
       case "forms":
-        const htmlForm = `<div class="cat-item cat-item-03">
+        let htmlForm;
+        if (pagesType == "form") {
+          htmlForm = `<a href="${item.link}" class="item item-01">
+                            <div class="item-content">
+                              <h3 class="item-ttl">${item.title}</h3>
+                              <p>${item.description}</p>
+                            </div>
+                            <div class="item-cat">${item.category.name}</div>
+                            <div class="item-code item-code-01 ${item.filetype}">${item.code}</div>
+                        </a>`;
+        } else if (typeActive == "all") {
+          htmlForm = `<div class="cat-item cat-item-02 form-all">
                             <div class="item-inner">
-                              <div class="item-head">
-                                <h3 class="item-cat item-cat-form">
-                                  <svg class="opb-icon opb-icon-search-forms">
-                                    <use xlink:href="#icon-search-forms"></use>
-                                  </svg>
-                                  <strong>${typeForms[item.category]}</strong>
-                                  <span>${item.code}</span>
-                                </h3>
-                              </div>
-                              <h2 class="item-ttl">${item.title}</h2>
-                              <div class="item-link item-link-download">
-                                <a href="{${
-                                  item.link
-                                }}" target="_blank">Download PDF</a>
-                              </div>
+                              <a href="${item.link}"  target="_blank">
+                                <div class="item-text">
+                                  <div class="item-head">
+                                    <h3 class="item-cat item-cat-articles">
+                                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.818115 0V16H13.298V0H0.818115ZM4.0835 10.9024L2.90127 9.6593L3.43726 9.0967L4.0835 9.78095L5.40638 8.38204L5.94237 8.94464L4.0835 10.9024ZM4.0797 7.61416L2.90127 6.37111L3.43726 5.80851L4.0835 6.49275L5.40638 5.08624L5.94237 5.64885L4.0797 7.61416ZM10.945 10.2789H7.13601V9.48444H10.945V10.2789ZM10.945 6.98693H7.13601V6.18864H10.945V6.98693Z" fill="#424242"/>
+                                    </svg>
+                                      <strong>Form ${item.code}</strong>
+                                    </h3>
+                                  </div>
+                                  <h2 class="item-ttl ${item.filetype}">${item.title}</h2>
+                                  <div class="item-copy">
+                                  <p>${item.description}</p>
+                                  <div class="item-cat">${item.category.name}</div>
+                                </div>
+
+                                </div>
+
+                              </a>
                             </div>
                           </div>`;
+        } else {
+          htmlForm = `
+          <a href="${item.link}" class="item item-01 ">
+                            <div class="item-content">
+                              <h3 class="item-ttl">${item.title}</h3>
+                              <p>${item.description}</p>
+                            </div>
+                            <div class="item-cat">${item.category.name}</div>
+                            <div class="item-code item-code-01 ${item.filetype}">${item.code}</div>
+                        </a>
+       `;
+        }
+
         return htmlForm;
       case "publications":
-        const htmlPublications = ` <div class="cat-item cat-item-03">
-                                    <div class="item-inner">
-                                      <div class="item-head">
-                                        <h3 class="item-cat item-cat-publications">
-                                          <svg class="opb-icon opb-icon-search-publications">
-                                            <use xlink:href="#icon-search-publications"></use>
-                                          </svg>
-                                          <strong>${
-                                            typePublications[item.category]
-                                          }</strong>
-                                          <span>${item.publish}</span>
-                                        </h3>
-                                      </div>
-                                      <h2 class="item-ttl">${item.title}</h2>
-                                      <div class="item-link item-link-download">
-                                        <a href="${
-                                          item.link
-                                        }" target="_blank">Download PDF</a>
-                                      </div>
-                                    </div>
-                                  </div>`;
+        let htmlPublications;
+        if (pagesType == "publications") {
+          htmlPublications = `<a href="${item.link}" class="item item-01">
+                            <div class="item-content">
+                              <h3 class="item-ttl">${item.title}</h3>
+                              <p>${item.description}</p>
+                            </div>
+                            <div class="item-cat">${item.category.name}</div>
+                            <div class="item-code item-code-01 ${item.filetype}">${item.name.name}</div>
+                        </a>`;
+        } else if (typeActive == "all") {
+          htmlPublications = `<div class="cat-item cat-item-02 form-all">
+                            <div class="item-inner">
+                              <a href="${item.link}" target="_blank">
+                                <div class="item-text">
+                                  <div class="item-head">
+                                    <h3 class="item-cat item-cat-articles">
+                                    <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.71963 4.41121V3.14019C10.1308 2.96573 10.5515 2.83489 10.9817 2.74766C11.4113 2.66044 11.8629 2.61682 12.3364 2.61682C12.6604 2.61682 12.9782 2.64174 13.2897 2.69159C13.6012 2.74143 13.9065 2.80374 14.2056 2.8785V4.07477C13.9065 3.96262 13.6045 3.87863 13.2994 3.8228C12.9939 3.76648 12.6729 3.73832 12.3364 3.73832C11.8629 3.73832 11.4081 3.79763 10.972 3.91626C10.5358 4.03439 10.1184 4.19938 9.71963 4.41121ZM9.71963 8.52336V7.25234C10.1308 7.07788 10.5515 6.94704 10.9817 6.85981C11.4113 6.77259 11.8629 6.72897 12.3364 6.72897C12.6604 6.72897 12.9782 6.75389 13.2897 6.80374C13.6012 6.85358 13.9065 6.91589 14.2056 6.99065V8.18692C13.9065 8.07477 13.6045 7.99078 13.2994 7.93495C12.9939 7.87863 12.6729 7.85047 12.3364 7.85047C11.8629 7.85047 11.4081 7.90654 10.972 8.01869C10.5358 8.13084 10.1184 8.29907 9.71963 8.52336ZM9.71963 6.46729V5.19626C10.1308 5.02181 10.5515 4.89097 10.9817 4.80374C11.4113 4.71651 11.8629 4.6729 12.3364 4.6729C12.6604 4.6729 12.9782 4.69782 13.2897 4.74766C13.6012 4.79751 13.9065 4.85981 14.2056 4.93458V6.13084C13.9065 6.01869 13.6045 5.9347 13.2994 5.87888C12.9939 5.82255 12.6729 5.79439 12.3364 5.79439C11.8629 5.79439 11.4081 5.85371 10.972 5.97234C10.5358 6.09047 10.1184 6.25545 9.71963 6.46729ZM4.11215 8.97196C4.69782 8.97196 5.26804 9.03726 5.8228 9.16785C6.37707 9.29894 6.92835 9.49533 7.47664 9.75701V2.39252C6.96573 2.09346 6.42368 1.86916 5.85047 1.71963C5.27726 1.57009 4.69782 1.49533 4.11215 1.49533C3.66355 1.49533 3.21819 1.53894 2.77607 1.62617C2.33346 1.7134 1.90654 1.84424 1.49533 2.01869V9.42056C1.93146 9.27103 2.36461 9.15888 2.79477 9.08411C3.22442 9.00935 3.66355 8.97196 4.11215 8.97196ZM8.97196 9.75701C9.52025 9.49533 10.0718 9.29894 10.6265 9.16785C11.1808 9.03726 11.7508 8.97196 12.3364 8.97196C12.785 8.97196 13.2244 9.00935 13.6546 9.08411C14.0842 9.15888 14.5171 9.27103 14.9533 9.42056V2.01869C14.5421 1.84424 14.1154 1.7134 13.6733 1.62617C13.2307 1.53894 12.785 1.49533 12.3364 1.49533C11.7508 1.49533 11.1713 1.57009 10.5981 1.71963C10.0249 1.86916 9.48287 2.09346 8.97196 2.39252V9.75701ZM8.2243 11.9626C7.62617 11.4891 6.97819 11.1215 6.28037 10.8598C5.58255 10.5981 4.85981 10.4673 4.11215 10.4673C3.45171 10.4673 2.76012 10.5919 2.03738 10.8411C1.31464 11.0903 0.635514 11.4766 0 12V1.15888C0.548287 0.785047 1.19327 0.498442 1.93495 0.299065C2.67614 0.0996885 3.40187 0 4.11215 0C4.83489 0 5.54218 0.0934579 6.23402 0.280374C6.92536 0.46729 7.58879 0.747664 8.2243 1.1215C8.85981 0.747664 9.52349 0.46729 10.2153 0.280374C10.9067 0.0934579 11.6137 0 12.3364 0C13.0467 0 13.7727 0.0996885 14.5144 0.299065C15.2556 0.498442 15.9003 0.785047 16.4486 1.15888V12C15.8255 11.4766 15.1497 11.0903 14.4209 10.8411C13.6917 10.5919 12.9969 10.4673 12.3364 10.4673C11.5888 10.4673 10.866 10.5981 10.1682 10.8598C9.47041 11.1215 8.82243 11.4891 8.2243 11.9626Z" fill="#656565"/>
+                                    </svg>
+                                      <strong>${item.name.name} Publication</strong>
+                                    </h3>
+                                  </div>
+                                  <h2 class="item-ttl ${item.filetype}">${item.title}</h2>
+                                  <div class="item-copy">
+                                  <p>${item.description}</p>
+                                  <div class="item-cat">${item.category.name}</div>
+                                </div>
+
+                                </div>
+
+                              </a>
+                            </div>
+                          </div>`;
+        } else {
+          htmlPublications = `
+          <a href="${item.link}" class="item item-01">
+                            <div class="item-content">
+                              <h3 class="item-ttl">${item.title}</h3>
+                              <p>${item.description}</p>
+                            </div>
+                            <div class="item-cat">${item.category.name}</div>
+                            <div class="item-code item-code-01 ${item.filetype}">${item.name.name}</div>
+                        </a>
+       `;
+        }
+
         return htmlPublications;
+
       default:
         return "";
     }
   }
-  function headerSearch0215() {
+  function headerSearch0216() {
     $(".search-header-icon").click(function () {
       $(this).toggleClass("is-active");
       $(".search-header-from").toggleClass("is-active");
       $("html").toggleClass("is-hidden");
       return false;
     });
+    let $inputs = $(
+      ".form-control.opb-form-text,.opb-form-text.search-header-input"
+    );
+    function checkAndRemoveClass() {
+      if ($(window).width() > 768) {
+        if ($(".search-header-icon").hasClass("is-active")) {
+          $(".search-header-icon").removeClass("is-active");
+          $(".search-header-from").removeClass("is-active");
+          $("html").removeClass("is-hidden");
+        }
+      }
+    }
+    checkAndRemoveClass();
+    $(window).resize(function () {
+      checkAndRemoveClass();
+    });
 
-    var $form = $("#search-header");
-    var $input = $(".search-header-input");
+    function init() {
+      $inputs.each(function (index, element) {
+        initAwesomeplete(element);
+      });
+    }
+
+    function initAwesomeplete(input) {
+      var $input = $(input),
+        jsonFetched = false,
+        awesomplete = new Awesomplete(input, {
+          minChars: 3,
+          autoFirst: false,
+          maxItems: 5,
+        });
+
+      // $input.on("awesomplete-open", function (e) {
+      //   var $list = $input.next(".input-show ul");
+      //   $list.addClass("abt-search-list-dropdown").append(liItems);
+      // });
+
+      $input.on("keyup", function () {
+        if ($input.val().length > 2 && !jsonFetched) {
+          $.ajax({
+            url: searchjson,
+            type: "GET",
+            dataType: "json",
+          }).done(function (data) {
+            awesomplete.list = data.keywords;
+            jsonFetched = true;
+          });
+        }
+      });
+    }
+    init();
+  }
+  function headerSearch0215() {
+    let $form = $("#search-header");
+    let $input = $(".search-header-input");
+    if ($input.val() != "") {
+      $input.parents().addClass("is-input");
+      $(".search-header-from .input-clear").addClass("is-active");
+      $(".form-inner_custom .input-clear").addClass("is-active");
+      $(".opb-search-page .input-warning").removeClass("is-active");
+      $(".search-header-from .input-warning").removeClass("is-active");
+    }
     $input.keyup(function () {
       var value = $(this).val().toLowerCase();
       if ($(this).val() == "") {
         $(this).parents().removeClass("is-input");
         $(".search-header-from .input-clear").removeClass("is-active");
+        $(".form-inner_custom .input-clear").removeClass("is-active");
+        $(".search-header-from .input-warning").addClass("is-active");
       } else {
         $(this).parents().addClass("is-input");
         $(".search-header-from .input-clear").addClass("is-active");
+        $(".form-inner_custom .input-clear").addClass("is-active");
         $(".search-header-from .input-warning").removeClass("is-active");
       }
     });
 
-    var items = [];
-    $(".input-show ul li a").each(function (i, ele) {
-      items.push({ data: i, value: $(ele).text() });
-    });
-
-    $(".search-header-input").autocomplete({
-      lookup: items,
-    });
-
-    $(".search-header-from .input-clear").click(function () {
-      $input.val("");
-      $(this).removeClass("is-active");
-      $form.removeClass("is-input");
-    });
-
-    $(".search-header-submit").click(function (event) {
-      var valid = $form.hasClass("is-input");
-      var error_free = true;
-      if (!valid) {
-        $(".search-header-from .input-warning").addClass("is-active");
-        error_free = false;
+    $(".search-header-from .input-clear,.form-inner_custom .input-clear").click(
+      function () {
+        $input.val("");
+        $(this).removeClass("is-active");
+        $form.removeClass("is-input");
       }
-      if (!error_free) {
-        event.preventDefault();
-      } else {
-      }
-    });
+    );
   }
 
   function homepage0215() {
@@ -839,7 +2911,17 @@ jQuery(document).ready(function ($) {
   function search0215() {
     var $form = $("#search-page-form");
     var $input = $(".opb-search-page .opb-form-text");
-
+    var $inputs = $("#search-data2");
+    if ($inputs.val() != "") {
+      $inputs.parents().addClass("is-input");
+      $(".form-inner_custom .input-clear").addClass("is-active");
+      $(".opb-search-page .input-warning").removeClass("is-active");
+    }
+    if ($input.val() != "") {
+      $(".opb-search-page .opb-form-search-page").addClass("is-input");
+      $(".opb-search-page .input-clear").addClass("is-active");
+      $(".opb-search-page .input-warning").removeClass("is-active");
+    }
     $input.keyup(function () {
       if ($(this).val() == "") {
         $(this).parents().removeClass("is-input");
@@ -851,87 +2933,21 @@ jQuery(document).ready(function ($) {
       }
     });
 
-    var items = [];
-    $(".input-show ul li a").each(function (i, ele) {
-      items.push({ data: i, value: $(ele).text() });
-    });
-
-    $input.autocomplete({
-      lookup: items,
-    });
-
     $(".opb-search-page .input-clear").click(function () {
       $input.val("");
       $(this).removeClass("is-active");
       $form.removeClass("is-input");
+      $(
+        ".opb-search-page #form-list-v1,.opb-search-page #all-data"
+      ).removeClass("none");
     });
-
-    // $(".opb-btn-submit").click(function (event) {
-    //   console.log("----")
-    //   var valid = $form.hasClass("is-input");
-    //   var error_free = true;
-    //   if (!valid) {
-    //     $(".opb-search-page .input-warning").addClass("is-active");
-    //     error_free = false;
-    //   }
-    //   if (!error_free) {
-    //     event.preventDefault();
-    //   } else {
-    //     const searchValue = $input.val();
-    //     if (searchValue) {
-    //       searchAll(searchValue);
-    //       search0215();
-    //     }
-    //   }
-    // });
 
     /* Tab
      ********************************************** */
-    // $('.opb-search-page-cat').hide();
-    // $(".c-tab-menu_list li:first-child").addClass("item-active");
+
     $(".opb-search-page-body .opb-search-page-cat:first-child").addClass(
       "is-active"
     );
-    //   $(".c-tab-menu_list li a").click(function (event) {
-    //     event.preventDefault();
-    //     var item = $(this).attr("href");
-    //     $(".c-tab-menu_list  li").removeClass("item-active");
-    //     $(this).parent().addClass("item-active");
-    //     const index = $(this).parent().index();
-
-    //     if ($(".cat-filter-item").length > 0) {
-    //       const searchValue = $input.val();
-    //       page = 1;
-    //       switch (index) {
-    //         case 0:
-    //           searchAll(searchValue);
-    //           $(".cat-filter-item").removeClass("is-active");
-    //           break;
-    //         case 1:
-    //           // Get value
-    //           searchByType(searchValue, 'page')
-    //           $(".cat-filter-item").removeClass("is-active");
-    //           $(".cat-filter-item.item-page").addClass("is-active");
-    //           break;
-    //         case 2:
-    //           $(".cat-filter-item").removeClass("is-active");
-    //           $(".cat-filter-item.item-articles").addClass("is-active");
-    //           break;
-    //         case 3:
-    //           $(".cat-filter-item").removeClass("is-active");
-    //           $(".cat-filter-item.item-forms").addClass("is-active");
-    //           break;
-    //         case 4:
-    //           $(".cat-filter-item").removeClass("is-active");
-    //           $(".cat-filter-item.item-publications").addClass("is-active");
-    //           break;
-    //       }
-    //     }
-
-    //   $(".opb-search-page-body .opb-search-page-cat").removeClass("is-active");
-    //   $(item).addClass("is-active");
-    //   return false;
-    // });
 
     /* Custome Select
      ********************************************** */
@@ -939,376 +2955,274 @@ jQuery(document).ready(function ($) {
     if ($customeSelect.length < 1) {
       return false;
     }
-    // $customeSelect.customSelectBox().change(function () {
-    //   // Do something with `$(this).val()` !!
-    // });
 
     $(".cat-filter-advanced_ttl").click(function () {
-      $(this).next().addClass("is-active");
+      if (
+        pagesType == "form" ||
+        $(".item-forms.is-active").length > 0 ||
+        $(".item-publications.is-active").length > 0 ||
+        pagesType == "publications"
+      ) {
+        $(this)
+          .parents(".cat-filter-advanced")
+          .find(".cat-filter-advanced_content")
+          .addClass("is-active");
+      } else {
+        $(this).next().addClass("is-active");
+      }
     });
+
+    $(".code-filter-advanced_ttl").click(function () {
+      if (
+        pagesType == "form" ||
+        $(".item-forms.is-active").length > 0 ||
+        $(".item-publications.is-active").length > 0 ||
+        pagesType == "publications"
+      ) {
+        $(this)
+          .parents(".cat-filter-advanced")
+          .find(".cat-filter-advanced_content")
+          .addClass("is-active");
+      }
+    });
+
     $(".content-body_btn").click(function () {
       $(this).parents(".cat-filter-advanced_content").removeClass("is-active");
+      $(this).parents(".code-filter-advanced_content").removeClass("is-active");
     });
 
-    /* Ajax Loading more
-     ********************************************** */
-    $("#cat-more-all").click(function () {
-      page++;
-      const searchValue = $input.val();
-      loadMore(searchValue);
-      return false;
-    });
+    $(".input-clear,.noResults-reset").on("click", function (event) {
+      localStorage.removeItem("searchValue");
+      localValue = "";
+      let inputId = $(event.target).attr("class");
+      if (searchParams.has("s")) {
+        searchParams.delete("s");
+        newURL.search = searchParams.toString();
+        let updatedURL = newURL.toString();
 
-    $("#cat-more-page").click(function () {
-      page++;
-      const searchValue = $input.val();
-      loadMore(searchValue, "page");
-    });
+        window.history.pushState({ path: updatedURL }, "", updatedURL);
+      }
 
-    $("#cat-more-articles").click(function () {
-      page++;
-      const searchValue = $input.val();
-      loadMore(searchValue, "articles");
-      // $cat_list = $("#cat-03 .cat-list");
-      // $button = $(this);
-      // $.ajax({
-      //   type: "GET",
-      //   url: origin + "/search/search-more-data.php",
-      //   success: function (result) {
-      //     $cat_list.append(result);
-      //   },
-      // }).always(function () { });
-      return false;
-    });
+      if (pagesType == "form") {
+        setTimeout(() => {
+          if (inputId == "noResults-reset") {
+            searchParams.delete("type");
+            searchParams.delete("cate");
+            searchParams.delete("group");
+            searchParams.delete("s");
+            resetSearch();
+          }
+          if (searchParams.has("type")) {
+            let typeCate = searchParams.get("cate"),
+              typeName = searchParams.get("group"),
+              typeActive = searchParams.get("type");
+            searchByType(typeActive, typeCate, null, typeName);
+          } else {
+            searchByType("forms");
+          }
+        }, 100);
+      } else if (pagesType == "publications") {
+        setTimeout(() => {
+          if (inputId == "noResults-reset") {
+            searchParams.delete("type");
+            searchParams.delete("cate");
+            searchParams.delete("group");
+            searchParams.delete("s");
+            resetSearch();
+          }
+          if (searchParams.has("type")) {
+            let typeCate = searchParams.get("cate"),
+              typeName = searchParams.get("group"),
+              typeActive = searchParams.get("type");
+            searchByType(typeActive, typeCate, null, typeName);
+          } else {
+            searchByType("publications");
+          }
+        }, 100);
+      } else {
+        $("#search-data,#search-data2,#search-data3").val("");
+        $(".input-clear").removeClass("is-active");
+        $(".input-warning").removeClass("is-active");
+        $("#search-page-form,#search-header").removeClass("is-input");
+        if (inputId == "noResults-reset") {
+          if (typeActive == "all" && !searchParams.has("type")) {
+            searchParams.delete("type");
+            searchParams.delete("cate");
+            searchParams.delete("group");
+            searchParams.delete("s");
+            searchAll();
+          } else {
+            searchParams.delete("cate");
+            searchParams.delete("group");
+            searchParams.delete("s");
+            const filterText = {
+              page: {
+                categoryItem: ".cat-filter-item.item-page",
+                selectText: "All web pages",
+                advancedText: "All web pages",
+              },
+              articles: {
+                categoryItem: ".cat-filter-item.item-articles",
+                selectText: "All articles",
+                advancedText: "All articles",
+              },
+              forms: {
+                categoryItem: ".cat-filter-item.item-forms",
+                selectText: "All categories",
+                codeText: "All code groups",
+                advancedCategoryText: "All categories",
+                advancedCodeText: "All code groups",
+              },
+              publications: {
+                categoryItem: ".cat-filter-item.item-publications",
+                selectText: "All publications",
+                codeText: "All type",
+                advancedCategoryText: "All publications",
+                advancedCodeText: "All type",
+              },
+            };
 
-    $("#cat-more-forms").click(function () {
-      page++;
-      const searchValue = $input.val();
-      loadMore(searchValue, "forms");
-      return false;
-      // $cat_list = $("#cat-04 .cat-list");
-      // $button = $(this);
-      // $.ajax({
-      //   type: "GET",
-      //   url: origin + "/search/search-more-data.php",
-      //   success: function (result) {
-      //     $cat_list.append(result);
-      //   },
-      // }).always(function () { });
-      // return false;
-    });
+            const filterInfo = filterText[typeActive];
+            const {
+              categoryItem,
+              selectText,
+              codeText,
+              advancedCategoryText,
+              advancedCodeText,
+            } = filterInfo;
 
-    $("#cat-more-publications").click(function () {
-      page++;
-      const searchValue = $input.val();
-      loadMore(searchValue, "publications");
-      return false;
-      // $cat_list = $("#cat-05 .cat-list");
-      // $button = $(this);
-      // $.ajax({
-      //   type: "GET",
-      //   url: origin + "/search/search-more-data.php",
-      //   success: function (result) {
-      //     $cat_list.append(result);
-      //   },
-      // }).always(function () {});
-      // return false;
-    });
+            $(categoryItem + " .select-selected").text(selectText);
+            $(categoryItem + " .cat-filter-advanced_ttl span span span")
+              .empty()
+              .text(advancedCategoryText);
 
-    $("#load-more-form-v1").click(function () {
-      $form_list = $("#form-list-v1");
-      $button = $(this);
-      $.ajax({
-        type: "GET",
-        url: origin + "/opb/form/form-more-v1.php",
-        success: function (result) {
-          $form_list.append(result);
-        },
-      }).always(function () {});
-      return false;
-    });
-
-    $("#load-more-form-v2").click(function () {
-      $form_list = $("#form-list-v2");
-      $button = $(this);
-      $.ajax({
-        type: "GET",
-        url: origin + "/opb/form/form-more-v2.php",
-        success: function (result) {
-          $form_list.append(result);
-        },
-      }).always(function () {});
-      return false;
-    });
-    $("#load-more-form-v3").click(function () {
-      $form_list = $("#form-list-v3");
-      $button = $(this);
-      $.ajax({
-        type: "GET",
-        url: origin + "/opb/form/form-more-v3.php",
-        success: function (result) {
-          $form_list.append(result);
-        },
-      }).always(function () {});
-      return false;
-    });
-    $("#load-more-form-v4").click(function () {
-      $form_list = $("#form-list-v4");
-      $button = $(this);
-      $.ajax({
-        type: "GET",
-        url: origin + "/opb/form/form-more-v4.php",
-        success: function (result) {
-          $form_list.append(result);
-        },
-      }).always(function () {});
-      return false;
-    });
-    $("#load-more-form-v5").click(function () {
-      $form_list = $("#form-list-v5");
-      $button = $(this);
-      $.ajax({
-        type: "GET",
-        url: origin + "/opb/form/form-more-v5.php",
-        success: function (result) {
-          $form_list.append(result);
-        },
-      }).always(function () {});
-      return false;
-    });
-
-    /* Ajax Slect Page
-     ********************************************** */
-    // $("select[name='selectPage']").on("change", function () {
-    //   var val = $(this).val();
-    //   console.log('val: ', val)
-    //   // if (val) {
-    //   //   if (val === '01') {
-
-    //   //   }
-    //   //   searchByType()
-    //   // }
-
-    //   // var val = $(this).val();
-    //   // if (val) {
-    //   //   var req = $.ajax({
-    //   //     type: "GET",
-    //   //     url: origin + "/_html/search/search-page-data.php",
-    //   //     data: { selectPageVal: "" + val + "" },
-    //   //     success: function (htmlresponse) {
-    //   //       $("#cat-02 .cat-list").html(htmlresponse);
-    //   //       $("#cat-02 .cat-list .cat-item").hide();
-    //   //       setTimeout(function () {
-    //   //         $("#cat-02 .cat-list .cat-item")
-    //   //           .slideDown(500, "swing")
-    //   //           .css("opacity", 0)
-    //   //           .animate({ opacity: 1 }, { queue: false, duration: 1000 });
-    //   //       }, 100);
-    //   //     },
-    //   //     complete: function () {
-    //   //       console.log("done");
-    //   //     },
-    //   //   });
-    //   // }
-    // });
-
-    // $("select[name='selectArticle']").on("change", function () {
-    //   var val = $(this).val();
-    //   if (val) {
-    //     var req = $.ajax({
-    //       type: "GET",
-    //       url: origin + "/_html/search/search-page-data.php",
-    //       data: { selectPageVal: "" + val + "" },
-    //       success: function (htmlresponse) {
-    //         $("#cat-03 .cat-list").html(htmlresponse);
-    //         $("#cat-03 .cat-list .cat-item").hide();
-    //         setTimeout(function () {
-    //           $("#cat-03 .cat-list .cat-item")
-    //             .slideDown(500, "swing")
-    //             .css("opacity", 0)
-    //             .animate({ opacity: 1 }, { queue: false, duration: 1000 });
-    //         }, 100);
-    //       },
-    //       complete: function () {
-    //         console.log("done");
-    //       },
-    //     });
-    //   }
-    // });
-
-    // $("select[name='selectForm']").on("change", function () {
-    //   var val = $(this).val();
-    //   if (val) {
-    //     var req = $.ajax({
-    //       type: "GET",
-    //       url: origin + "/_html/search/search-page-data.php",
-    //       data: { selectPageVal: "" + val + "" },
-    //       success: function (htmlresponse) {
-    //         $("#cat-04 .cat-list").html(htmlresponse);
-    //         $("#cat-04 .cat-list .cat-item").hide();
-    //         setTimeout(function () {
-    //           $("#cat-04 .cat-list .cat-item")
-    //             .slideDown(500, "swing")
-    //             .css("opacity", 0)
-    //             .animate({ opacity: 1 }, { queue: false, duration: 1000 });
-    //         }, 100);
-    //       },
-    //       complete: function () {
-    //         console.log("done");
-    //       },
-    //     });
-    //   }
-    // });
-
-    // $("select[name='selectPublications']").on("change", function () {
-    //   var val = $(this).val();
-    //   if (val) {
-    //     var req = $.ajax({
-    //       type: "GET",
-    //       url: origin + "/_html/search/search-page-data.php",
-    //       data: { selectPageVal: "" + val + "" },
-    //       success: function (htmlresponse) {
-    //         $("#cat-05 .cat-list").html(htmlresponse);
-    //         $("#cat-05 .cat-list .cat-item").hide();
-    //         setTimeout(function () {
-    //           $("#cat-05 .cat-list .cat-item")
-    //             .slideDown(500, "swing")
-    //             .css("opacity", 0)
-    //             .animate({ opacity: 1 }, { queue: false, duration: 1000 });
-    //         }, 100);
-    //       },
-    //       complete: function () {
-    //         console.log("done");
-    //       },
-    //     });
-    //   }
-    // });
-
-    $("select[name='selectFormV1']").on("change", function () {
-      var val = $(this).val();
-      if (val) {
-        var req = $.ajax({
-          type: "GET",
-          url: origin + "/form/form-more-v1.php",
-          data: { selectPageVal: "" + val + "" },
-          success: function (htmlresponse) {
-            $("#form-list-v1").html(htmlresponse);
-            $("#form-list-v1 .item").hide();
-            setTimeout(function () {
-              $("#form-list-v1 .item")
-                .slideDown(500, "swing")
-                .css("opacity", 0)
-                .animate({ opacity: 1 }, { queue: false, duration: 1000 });
-            }, 100);
-          },
-          complete: function () {
-            console.log("done");
-          },
-        });
+            if (typeActive === "forms" || typeActive === "publications") {
+              $(categoryItem + " .cat-filter-select .select-selected").text(
+                selectText
+              );
+              $(categoryItem + " .code-filter-select .select-selected").text(
+                codeText
+              );
+              $(".cat-filter-advanced .cat-filter-advanced_ttl span span")
+                .empty()
+                .text(advancedCategoryText);
+              $(".cat-filter-advanced .code-filter-advanced_ttl span span")
+                .empty()
+                .text(advancedCodeText);
+            }
+            searchByType(typeActive);
+          }
+        } else {
+          searchParams.delete("s");
+          if (searchParams.has("type")) {
+            let typeCate = searchParams.get("cate"),
+              typeName = searchParams.get("group"),
+              typeActive = searchParams.get("type");
+            searchByType(typeActive, typeCate, null, typeName);
+          } else {
+            searchAll();
+          }
+        }
       }
     });
-
-    $("select[name='selectFormV2']").on("change", function () {
-      var val = $(this).val();
-      if (val) {
-        var req = $.ajax({
-          type: "GET",
-          url: origin + "/opb/form/form-more-v2.php",
-          data: { selectPageVal: "" + val + "" },
-          success: function (htmlresponse) {
-            $("#form-list-v2").html(htmlresponse);
-            $("#form-list-v2 .item").hide();
-            setTimeout(function () {
-              $("#form-list-v2 .item")
-                .slideDown(500, "swing")
-                .css("opacity", 0)
-                .animate({ opacity: 1 }, { queue: false, duration: 1000 });
-            }, 100);
-          },
-          complete: function () {
-            console.log("done");
-          },
-        });
+    $(".backPopup").click(function () {
+      if (
+        pagesType == "form" ||
+        $(".item-forms.is-active").length > 0 ||
+        $(".item-publications.is-active").length > 0 ||
+        pagesType == "publications"
+      ) {
+        $(this)
+          .parents(".cat-filter-advanced")
+          .find(".cat-filter-advanced_content")
+          .removeClass("is-active");
+      } else {
+        $(this).parent().removeClass("is-active");
       }
-    });
-
-    $("select[name='selectFormV3']").on("change", function () {
-      var val = $(this).val();
-      if (val) {
-        var req = $.ajax({
-          type: "GET",
-          url: origin + "/opb/form/form-more-v3.php",
-          data: { selectPageVal: "" + val + "" },
-          success: function (htmlresponse) {
-            $("#form-list-v3").html(htmlresponse);
-            $("#form-list-v3 .cat-item").hide();
-            setTimeout(function () {
-              $("#form-list-v3 .cat-item")
-                .slideDown(500, "swing")
-                .css("opacity", 0)
-                .animate({ opacity: 1 }, { queue: false, duration: 1000 });
-            }, 100);
-          },
-          complete: function () {
-            console.log("done");
-          },
-        });
-      }
-    });
-
-    $("select[name='selectFormV4']").on("change", function () {
-      var val = $(this).val();
-      if (val) {
-        var req = $.ajax({
-          type: "GET",
-          url: origin + "/opb/form/form-more-v4.php",
-          data: { selectPageVal: "" + val + "" },
-          success: function (htmlresponse) {
-            $("#form-list-v4").html(htmlresponse);
-            $("#form-list-v4 .item").hide();
-            setTimeout(function () {
-              $("#form-list-v4 .item")
-                .slideDown(500, "swing")
-                .css("opacity", 0)
-                .animate({ opacity: 1 }, { queue: false, duration: 1000 });
-            }, 100);
-          },
-          complete: function () {
-            console.log("done");
-          },
-        });
-      }
-    });
-
-    $("select[name='selectFormV5']").on("change", function () {
-      var val = $(this).val();
-      if (val) {
-        var req = $.ajax({
-          type: "GET",
-          url: origin + "/opb/form/form-more-v5.php",
-          data: { selectPageVal: "" + val + "" },
-          success: function (htmlresponse) {
-            $("#form-list-v5").html(htmlresponse);
-            $("#form-list-v5 .item").hide();
-            setTimeout(function () {
-              $("#form-list-v5 .item")
-                .slideDown(500, "swing")
-                .css("opacity", 0)
-                .animate({ opacity: 1 }, { queue: false, duration: 1000 });
-            }, 100);
-          },
-          complete: function () {
-            console.log("done");
-          },
-        });
-      }
-    });
-
-    /* Sort Form
-     ********************************************** */
-    $(".page-sub-soft li").click(function () {
-      $(this).toggleClass("is-soft");
-      console.log("sort forms");
     });
   }
+  function setItemImageHeight() {
+    $(".js_arti").each(function () {
+      var totalHeight = $(this).outerHeight();
+      $(this)
+        .find(".item-image")
+        .css("height", totalHeight + "px");
+    });
+  }
+  function btnLoad() {
+    $("#cat-more-" + typeActive).off("click");
+    $("#cat-more-" + typeActive).click(function (e) {
+      let $input = $(".opb-search-page .opb-form-text");
+      page++;
+      let searchValue = $input.val();
+      if (typeActive == "all") {
+        loadMore(searchValue);
+      } else {
+        loadMore(searchValue, typeActive);
+      }
+      return false;
+    });
+  }
+  function resetSearch() {
+    var catFilterItems = $(".cat-filter-advanced"),
+      catSelect = $(".cat-filter-selectV1 .select-selected"),
+      codeSelect = $(".code-filter-selectV1 .select-selected"),
+      formChecked = $('input[name="code-advanced-form"]:first'),
+      catFormChecked = $('input[name="filter-advanced-form"]:first'),
+      pubChecked = $('input[name="code-advanced-publications"]:first'),
+      catPubChecked = $('input[name="filter-advanced-publications"]:first');
+
+    pagesType === "form"
+      ? (catFilterItems.find(".cat-filter-advanced_ttl span span").empty(),
+        catFilterItems.find(".code-filter-advanced_ttl span span").empty(),
+        catFilterItems
+          .find(".cat-filter-advanced_ttl span span")
+          .text("All categories"),
+        catFilterItems
+          .find(".code-filter-advanced_ttl span span")
+          .text("All code groups"),
+        catSelect.text("All categories"),
+        codeSelect.text("All code groups"),
+        $(".cat-filter-selectV1 option").eq(0).prop("selected", true),
+        $(".code-filter-selectV1 option").eq(0).prop("selected", true),
+        formChecked.prop("checked", true),
+        catFormChecked.prop("checked", true))
+      : pagesType === "publications"
+      ? (catFilterItems.find(".cat-filter-advanced_ttl span span").empty(),
+        catFilterItems.find(".code-filter-advanced_ttl span span").empty(),
+        catFilterItems
+          .find(".cat-filter-advanced_ttl span span")
+          .text("All publications"),
+        catFilterItems
+          .find(".code-filter-advanced_ttl span span")
+          .text("All types"),
+        catSelect.text("All categories"),
+        codeSelect.text("All code groups"),
+        $(".cat-filter-selectV1 option").eq(0).prop("selected", true),
+        $(".code-filter-selectV1 option").eq(0).prop("selected", true),
+        catSelect.text("All types"),
+        codeSelect.text("All publications"),
+        pubChecked.prop("checked", true),
+        catPubChecked.prop("checked", true))
+      : null;
+
+    $(".opb-search-page .opb-form-text").val("");
+    $("#search-page-form,#search-header").removeClass("is-input");
+    $(".input-clear").removeClass("is-active");
+    $(".input-warning").removeClass("is-active");
+  }
+  let inputStyles = $(".opb-form-text");
+  let divs = $(".input-clear use");
+
+  inputStyles.focus(function () {
+    let index = inputStyles.index(this);
+    let div = divs.eq(index);
+    div.attr("xlink:href", "#icon-search-clear_on");
+  });
+
+  inputStyles.blur(function () {
+    let index = inputStyles.index(this);
+    let div = divs.eq(index);
+    div.attr("xlink:href", "#icon-search-clear");
+  });
 });

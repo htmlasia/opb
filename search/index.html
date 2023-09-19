@@ -186,10 +186,11 @@
       <symbol id="icon-search-clear" viewBox="0 0 15 14">
         <path d="M14.2783 1.41L12.8683 0L7.27832 5.59L1.68832 0L0.27832 1.41L5.86832 7L0.27832 12.59L1.68832 14L7.27832 8.41L12.8683 14L14.2783 12.59L8.68832 7L14.2783 1.41Z" fill="#656565" />
       </symbol>
-      <symbol id="icon-search-warning" viewBox="0 0 20 20">
-        <circle cx="10" cy="10" r="10" fill="black" />
-        <circle cx="10" cy="10" r="9" fill="#FFCF2E" />
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M11 5H9V11H11V5ZM11 13H9V15H11V13Z" fill="black" />
+      <symbol id="icon-search-clear_on" viewBox="0 0 15 14">
+        <path d="M14.2783 1.41L12.8683 0L7.27832 5.59L1.68832 0L0.27832 1.41L5.86832 7L0.27832 12.59L1.68832 14L7.27832 8.41L12.8683 14L14.2783 12.59L8.68832 7L14.2783 1.41Z" fill="#21578a" />
+      </symbol>
+      <symbol id="icon-search-warning" viewBox="0 0 19 16">
+        <path d="M0 16H18.5263L9.26316 0L0 16ZM10.1053 13.4737H8.42105V11.7895H10.1053V13.4737ZM10.1053 10.1053H8.42105V6.73684H10.1053V10.1053Z" fill="#A80000" />
       </symbol>
       <symbol id="icon-search-more" viewBox="0 0 15 14">
         <path d="M14.5 8H8.5V14H6.5V8H0.5V6H6.5V0H8.5V6H14.5V8Z" />
@@ -790,7 +791,7 @@
     </div>
     <div>
       <div class="">
-        <a href="#" class="search-header-icon">
+        <a href="#" class="search-header-icon onlySP">
           <div class="search-header-icon-start">
             <svg class="opb-icon opb-icon-search-renewal">
               <use xlink:href="#icon-search-renewal"></use>
@@ -803,11 +804,34 @@
             </svg>
           </div>
         </a>
+        <div class="form-inner form-inner_custom onlyPC">
+          <form id="search-header" class="opb-form-search-page" method="post" action="">
+            <div class="form-input">
+              <input type="text" id="search-data2" class="form-control opb-form-text search-header-input" placeholder="Search" name="searchtext" value="">
+            </div>
+            <button type="submit" class="btn btn-primary opb-btn-submit search-header-submit">
+              <svg class="opb-icon opb-icon-search-renewal">
+                <use xlink:href="#icon-search-renewal"></use>
+              </svg>
+            </button>
+          </form>
+          <div class="input-clear">
+            <svg class="opb-icon opb-icon-search-clear">
+              <use xlink:href="#icon-search-clear"></use>
+            </svg>
+          </div>
+          <div class="input-warning">
+            <svg class="opb-icon opb-icon-search-warning">
+              <use xlink:href="#icon-search-warning"></use>
+            </svg>
+            <span>Please enter a search term</span>
+          </div>
+        </div>
         <div class="search-header-from">
           <div class="form-inner">
             <form id="search-header" class="opb-form-search-page" method="post" action="">
               <div class="form-input">
-                <input type="text" class="form-control opb-form-text search-header-input" placeholder="Enter a search term" name="searchtext" value="">
+                <input type="text" id="search-data3" class="form-control opb-form-text search-header-input" placeholder="Enter a search term" name="searchtext" value="">
               </div>
               <button type="submit" class="btn btn-primary opb-btn-submit search-header-submit">
                 <svg class="opb-icon opb-icon-search-renewal">
@@ -815,19 +839,6 @@
                 </svg>
               </button>
             </form>
-            <div class="input-show">
-              <ul>
-                <li><a href="#">retirement</a></li>
-                <li><a href="#">careers</a></li>
-                <li><a href="#">contact OPB</a></li>
-                <li><a href="#">2023 pay dates</a></li>
-                <li><a href="#">insured benefits</a></li>
-                <li><a href="#">buying back credit</a></li>
-                <li><a href="#">survivor pension</a></li>
-                <li><a href="#">ltip</a></li>
-                <li><a href="#">how my pension is calculated</a></li>
-              </ul>
-            </div>
             <div class="input-clear">
               <svg class="opb-icon opb-icon-search-clear">
                 <use xlink:href="#icon-search-clear"></use>
@@ -907,9 +918,9 @@
 
   <!-- endinject -->
 
-  <main id="content" class="main opb-search-page" role="main">
+  <main id="content" class="main opb-search-page opb-page-header-main-fixed" role="main">
     <div class="opb-page-content">
-      <div class="opb-page-header">
+      <div class="opb-page-header opb-page-header-main">
         <div class="container">
           <div class="opb-page-header-title">
             <!-- Please Remove the onsubmit="*" -->
@@ -941,316 +952,229 @@
           </div>
 
           <div class="opb-form-search-header">
+
             <div id="menu-tab-id">
-              <!-- <div class="c-tab-menu">
+              <div class="c-tab-menu">
                 <ul class="c-tab-menu_list">
-                  <li class="c-tab-menu_item item-active"><a href="#cat-01">
-                      <svg class="opb-icon opb-icon-search-all">
+                  <li class="c-tab-menu_item">
+                    <a href="#searchTabAll">
+                      <svg class="icon-resize opb-icon opb-icon-search-all" viewBox="0 0 16 16">
                         <use xlink:href="#icon-search-all"></use>
                       </svg>
-                      <span>All <span class="txt-num">(280)</span></span></a>
+                      <span>All <span class="txt-num " id="allct">(55)</span></span>
+                    </a>
                   </li>
-                  <li class="c-tab-menu_item"><a href="#cat-02">
-                      <svg class="opb-icon opb-icon-search-page">
+                  <li class="c-tab-menu_item">
+                    <a href="#searchTabPage">
+                      <svg class="icon-resize opb-icon opb-icon-search-page" viewBox="0 0 16 16">
                         <use xlink:href="#icon-search-page"></use>
                       </svg>
-                      <span>Pages <span class="txt-num">(100)</span></span></a>
+                      <span>Pages <span class="txt-num" id="pagect">(4)</span></span>
+                    </a>
                   </li>
-                  <li class="c-tab-menu_item"><a href="#cat-03">
-                      <svg class="opb-icon opb-icon-search-articles">
-                        <use xlink:href="#icon-search-articles"></use>
-                      </svg>
-                      <span>Articles <span class="txt-num">(110)</span></span></a>
-                  </li>
-                  <li class="c-tab-menu_item"><a href="#cat-04">
-                      <svg class="opb-icon opb-icon-search-forms">
+                  <li class="c-tab-menu_item">
+                    <a href="#searchTabForms">
+                      <svg class="icon-resize opb-icon opb-icon-search-forms" viewBox="0 0 16 16">
                         <use xlink:href="#icon-search-forms"></use>
                       </svg>
-                      <span>Forms <span class="txt-num">(5)</span></span></a>
+                      <span>Forms <span class="txt-num" id="formct">(11)</span></span>
+                    </a>
                   </li>
-                  <li class="c-tab-menu_item"><a href="#cat-05">
-                      <svg class="opb-icon opb-icon-search-publications">
+                  <li class="c-tab-menu_item">
+                    <a href="#searchTabPublications">
+                      <svg class="icon-resize opb-icon  opb-icon-search-publications" viewBox="0 0 16 16">
                         <use xlink:href="#icon-search-publications"></use>
                       </svg>
-                      <span>Publications <span class="txt-num">(40)</span></span></a>
+                      <span>Publications <span class="txt-num" id="pubct">(22)</span></span>
+                    </a>
+                  </li>
+                  <li class="c-tab-menu_item">
+                    <a href="#searchTabArticles">
+                      <svg class="icon-resize opb-icon opb-icon-search-articles" viewBox="0 0 16 16">
+                        <use xlink:href="#icon-search-articles"></use>
+                      </svg>
+                      <span>Articles <span class="txt-num" id="newsct">(5)</span></span>
+                    </a>
                   </li>
                 </ul>
-              </div> -->
+              </div>
             </div>
-
-
             <div class="cat-filter">
+              <span>
+                <svg class="opb-icon opb-icon-filter-advanced">
+                  <use xlink:href="#icon-filter-advanced"></use>
+                </svg> Filter by:
+              </span>
               <div class="cat-filter-item item-page">
-                <div class="cat-filter-select">
-                  <select id="selectPage" name="selectPage" class="js-custom-select">
-                    <option selected value="01">All web pages</option>
-                    <option value="02">Members pages only</option>
-                    <option value="03">Current members pages only</option>
-                    <option value="04">Retired members pages only</option>
-                    <option value="05">Employers pages only</option>
-                  </select>
+                <div class="cat-filter-select js-select-nws">
+                  <select id="selectPage" name="selectPage" class="js-custom-select"></select>
                 </div>
                 <div class="cat-filter-advanced">
                   <h3 class="cat-filter-advanced_ttl">
-                    <svg class="opb-icon opb-icon-filter-advanced">
-                      <use xlink:href="#icon-filter-advanced"></use>
-                    </svg>
-                    <span>Advanced Search Filter</span>
+                    <span>Filter:
+                      <span>
+                        <svg class="opb-icon opb-icon-filter-advanced">
+                          <use xlink:href="#icon-filter-advanced"></use>
+                        </svg>
+                        <span>All web pages</span>
+                      </span>
+                    </span>
                   </h3>
                   <div class="cat-filter-advanced_content">
+                    <div class="backPopup">
+                      <span class="svg">
+                        <svg width="12px" height="13px" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.82475e-07 6.61035L7.60625 6.61035L4.1125 10.1041L5 10.9854L10 5.98535L5 0.985351L4.11875 1.8666L7.60625 5.36035L4.91753e-07 5.36035L3.82475e-07 6.61035Z" fill="#21578a" />
+                        </svg>
+                      </span>Back
+                    </div>
                     <div class="content-inner">
                       <div class="content-body">
                         <h3>Pages</h3>
                         <h4>Filter by</h4>
-                        <ul class="list">
-                          <li>
-                            <input type="radio" name="filter-advanced-page" id="filter-advanced-01">
-                            <label for="filter-advanced-01">Members pages only</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-page" id="filter-advanced-02">
-                            <label for="filter-advanced-02">Current members pages only</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-page" id="filter-advanced-03">
-                            <label for="filter-advanced-03">Retired members pages only</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-page" id="filter-advanced-04">
-                            <label for="filter-advanced-04">Employers pages only</label>
-                          </li>
-                        </ul>
+                        <ul class="list"></ul>
                       </div>
-                      <div class="content-body_btn"><a href="#">Filter Results</a></div>
+                      <div class="content-body_btn"><a href="javascript:void(0);">Filter Results</a></div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="cat-filter-item item-articles">
-                <div class="cat-filter-select">
-                  <select name="selectArticle" class="js-custom-select">
-                    <option selected value="01">All article types</option>
-                    <option value="02">News articles</option>
-                    <option value="03">Newsletters</option>
-                    <option value="04">Blog articles</option>
-                  </select>
-                </div>
-                <div class="cat-filter-sort">
-                  <p class="cat-filter-sort-ttl">Sort by</p>
-                  <ul class="cat-filter-sort-list sort-articles">
-                    <li id="desc" class="sort-newest"><a href="#">Newest</a></li>
-                    <li id="asc" class="sort-oldest"><a href="#">Oldest</a></li>
-                  </ul>
+                <div class="cat-filter-select js-select-nws">
+                  <select id="selectArticle" name="selectArticle" class="js-custom-select"></select>
                 </div>
                 <div class="cat-filter-advanced">
                   <h3 class="cat-filter-advanced_ttl">
-                    <svg class="opb-icon opb-icon-filter-advanced">
-                      <use xlink:href="#icon-filter-advanced"></use>
-                    </svg>
-                    <span>Advanced Search Filter</span>
+                    <span>Filter:
+                      <span>
+                        <svg class="opb-icon opb-icon-filter-advanced">
+                          <use xlink:href="#icon-filter-advanced"></use>
+                        </svg>
+                        <span>All article types</span>
+                      </span>
+                    </span>
                   </h3>
                   <div class="cat-filter-advanced_content">
+                    <div class="backPopup">
+                      <span class="svg">
+                        <svg width="12px" height="13px" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.82475e-07 6.61035L7.60625 6.61035L4.1125 10.1041L5 10.9854L10 5.98535L5 0.985351L4.11875 1.8666L7.60625 5.36035L4.91753e-07 5.36035L3.82475e-07 6.61035Z" fill="#21578a" />
+                        </svg>
+                      </span>Back
+                    </div>
                     <div class="content-inner">
                       <div class="content-body">
                         <h3>Articles</h3>
                         <h4>Filter by</h4>
-                        <ul class="list">
-                          <li>
-                            <input type="radio" name="filter-advanced-article" id="filter-advanced-article-01">
-                            <label for="filter-advanced-article-01">All article types</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-article" id="filter-advanced-article-02">
-                            <label for="filter-advanced-article-02">News articles</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-article" id="filter-advanced-article-03">
-                            <label for="filter-advanced-article-03">Newsletters</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-article" id="filter-advanced-article-04">
-                            <label for="filter-advanced-article-04">Blog articles</label>
-                          </li>
-                        </ul>
-                        <h4>Sort by</h4>
-                        <ul class="list">
-                          <li>
-                            <input type="radio" name="soft-advanced-article" id="soft-advanced-article-01">
-                            <label for="soft-advanced-article-01">Newest</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="soft-advanced-article" id="soft-advanced-article-02">
-                            <label for="soft-advanced-article-02">Oldest</label>
-                          </li>
-                        </ul>
+                        <ul class="list"></ul>
                       </div>
-                      <div class="content-body_btn"><a href="#">Filter Results</a></div>
+                      <div class="content-body_btn"><a href="javascript:void(0);">Filter Results</a></div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="cat-filter-item item-forms">
-                <div class="cat-filter-select">
-                  <select name="selectForm" class="js-custom-select">
-                    <option selected value="01">All form categories</option>
-                    <option value="02">OPB forms</option>
-                    <option value="03">FSCO / FSRA Waivers forms</option>
-                    <option value="04">FSRA Family Law forms</option>
-                    <option value="05">Cowan forms</option>
-                    <option value="06">Canada Life forms</option>
-                  </select>
+                <div class="cat-filter-select js-select-nws">
+                  <!-- <select id="selectForm" name="selectForm" class="js-custom-select"></select> -->
+                  <select id="formsSelectCategory" name="formsSelectCategory" class="js-custom-select "></select>
                 </div>
-                <div class="cat-filter-sort">
-                  <p class="cat-filter-sort-ttl">Sort by</p>
-                  <ul class="cat-filter-sort-list sort-forms">
-                    <li id="asc" class="sort-az"><a href="#">Title A-Z</a></li>
-                    <li id="desc" class="sort-za"><a href="#">Title Z-A</a></li>
-                  </ul>
+                <div class="code-filter-selectV1 js-select-nws">
+                  <!-- <select id="selectFormV1" name="selectFormV1" class="js-custom-select"></select> -->
+                  <select id="formsSelectCode" name="formsSelectCode" class="js-custom-select"></select>
                 </div>
                 <div class="cat-filter-advanced">
-                  <h3 class="cat-filter-advanced_ttl">
-                    <svg class="opb-icon opb-icon-filter-advanced">
-                      <use xlink:href="#icon-filter-advanced"></use>
-                    </svg>
-                    <span>Advanced Search Filter</span>
-                  </h3>
-                  <div class="cat-filter-advanced_content">
-                    <div class="content-inner">
-                      <div class="content-body">
-                        <h3>Forms</h3>
-                        <h4>Filter by</h4>
-                        <ul class="list">
-                          <li>
-                            <input type="radio" name="filter-advanced-form" id="filter-advanced-form-01">
-                            <label for="filter-advanced-form-01">All form categories</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-form" id="filter-advanced-form-02">
-                            <label for="filter-advanced-form-02">OPB forms</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-form" id="filter-advanced-form-03">
-                            <label for="filter-advanced-form-03">FSCO / FSRA Waivers forms</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-form" id="filter-advanced-form-04">
-                            <label for="filter-advanced-form-04">FSRA Family Law forms</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-form" id="filter-advanced-form-05">
-                            <label for="filter-advanced-form-05">Cowan forms</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-form" id="filter-advanced-form-06">
-                            <label for="filter-advanced-form-06">Canada Life forms</label>
-                          </li>
-                        </ul>
-                        <h4>Sort by</h4>
-                        <ul class="list">
-                          <li>
-                            <input type="radio" name="soft-advanced-form" id="soft-advanced-form-01">
-                            <label for="soft-advanced-form-01">A-Z title</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="soft-advanced-form" id="soft-advanced-form-02">
-                            <label for="soft-advanced-form-02">Z-A title</label>
-                          </li>
-                        </ul>
+                  <div class="list-filter">
+                    <span>
+                      <svg class="opb-icon opb-icon-filter-advanced">
+                        <use xlink:href="#icon-filter-advanced"></use>
+                      </svg> Filter & Sort:
+                    </span>
+                    <div class="list">
+                      <h3 class="cat-filter-advanced_ttl">
+                        <span>
+                          <span>All categories</span>
+                        </span>
+                      </h3>
+                      <h3 class="code-filter-advanced_ttl">
+                        <span>
+                          <span>All code groups</span>
+                        </span>
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="filter-advanced-content">
+                    <div class="cat-filter-advanced_content">
+                      <div class="backPopup">
+                        <span class="svg">
+                          <svg width="12px" height="13px" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.82475e-07 6.61035L7.60625 6.61035L4.1125 10.1041L5 10.9854L10 5.98535L5 0.985351L4.11875 1.8666L7.60625 5.36035L4.91753e-07 5.36035L3.82475e-07 6.61035Z" fill="#21578a" />
+                          </svg>
+                        </span>Back
                       </div>
-                      <div class="content-body_btn"><a href="#">Filter Results</a></div>
+                      <div class="content-inner">
+                        <div class="content-body content-cat">
+                          <h3>Forms</h3>
+                          <h4>Filter by category</h4>
+                          <ul class="list"></ul>
+                        </div>
+                        <div class="content-body content-code">
+                          <h4>Filter by code group</h4>
+                          <ul class="list"></ul>
+                        </div>
+                        <div class="content-body_btn"><a href="javascript:void(0);">Filter Results</a></div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="cat-filter-item item-publications">
-                <div class="cat-filter-select">
-                  <select name="selectPublications" class="js-custom-select">
-                    <option selected value="01">All publications</option>
-                    <option value="02">Booklets</option>
-                    <option value="03">Flyers and Brochures</option>
-                    <option value="04">OPB News for Members</option>
-                    <option value="05">Annual Reports - EN</option>
-                    <option value="06">Annual Reports - FR</option>
-                    <option value="07">Financial Reports - EN</option>
-                    <option value="08">Financial Reports - FR</option>
-                    <option value="09">Business Plans - EN</option>
-                    <option value="20">Business Plans - FR</option>
-                  </select>
+                <div class="code-filter-select js-select-nws">
+                  <select id="publicationsSelectType" name="publicationsSelectType" class="js-custom-select"></select>
                 </div>
-                <div class="cat-filter-sort">
-                  <p class="cat-filter-sort-ttl">Sort by</p>
-                  <ul class="cat-filter-sort-list sort-publications">
-                    <li class="sort-newest"><a href="#">Newest</a></li>
-                    <li class="sort-oldest"><a href="#">Oldest</a></li>
-                  </ul>
+                <div class="cat-filter-select js-select-nws">
+                  <select id="publicationsSelectCategory" name="publicationsSelectCategory" class="js-custom-select"></select>
                 </div>
                 <div class="cat-filter-advanced">
-                  <h3 class="cat-filter-advanced_ttl">
-                    <svg class="opb-icon opb-icon-filter-advanced">
-                      <use xlink:href="#icon-filter-advanced"></use>
-                    </svg>
-                    <span>Advanced Search Filter</span>
-                  </h3>
-                  <div class="cat-filter-advanced_content">
-                    <div class="content-inner">
-                      <div class="content-body">
-                        <h3>Publications</h3>
-                        <h4>Filter by</h4>
-                        <ul class="list">
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-01">
-                            <label for="filter-advanced-public-01">All publications</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-02">
-                            <label for="filter-advanced-public-02">Booklets</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-03">
-                            <label for="filter-advanced-public-03">Flyers and Brochures</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-04">
-                            <label for="filter-advanced-public-04">OPB News for Members</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-05">
-                            <label for="filter-advanced-public-05">Annual Reports - EN</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-06">
-                            <label for="filter-advanced-public-06">Annual Reports - FR</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-07">
-                            <label for="filter-advanced-public-07">Financial Reports - EN</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-08">
-                            <label for="filter-advanced-public-08">Annual Reports - FR</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-09">
-                            <label for="filter-advanced-public-09">Business Plans - EN</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="filter-advanced-public" id="filter-advanced-public-10">
-                            <label for="filter-advanced-public-10">Business Plans - FR</label>
-                          </li>
-                        </ul>
-                        <h4>Sort by</h4>
-                        <ul class="list">
-                          <li>
-                            <input type="radio" name="soft-advanced-public" id="soft-advanced-public-01">
-                            <label for="soft-advanced-public-01">A-Z title</label>
-                          </li>
-                          <li>
-                            <input type="radio" name="soft-advanced-public" id="soft-advanced-public-02">
-                            <label for="soft-advanced-public-02">Z-A title</label>
-                          </li>
-                        </ul>
+                  <div class="list-filter">
+                    <span>
+                      <svg class="opb-icon opb-icon-filter-advanced">
+                        <use xlink:href="#icon-filter-advanced"></use>
+                      </svg> Filter & Sort:
+                    </span>
+                    <div class="list">
+                      <h3 class="code-filter-advanced_ttl">
+                        <span>
+                          <span>All types</span>
+                        </span>
+                      </h3>
+                      <h3 class="cat-filter-advanced_ttl">
+                        <span>
+                          <span>All categories</span>
+                        </span>
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="filter-advanced-content">
+                    <div class="cat-filter-advanced_content">
+                      <div class="backPopup">
+                        <span class="svg">
+                          <svg width="12px" height="13px" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.82475e-07 6.61035L7.60625 6.61035L4.1125 10.1041L5 10.9854L10 5.98535L5 0.985351L4.11875 1.8666L7.60625 5.36035L4.91753e-07 5.36035L3.82475e-07 6.61035Z" fill="#21578a" />
+                          </svg>
+                        </span>Back
                       </div>
-                      <div class="content-body_btn"><a href="#">Filter Results</a></div>
+                      <div class="content-inner">
+                        <div class="content-body content-cat">
+                          <h3>Publications</h3>
+                          <h4>Filter by types</h4>
+                          <ul class="list"></ul>
+                        </div>
+                        <div class="content-body content-code">
+                          <h4>Filter by categories</h4>
+                          <ul class="list"></ul>
+                        </div>
+                        <div class="content-body_btn"><a href="#">Filter Results</a></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1259,14 +1183,45 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="opb-search-page-body">
-        <div class="container">
-          <div id="all-data"></div>
-
+    <div class="opb-search-page-body">
+      <div class="container">
+        <div class="loading">
+          <div class="container-loading">
+            <div class="ico-load">
+              <img src="../assets0215/img/ico_loading.svg" alt="">
+            </div>
+            <div class="text-loading">Loading...</div>
+          </div>
+        </div>
+        <div id="all-data"></div>
+        <div class="note">
+          <div class="cat-inner nore ">
+            <h3 class="body-ttl"><span class="type"></span> search results <span class="keysearch"></span></h3>
+          </div>
+          <div class="noResults ">
+            <div class="content-noResults">
+              <div class="ttl-noResults">No matching results</div>
+              <p class="txt-noResults">It seems we can’t find any matching results based on the search input. Enter different search terms or filters and try again.</p>
+              <div class="btn-wrap">
+                <a href="javascript:void(0);" class="noResults-reset">Try again</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cat-more ">
+          <a href="javascript:void(0);" id="cat-more-all" class="cat-more-btn">
+            <span>Load more results</span>
+            <svg class="opb-icon opb-icon-search-more" viewBox="0 0 16 16">
+              <use xlink:href="#icon-search-more"></use>
+            </svg>
+            <i class="fa fa-spinner fa-spin mx-1" style="display: none;"></i>
+          </a>
         </div>
       </div>
-      <!-- opb-search-page-body  -->
+    </div>
+    <!-- opb-search-page-body  -->
 
 
     </div>
@@ -1484,7 +1439,7 @@
     </svg>
     <span class="sr-only">Go to the top of the page.</span>
   </a>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
   <script type="text/javascript" src="https://www.opb.ca/sites/opb/js/jquery.min.js"></script>
   <script type="text/javascript" src="https://www.opb.ca/sites/opb/js/popper.min.js"></script>
@@ -1495,7 +1450,8 @@
   <script type="text/javascript" src="https://www.opb.ca/sites/opb/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://www.opb.ca/sites/opb/js/opb-core.min.js"></script>
 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.9/jquery.autocomplete.min.js"></script>
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.9/jquery.autocomplete.min.js"></script> -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
   <script type="text/javascript" src="../assets0215/js/jquery.custom.selectbox.min.js"></script>
   <script type="text/javascript" src="../assets0215/js/custome0215.js"></script>
 

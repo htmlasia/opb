@@ -1,0 +1,2383 @@
+{
+  "data": [
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Retirement Compensation Arrangement (RCA)",
+      "description": "On January 1, 2022, the existing Public Service Supplementary Benefits Account (PSSBA) was replaced by a new RCA which provides additional tax benefits and portability options for members.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Current Members",
+          "link": "/current-members"
+        }
+      ],
+      "date": "2022-01-04 15:57:41",
+      "image": "",
+      "link": "/current-members/retirement-compensation-arrangement"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "New Definition of Eligible Child",
+      "description": "A recent amendment to the Public Service Pension Plan (PSPP) changed the definition of 'eligible child' to allow eligible disabled dependant children to receive a lifetime survivor pension even if the child is over 18 and not attending post secondary school.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Related information",
+          "link": "/employers/related-information"
+        },
+        {
+          "name": "Employer bulletins",
+          "link": "/employers/related-information/employer-bulletins"
+        }
+      ],
+      "date": "2018-10-29 16:16:00",
+      "image": "",
+      "link": "/employers/related-information/employer-bulletins/new-definition-of-eligible-child"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Upcoming Mailing to Members",
+      "description": "On July 4, 2000, the attached Pension Bulletins #4 and #5 will be mailed to members of the Public Service Pension Plan.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Related information",
+          "link": "/employers/related-information"
+        },
+        {
+          "name": "Employer bulletins",
+          "link": "/employers/related-information/employer-bulletins"
+        }
+      ],
+      "date": "2018-10-29 15:48:30",
+      "image": "",
+      "link": "/employers/related-information/employer-bulletins/upcoming-mailing-to-members"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Planning for Retirement in Mid-Career",
+      "description": "Mid-career tends to be when people start paying attention to their retirement plan. Learn more about how to plan for your retirement in mid-career.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Current Members",
+          "link": "/current-members"
+        },
+        {
+          "name": "Planning for your retirement",
+          "link": "/current-members/planning-for-your-retirement"
+        }
+      ],
+      "date": "2018-10-16 18:41:02",
+      "image": "",
+      "link": "/current-members/planning-for-your-retirement/planning-for-your-retirement-in-mid-career"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Planning for Retirement in Late Career",
+      "description": "For many members, the final ten or so years of work prior to retirement is an exciting time to start looking forward to what lies after that important date. Learn what you need to be paying attention to in Late Career in order to have a successful retirement. ",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Current Members",
+          "link": "/current-members"
+        },
+        {
+          "name": "Planning for your retirement",
+          "link": "/current-members/planning-for-your-retirement"
+        }
+      ],
+      "date": "2018-10-16 18:17:12",
+      "image": "",
+      "link": "/current-members/planning-for-your-retirement/planning-for-your-retirement-in-late-career"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "OPB News for Retired Members",
+      "description": "OPBnews",
+      "breadcrums": [
+        {
+          "name": "Publications",
+          "link": "/publications-old"
+        }
+      ],
+      "date": "2018-10-09 18:04:58",
+      "image": "",
+      "link": "/publications/opb-news-jun-2017-ret"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "OPB News for Retired Members",
+      "description": "OPBnews",
+      "breadcrums": [
+        {
+          "name": "Publications",
+          "link": "/publications-old"
+        }
+      ],
+      "date": "2018-10-09 18:04:58",
+      "image": "",
+      "link": "/publications/opb-news-jan-2018-ret"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "OPB News for Members",
+      "description": "OPBnews",
+      "breadcrums": [
+        {
+          "name": "Publications",
+          "link": "/publications-old"
+        }
+      ],
+      "date": "2018-10-09 18:04:58",
+      "image": "",
+      "link": "/publications/opb-news-apr-2017-mbr"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Insured benefits",
+      "description": "If you meet certain eligibility criteria, you may receive certain insured medical benefits in retirement.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Retired Members",
+          "link": "/retired-members"
+        },
+        {
+          "name": "Making the most of your retirement",
+          "link": "/retired-members/making-the-most-of-your-retirement"
+        }
+      ],
+      "date": "2018-08-26 16:03:16",
+      "image": "",
+      "link": "/retired-members/making-the-most-of-your-retirement/insured-benefits"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Estate planning",
+      "description": "If you're creating or refining your estate plan don't forget to include your pension. OPB's Advisors are Certified Financial Planners who can assist you.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Retired Members",
+          "link": "/retired-members"
+        },
+        {
+          "name": "Relationship changes in retirement",
+          "link": "/retired-members/relationship-changes-in-retirement"
+        }
+      ],
+      "date": "2018-08-26 16:00:38",
+      "image": "",
+      "link": "/retired-members/relationship-changes-in-retirement/estate-planning"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Survivor benefits to protect your loved ones",
+      "description": "It’s important to be aware of the PSPP's survivor benefits and how they can support your loved ones after you pass away. ",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Retired Members",
+          "link": "/retired-members"
+        },
+        {
+          "name": "Relationship changes in retirement",
+          "link": "/retired-members/relationship-changes-in-retirement"
+        }
+      ],
+      "date": "2018-08-26 15:56:56",
+      "image": "",
+      "link": "/retired-members/relationship-changes-in-retirement/survivor-benefits-to-protect-your-loved-ones"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Starting or ending a relationship in retirement",
+      "description": "Whether you're ending or beginning a relationship, it's important to understand how these life changes may impact your PSPP pension.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Retired Members",
+          "link": "/retired-members"
+        },
+        {
+          "name": "Relationship changes in retirement",
+          "link": "/retired-members/relationship-changes-in-retirement"
+        }
+      ],
+      "date": "2018-08-26 15:52:50",
+      "image": "",
+      "link": "/retired-members/relationship-changes-in-retirement/starting-or-ending-a-relationship-in-retirement"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Members pages only",
+        "slug": "Members_pages_only"
+      },
+      "title": "Managing your taxes",
+      "description": "Retirement comes with distinct tax advantages and responsibilities that you must be aware of, especially if you want to minimize your tax liabilities.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Retired Members",
+          "link": "/retired-members"
+        },
+        {
+          "name": "Welcome to retirement",
+          "link": "/retired-members/welcome-to-retirement"
+        }
+      ],
+      "date": "2018-08-26 15:31:47",
+      "image": "",
+      "link": "/retired-members/welcome-to-retirement/managing-your-taxes"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "CPP integration",
+      "description": "CPP integration refers to how the PSPP and CPP plans work together during a member's working years, early retirement, and after age 65.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Retired Members",
+          "link": "/retired-members"
+        },
+        {
+          "name": "Welcome to retirement",
+          "link": "/retired-members/welcome-to-retirement"
+        }
+      ],
+      "date": "2018-08-26 15:24:11",
+      "image": "",
+      "link": "/retired-members/welcome-to-retirement/cpp-integration"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Overview",
+      "description": "Whether you're a retired member or a surviving spouse/beneficiary, there's some critical information you need to know about your pension benefits. ",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Retired Members",
+          "link": "/retired-members"
+        },
+        {
+          "name": "Welcome to retirement",
+          "link": "/retired-members/welcome-to-retirement"
+        }
+      ],
+      "date": "2018-08-26 15:14:24",
+      "image": "",
+      "link": "/retired-members/welcome-to-retirement/overview"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Defined benefit plans 101",
+      "description": "A defined benefit plan provides you with a pension that’s payable for your lifetime so you don’t need to worry about outliving your money in retirement.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Current Members",
+          "link": "/current-members"
+        },
+        {
+          "name": "Just starting out",
+          "link": "/current-members/just-starting-out"
+        },
+        {
+          "name": "Why your DB pension is important",
+          "link": "/current-members/just-starting-out/why-your-db-pension-is-important"
+        }
+      ],
+      "date": "2018-06-05 13:23:06",
+      "image": "",
+      "link": "/current-members/just-starting-out/why-your-db-pension-is-important/defined-benefit-plans-101"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Open information sessions are here",
+      "description": "Learning about the Public Service Pension Plan (PSPP) will help you make informed decisions about your pension. And now, you no longer have to wait until a session takes place where you work.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Questions and answers",
+          "link": "/employers/questions-and-answers"
+        }
+      ],
+      "date": "2018-03-29 16:58:38",
+      "image": "",
+      "link": "/employers/questions-and-answers/open-information-sessions-are-here"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Pension application process",
+      "description": "An overview of pension application process.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Retirement",
+          "link": "/employers/retirement"
+        }
+      ],
+      "date": "2018-03-29 16:03:39",
+      "image": "",
+      "link": "/employers/retirement/pension-application-process"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Retirement administration",
+      "description": "Overview of the mechanics related to pension payments; i.e., pension formula, payment dates, CPP integration",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Retirement",
+          "link": "/employers/retirement"
+        }
+      ],
+      "date": "2018-03-29 14:39:40",
+      "image": "",
+      "link": "/employers/retirement/retirement-administration"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Surviving spouse and beneficiaries",
+      "description": "An overview of topics related to surviving spouses & beneficiaries.\r\n\r\n",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Death",
+          "link": "/employers/death"
+        }
+      ],
+      "date": "2018-03-28 19:19:45",
+      "image": "",
+      "link": "/employers/death/surviving-spouse-and-beneficiaries"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Post-retirement death",
+      "description": "Overview of the topics related to a member's post-retirement death.\r\n\r\n\r\n",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Death",
+          "link": "/employers/death"
+        }
+      ],
+      "date": "2018-03-28 18:40:24",
+      "image": "",
+      "link": "/employers/death/post-retirement-death"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Pre-retirement death",
+      "description": "Overview page related to pre-retirement death.\r\n\r\n",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Death",
+          "link": "/employers/death"
+        }
+      ],
+      "date": "2018-03-28 18:17:41",
+      "image": "",
+      "link": "/employers/death/pre-retirement-death"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Designating beneficiaries",
+      "description": "Overview of topics related to designating pension beneficiaries.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Death",
+          "link": "/employers/death"
+        }
+      ],
+      "date": "2018-03-28 17:58:58",
+      "image": "",
+      "link": "/employers/death/designating-beneficiaries"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Terminating PSPP membership",
+      "description": "Learn more about the different reasons that can cause an employee's PSPP membership to be terminated.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Termination",
+          "link": "/employers/termination"
+        }
+      ],
+      "date": "2018-03-28 14:52:27",
+      "image": "",
+      "link": "/employers/termination/terminating-pspp-membership"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Transfers",
+      "description": "The introductory page for the Employer Manual section related to reciprocal transfer agreements (RTAs).",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Buybacks and transfers",
+          "link": "/employers/buybacks-and-transfers"
+        }
+      ],
+      "date": "2018-03-27 15:22:05",
+      "image": "",
+      "link": "/employers/buybacks-and-transfers/transfers"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Tools to help you meet your goals",
+      "description": "OPB provides members with free online tools so you can forecast everything from your potential pension income to your complete financial retirement picture.",
+      "date": "2018-03-27 15:15:04",
+      "image": "",
+      "link": "/tools-to-help-you-meet-your-goals"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "About your pension",
+      "description": "As a member of the Public Service Pension Plan (the PSPP or the Plan), there is some information you need to know to understand how pensions fit into your overall retirement plan. ",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Current Members",
+          "link": "/current-members"
+        }
+      ],
+      "date": "2018-03-27 15:05:15",
+      "image": "",
+      "link": "/current-members/about-your-pension"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Designating or changing beneficiaries",
+      "description": "Your pension may be one of your most significant assets and it comes with valuable survivor benefits to help protect your loved ones when you pass away.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Current Members",
+          "link": "/current-members"
+        },
+        {
+          "name": "Changes in your life",
+          "link": "/current-members/changes-in-your-life"
+        }
+      ],
+      "date": "2018-03-26 22:07:37",
+      "image": "",
+      "link": "/current-members/changes-in-your-life/designating-or-changing-beneficiaries"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Retirement forms",
+      "description": "To help you officially start retirement, there are forms you need to review and fill out including some you'll see mentioned in your retirement package.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Current Members",
+          "link": "/current-members"
+        },
+        {
+          "name": "Planning for your retirement",
+          "link": "/current-members/planning-for-your-retirement"
+        }
+      ],
+      "date": "2018-03-26 21:42:10",
+      "image": "",
+      "link": "/current-members/planning-for-your-retirement/forms"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Publications",
+      "description": "summary ",
+      "date": "2018-03-23 19:29:09",
+      "image": "",
+      "link": "/publications-old"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Divestment",
+      "description": "Divestment is the term used within the Ontario Public Service (OPS) to describe a sale, assignment or disposal of an operation from the Ontario government, or one of its agencies, boards or commissions to other government or private sector employers, or vice-versa. We've prepared this section to help you to understand how divestments are treated in the PSPP.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Termination",
+          "link": "/employers/termination"
+        }
+      ],
+      "date": "2018-03-23 18:05:56",
+      "image": "",
+      "link": "/employers/termination/divestment"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Death",
+      "description": "Overview of topics related to the death of a PSPP member or retired member.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        }
+      ],
+      "date": "2018-03-23 14:42:42",
+      "image": "",
+      "link": "/employers/death"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Glossary",
+      "description": "Terms and words relating to the administration and advocacy of the Public Service Pension Plan.",
+      "date": "2018-03-23 13:39:46",
+      "image": "",
+      "link": "/glossary"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Forms",
+      "description": "Here you will find a listing of our commonly used forms.",
+      "date": "2018-03-22 16:35:11",
+      "image": "",
+      "link": "/forms-old"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Site map",
+      "description": "Site map for www.opb.ca",
+      "date": "2018-03-22 09:32:09",
+      "image": "",
+      "link": "/sitemap"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Separation or divorce",
+      "description": "Because your pension is considered a family asset, it's important to understand how it's affected when you start, or end, a spousal relationship.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Current Members",
+          "link": "/current-members"
+        },
+        {
+          "name": "Changes in your life",
+          "link": "/current-members/changes-in-your-life"
+        }
+      ],
+      "date": "2018-03-20 18:48:30",
+      "image": "",
+      "link": "/current-members/changes-in-your-life/separation-or-divorce"
+    },
+    {
+      "type": "page",
+      "category": {
+        "name": "Current members pages only",
+        "slug": "Current_members_pages_only"
+      },
+      "title": "Updating member information",
+      "description": "Scenarios where employers must notify OPB about any member information changes..\r\n\r\n\r\n",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Employers",
+          "link": "/employers"
+        },
+        {
+          "name": "Enrolment and membership",
+          "link": "/employers/enrolment-and-membership"
+        }
+      ],
+      "date": "2018-03-20 17:32:33",
+      "image": "",
+      "link": "/employers/enrolment-and-membership/updating-member-information"
+    },
+    {
+      "type": "articles",
+      "category":{"slug":"new_article","name":"News articles"} ,
+      "title": "Cost-of-living increases for Retired Members",
+      "date": "2023-02-10 10:18:52",
+      "description": "News article description to help user understand more context as they search. Should be character limited.",
+      "image": "https://promise.opb.ca/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498702091&ssbinary=true",
+      "link": "https://www.w3.org/Provider/Style/dummy.html"
+    },
+    {
+      "type": "articles",
+      "category":{"slug":"new_article","name":"News articles"} ,
+      "title": "Pensions to increase by 1.6 per cent for 2018 cost-of-living adjustment",
+      "date": "2023-02-13 10:18:51",
+      "description": "News article description to help user understand more context as they search. Should be character limited.",
+      "image": "https://promise.opb.ca/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498699933&ssbinary=true",
+      "link": "https://www.w3.org/Provider/Style/dummy.html"
+    },
+    {
+      "type": "articles",
+      "category":{"slug":"new_letter","name":"News letters"} ,
+      "title": "Your 2023 cost-of-living adjustment",
+      "date": "2023-02-10 10:18:53",
+      "description": "News article description to help user understand more context as they search. Should be character limited.",
+      "image": "../assets0215/img/img_search_02.jpg",
+      "link": "https://www.w3.org/Provider/Style/dummy.html"
+    },
+    {
+      "type": "articles",
+      "category":{"slug":"new_blog","name":"Blog articles"} ,
+      "title": "Pensions to increase by 1.3 percent for 2017 cost-of-living-adjustment",
+      "date": "2023-02-13 10:18:51",
+      "description": "News article description to help user understand more context as they search. Should be character limited.",
+      "image": "../assets0215/img/img_search_04.jpg",
+      "link": "https://www.w3.org/Provider/Style/dummy.html"
+    },
+    {
+      "type": "articles",
+      "category":{"slug":"new_letter","name":"News letters"} ,
+      "title": "Pensions to increase by 2.2% on Jan 1, 2019",
+      "date": "2023-02-13 10:18:51",
+      "description": "News article description to help user understand more context as they search. Should be character limited.",
+      "image": "../assets0215/img/img_search_05.jpg",
+      "link": "https://www.w3.org/Provider/Style/dummy.html"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News Articles",
+        "slug": "News"
+      },
+      "title": "Get a Start on Retirement Planning",
+      "description": "We’re here to help take the stress out of retirement planning so that you can start retirement dreaming.",
+      "date": "2023-04-19 10:29:16",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498699933&ssbinary=true",
+      "link": "/news/get-a-start-on-retirement-planning"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "Blog Articles",
+        "slug": "Blog"
+      },
+      "title": "Retirement Planning",
+      "description": "Retirement used to be simple. You’d work one job for your entire career and then you announced your retirement and went on to live happily with your employer sponsored pension.",
+      "date": "2018-12-01 18:25:24",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498698674&ssbinary=true",
+      "link": "/news/retirement-planning"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News Articles",
+        "slug": "News"
+      },
+      "title": "Plan Your Retirement with OPB ",
+      "description": "November is Financial Literacy Month and what better time to discuss one of our favourite topics: Retirement planning. ",
+      "date": "2022-11-09 14:04:41",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498698521&ssbinary=true",
+      "link": "/news/plan-your-retirement-with-opb"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News Articles",
+        "slug": "News"
+      },
+      "title": "Staying Socially and Physically Active in Retirement",
+      "description": "After a rewarding career, retirement gives you the gift of time.",
+      "date": "2022-01-25 19:43:49",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498697852&ssbinary=true",
+      "link": "/news/staying-socially-and-physically-active-in-retirement"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News letters",
+        "slug": "Newsletter"
+      },
+      "title": "OPB News for Members",
+      "description": "In this year's edition of OPB News, we want to provide helpful tips and information you can use for your financial and retirement planning.",
+      "date": "2023-04-17 09:20:51",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498703184&ssbinary=true",
+      "link": "/news/newsletter/opb-news-apr-2023-mbr-old"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News Articles",
+        "slug": "News"
+      },
+      "title": "What’s your OPB retirement story?",
+      "description": "In our 2019 issue of OPB News for Retired Members, we asked our retired members to submit a photo of how they are staying active in retirement.",
+      "date": "2019-11-21 13:31:00",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498702250&ssbinary=true",
+      "link": "/news/whats-your-opb-retirement-story"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "Blog Articles",
+        "slug": "Blog"
+      },
+      "title": "Your PSPP Pension & Your Retirement",
+      "description": "As a member of the PSPP, you might be thinking “why do I need to focus on retirement when my pension’s got me covered?” ",
+      "date": "2018-11-16 17:25:24",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498698546&ssbinary=true",
+      "link": "/news/your-pspp-pension-and-your-retirement"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "Blog Articles",
+        "slug": "Blog"
+      },
+      "title": "RRSPs vs TFSA: Which is more effective in enhancing my retirement income?",
+      "description": "As you plan for your retirement, you may be wondering about the best way to make your money work for you.",
+      "date": "2020-05-22 18:07:46",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498699341&ssbinary=true",
+      "link": "/news/rrsp-vs-tfsa-which-is-more-effective-in-enhancing-my-retirement-income"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News Articles",
+        "slug": "News"
+      },
+      "title": "Mark Fuller: Sharing responsibility for creating a sustainable retirement system in Canada",
+      "description": "On December 10, 2015, President & CEO Mark Fuller spoke to the Actuarial Standards Oversight Council about the challenges the Canadian retirement system is facing.",
+      "date": "2016-01-11 19:17:45",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498699246&ssbinary=true",
+      "link": "/news/mark-fuller-sharing-responsibility-for-creating-a-sustainable-retirement-system-in-canada"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News Articles",
+        "slug": "News"
+      },
+      "title": "Availability of post-retirement insured benefits optional upgrade packages",
+      "description": "Retired members and survivors who qualify for post-retirement insured benefits will be eligible to enrol in an additional optional upgrade package starting in August 2017.",
+      "date": "2017-05-18 16:26:05",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498702421&ssbinary=true",
+      "link": "/news/availability-of-post-retirement-insured-benefits-optional-upgrade-packages"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "Blog Articles",
+        "slug": "Blog"
+      },
+      "title": "Is early retirement right for you?",
+      "description": "Not so long ago, the dream of retiring with a pension seemed very simple.",
+      "date": "2021-04-23 17:43:41",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498700815&ssbinary=true",
+      "link": "/news/is-early-retirement-right-for-you"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News Articles",
+        "slug": "News"
+      },
+      "title": "See how using e-services helps you plan for and manage your retirement ",
+      "description": "As a member of the Public Service Pension Plan, you can register for e-services – OPB’s online member portal – to help you actively plan for and manage your retirement.",
+      "date": "2021-11-10 19:00:18",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498699578&ssbinary=true",
+      "link": "/news/see-how-using-e-services-helps-you-plan-for-and-manage-your-retirement"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News letters",
+        "slug": "Newsletter"
+      },
+      "title": "OPB News for Members",
+      "description": "Read the latest news for Members.",
+      "date": "2023-04-20 09:48:45",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498703234&ssbinary=true",
+      "link": "/news/newsletter/opb-news-apr-2023-mbr"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News Articles",
+        "slug": "News"
+      },
+      "title": "Canadian defined benefit pension plans collaborate on retirement security video to mark Financial Literacy Month",
+      "description": "Defined benefit (DB) pension plans from across Canada today released an informational video entitled What’s Important produced in collaboration to mark Financial Literacy Month and raise awareness about the value of retirement income security.",
+      "date": "2021-11-16 14:04:35",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498699826&ssbinary=true",
+      "link": "/news/canadian-defined-benefit-pension-plans-collaborate-retirement-security-video-financial-literacy-month"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News Articles",
+        "slug": "News"
+      },
+      "title": "Post-retirement benefits premium rate changes effective June 1, 2019 for retirees",
+      "description": "The Government of Ontario has announced changes to the premium rates for the Ontario Public Service (OPS) Post-Retirement Benefit (PRB) plans (where applicable), and for the Optional Upgrade Package (OUP) for eligible retired members that will be effective June 1, 2019.",
+      "date": "2019-05-08 15:34:17",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498702184&ssbinary=true",
+      "link": "/news/post-retirement-benefits-premium-rate-changes"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News letters",
+        "slug": "Newsletter"
+      },
+      "title": "OPB News for Retired Members",
+      "description": "Read the latest news for Retired Members.",
+      "date": "2020-01-15 11:00:21",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498700403&ssbinary=true",
+      "link": "/news/newsletter/opb-news-jan-2020-ret"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News letters",
+        "slug": "Newsletter"
+      },
+      "title": "OPB News for Members",
+      "description": "Read the latest news for Members.",
+      "date": "2020-05-22 17:24:23",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498701186&ssbinary=true",
+      "link": "/news/newsletter/opb-news-may-2020-mbr"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News letters",
+        "slug": "Newsletter"
+      },
+      "title": "OPB News for Retired Members",
+      "description": "Read the latest news for Retired Members.",
+      "date": "2019-01-15 17:24:21",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498698172&ssbinary=true",
+      "link": "/news/newsletter/opb-news-jan-2019-ret"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News letters",
+        "slug": "Newsletter"
+      },
+      "title": "OPB News for Members",
+      "description": "Read the latest news for Members.",
+      "date": "2019-04-16 14:24:44",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498701540&ssbinary=true",
+      "link": "/news/newsletter/opb-news-apr-2019-mbr"
+    },
+    {
+      "type": "articles",
+      "category": {
+        "name": "News letters",
+        "slug": "Newsletter"
+      },
+      "title": "OPB News for Retired Members",
+      "description": "Read the latest news for Retired Members.",
+      "date": "2021-01-18 15:43:44",
+      "image": "/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498699041&ssbinary=true",
+      "link": "/news/newsletter/opb-news-jan-2021-ret"
+    },
+    {
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "/forms/OPB1048.pdf",
+      "code": "OPB0014",
+      "category": {
+        "name": "Transfer",
+        "slug": "transfer"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB1048 Locking-in Agreement For Funds Transferred from the PSPP to a LIRA/LIF",
+      "filetype": "pdf"
+    },
+    {
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "/forms/OPB3012.pdf",
+      "code": "OPB3012",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB3012 Financial Disclosure Report for a Disabled Dependant",
+      "filetype": "pdf"
+    },
+    {
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "/forms/OPB3007.pdf",
+      "code": "OPB3007",
+      "category": {
+        "name": "Enrollment",
+        "slug": "enrollment"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB3007 Declaration Of Spousal Status",
+      "filetype": "pdf"
+    },
+    {
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "/forms/OPB1068.pdf",
+      "code": "OPB0014",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB1068 Application For A Survivor Pension",
+      "filetype": "pdf"
+    },
+    {
+      "name": {
+        "name": "FSRA",
+        "slug": "fsra"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "https://www.fsrao.ca/industry/pensions/pensions-all-forms#family",
+      "code": "OPB0014",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "Post-retirement Waiver of Survivor Pension After Separation (Optional) ",
+      "filetype": "link"
+    },
+    {
+      "name": {
+        "name": "FSRA",
+        "slug": "fsra"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "https://www.fsrao.ca/industry/pensions/pensions-all-forms",
+      "code": "OPB0014",
+      "category": {
+        "name": "Enrollment",
+        "slug": "enrollment"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "FSCO Form 4 - Waiver of Pre-Retirement Death Benefit",
+      "filetype": "link"
+    },
+    {
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "/forms/OPB1060.pdf",
+      "code": "OPB1060",
+      "category": {
+        "name": "Buyback",
+        "slug": "buyback"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB1060 Designating Life Insurance Beneficiaries",
+      "filetype": "pdf"
+    },
+    {
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "/forms/OPB1058.pdf",
+      "code": "OPB0014",
+      "category": {
+        "name": "Enrollment",
+        "slug": "enrollment"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB1058 Application To Transfer Pension Credit",
+      "filetype": "pdf"
+    },
+    {
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "/forms/OPB1046.pdf",
+      "code": "OPB0014",
+      "category": {
+        "name": "Transfer",
+        "slug": "transfer"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB1046 Waiver Of Basic Life Insurance Coverage",
+      "filetype": "pdf"
+    },
+    {
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "/forms/OPB1011.pdf",
+      "code": "OPB0014",
+      "category": {
+        "name": "Enrollment",
+        "slug": "enrollment"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB1011 Certificate Of Health",
+      "filetype": "pdf"
+    },
+    {
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-02-13 10:18:51",
+      "link": "/forms/OPB1006.pdf",
+      "code": "OPB0014",
+      "category": {
+        "name": "Enrollment",
+        "slug": "enrollment"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB1006 Increased Survivor Pension Application",
+      "filetype": "pdf"
+    },
+    {
+      "filetype": "link",
+      "name": {
+        "name": "FSRA",
+        "slug": "fsra"
+      },
+      "type": "forms",
+      "date": "2023-08-14 20:05:23",
+      "link": "https://www.fsrao.ca/industry/pensions/pensions-all-forms",
+      "code": "OPB0014",
+      "category": {
+        "name": "Enrollment",
+        "slug": "enrollment"
+      },
+      "description": "FSRA form for spouses of pension plan members and former members to waive entitlement to a pre-retirement death benefit.",
+      "title": "FSCO Form 4 - Waiver of Pre-Retirement Death Benefit"
+    },
+    {
+      "filetype": "link",
+      "name": {
+        "name": "FSRA",
+        "slug": "fsra"
+      },
+      "type": "forms",
+      "date": "2023-08-14 20:05:34",
+      "link": "https://www.fsrao.ca/industry/pensions/pensions-all-forms",
+      "code": "OPB0014",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "FSRA form to be used by the retired member and the retired member’s spouse where the pension is paid in a joint and survivor form, and the spouse wants to waive their right to receive a survivor pension.",
+      "title": "FSRA FL8 - Post-retirement Waiver of Survivor Pension After Separation (Optional) "
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:36:18",
+      "link": "/forms/OPB1122.pdf",
+      "code": "OPB1122",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for retired members to apply for Post-Retirement Insured Benefits Plan coverage through The Canada Life Assurance Company.",
+      "title": "Post-Retirement Insured Benefits Application (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 12:57:29",
+      "link": "/forms/OPB1048.pdf",
+      "code": "OPB1048",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for members, former members, spouses or former spouses applying for a transfer of the commuted value or family law value entitlement to a LIRA or LIF.",
+      "title": "Locking-in Agreement For Funds Transferred from the PSPP to a LIRA/LIF (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 12:57:16",
+      "link": "/forms/OPB1046.pdf",
+      "code": "OPB1046",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for retired members or their Power of Attorneys who wish to waive their basic life insurance coverage provided by the Government of Ontario.",
+      "title": "Waiver Of Basic Life Insurance Coverage (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:07:06",
+      "link": "/forms/OPB1095.pdf",
+      "code": "OPB1095",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for PSPP pension recipients who wish to have their PSPP pension deposited into a U.S. bank account.",
+      "title": "US Direct Deposit Authorization (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:03:57",
+      "link": "/forms/OPB1068.pdf",
+      "code": "OPB1068",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for retired members who marry or establish a common-law relationship after their pension begins, and who want to apply for a survivor pension.",
+      "title": "Application For A Survivor Pension (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Canada Life",
+        "slug": "canada life"
+      },
+      "type": "forms",
+      "date": "2023-08-30 19:30:20",
+      "link": "/forms/GWLM445D-plan157836.pdf",
+      "code": "M445D",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Canada Life dental claim form for PSPP pension recipients who are receiving insured benefits under the Legacy Plan: Premium Free (Policy #157836).",
+      "title": "Dental Benefits Claim (Policy #157836) (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Canada Life",
+        "slug": "canada life"
+      },
+      "type": "forms",
+      "date": "2023-08-30 19:30:25",
+      "link": "/forms/GWLM445D-plan169493.pdf",
+      "code": "M445D",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Canada Life dental claim form for PSPP pension recipients who are receiving insured benefits under the Legacy Plan: 50% co-pay (Policy #169493).",
+      "title": "Dental Benefits Claim (Policy #169493) (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Canada Life",
+        "slug": "canada life"
+      },
+      "type": "forms",
+      "date": "2023-08-30 19:30:43",
+      "link": "/forms/GWLM445D-plan169973.pdf",
+      "code": "M635D",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Canada Life dental claim form for PSPP pension recipients who are receiving insured benefits under the Retiree-Focused Plan (Policy #169973).",
+      "title": "Dental Benefits Claim (Policy #169973) (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:07:54",
+      "link": "/forms/OPB1096.pdf",
+      "code": "OPB1096",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for PSPP pension recipients who wish to have their PSPP pension deposited into a foreign bank account.",
+      "title": "Foreign Direct Deposit Authorization (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:35:17",
+      "link": "/forms/OPB3010.pdf",
+      "code": "OPB3010",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for members or former members to confirm common-law relationship status or when proof of marital status documentation is not available (must be signed before a commissioner for taking affidavits).",
+      "title": "Affidavit of Spousal Status (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Canada Life",
+        "slug": "canada life"
+      },
+      "type": "forms",
+      "date": "2023-08-30 19:30:58",
+      "link": "/forms/GWLM635D-plan157836.pdf",
+      "code": "OPB0014",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Canada Life supplementary health and hospital claim form for PSPP pension recipients who are receiving insured benefits under the Legacy Plan: Premium Free (Policy #157836).",
+      "title": "Supplementary Health and Hospital Claim (Policy #157836) (PDF) "
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Canada Life",
+        "slug": "canada life"
+      },
+      "type": "forms",
+      "date": "2023-08-30 19:30:51",
+      "link": "/forms/GWLM635D-plan169493.pdf",
+      "code": "M635D",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Canada Life supplementary health and hospital claim form for PSPP pension recipients who are receiving insured benefits under Legacy Plan: 50% co-pay (Policy #169493).",
+      "title": "Supplementary Health and Hospital Claim (Policy #169493) (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Canada Life",
+        "slug": "canada life"
+      },
+      "type": "forms",
+      "date": "2023-08-30 19:30:55",
+      "link": "/forms/GWLM635D-plan169973.pdf",
+      "code": "M635D",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Canada Life supplementary health and hospital claim form for PSPP pension recipients who are receiving insured benefits under the Retiree-Focused Plan (Policy #169973).",
+      "title": "Supplementary Health and Hospital Claim (Policy #169973) (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:36:24",
+      "link": "/forms/OPB1121.pdf",
+      "code": "OPB1121",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for eligible retired members or survivors to apply for the Optional Upgrade Package provided by the Province of Ontario with The Canada Life Assurance Company.",
+      "title": "Insured Benefits Optional Upgrade Package Application (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:36:01",
+      "link": "/forms/OPB3001.pdf",
+      "code": "OPB3001",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for members and former members who wish to apply for a disability pension.",
+      "title": "Disability Pension Application (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:35:53",
+      "link": "/forms/OPB3002.pdf",
+      "code": "OPB3002",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for employers to provide information on a member or former member's disability when the member applies for a disability pension.",
+      "title": "Employers Statement of Disability (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:35:48",
+      "link": "/forms/OPB3003.pdf",
+      "code": "OPB3003",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for members to provide a medical examination report used to determine their eligibility for disability benefits.",
+      "title": "Medical Examination Report (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "OPB",
+        "slug": "opb"
+      },
+      "type": "forms",
+      "date": "2023-09-11 13:02:28",
+      "link": "/forms/OPB1061.pdf",
+      "code": "OPB1061",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB form for contributing and deferred members to change their name, address or spousal status.",
+      "title": "Member/Former Member Information Change (PDF)"
+    },
+    {
+      "filetype": "link",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-05-15 07:33:47",
+      "link": "https://www.opb.ca/publications/opb-news-apr-2017-mbr",
+      "publish": "2023",
+      "category": {
+        "name": "Governance",
+        "slug": "governance"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "Five ways to ensure you’re preparing for retirement"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-08-30 18:38:47",
+      "link": "/publications/a-guide-to-your-benefits-after-retirement.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide from the Treasury Board for PSPP pension recipients who are receiving insured benefits from the Government of Ontario under the Legacy plan (Policy #157836).",
+      "title": "A Guide To Your Benefits After Retirement (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:20:42",
+      "link": "/publications/insured-benefits-in-retirement-opp.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide for retired OPP members, or a surviving spouse of a retired OPP member, on eligibility for post-retirement insured medical benefits.",
+      "title": "Insured Benefits in Retirement for OPP Employees (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:20:38",
+      "link": "/publications/insured-benefits-in-retirement-first-nations-constables.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide for retired First Nation Constables, or a surviving spouse of a retired First Nation Constable, on eligibility for post-retirement insured medical benefits.",
+      "title": "Insured Benefits in Retirement for First Nations Constables (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:20:10",
+      "link": "/publications/insured-benefits-in-retirement-pspp-members.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide for retired PSPP members, or a surviving spouse of a retired PSPP member, on eligibility for post-retirement insured medical benefits.",
+      "title": "Insured Benefits in Retirement for PSPP Members (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:20:47",
+      "link": "/publications/insured-benefits-in-retirement-aloc-occa.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide for retired ALOC/OCCA members, or a surviving spouse of a retired ALOC/OCCA member, on eligibility for post-retirement insured medical benefits.",
+      "title": "Insured Benefits in Retirement for ALOC/OCCA Members (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:20:13",
+      "link": "/publications/insured-benefits-in-retirement-justices-of-the-peace.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide for retired Justices of the Peace, or a surviving spouse of a retired Justice of the Peace, on eligibility for post-retirement insured medical benefits.",
+      "title": "Insured Benefits in Retirement for Justices of the Peace (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:20:34",
+      "link": "/publications/insured-benefits-in-retirement-case-management-masters.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide for retired Associate Judges/former Case Management Masters, or a surviving spouse of a retired Associate Judge/former Case Management Master, on eligibility for post-retirement insured medical benefits.",
+      "title": "Insured Benefits in Retirement for Associate Judges/former Case Management Masters (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Letter",
+        "slug": "letter"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:07:32",
+      "link": "/publications/status-indian-sample-letter.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Sample letter from Employer confirming tax-exempt employment income for a Status Indian.",
+      "title": "Indian Status - Sample Letter (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:19:56",
+      "link": "/publications/inflation-protection.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide to inflation protection with information on how your pension will increase, how it is determined, and when you will receive it.",
+      "title": "Inflation Protection (PDF) "
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 18:19:16",
+      "link": "/publications/opb-pay-date-calendar.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "OPB's pay dates schedule for pension recipients under the PSPP, Ontario Northland Plan, Agricorp Plan, or TVO Plan.",
+      "title": "OPB Pay Date Calendar (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 19:13:57",
+      "link": "/publications/cpp-integration.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide for members of the PSPP to understand how the Canada Pension Plan works together with the PSPP pension during working years, early retirement up to age 65, and at age 65.",
+      "title": "CPP Integration and Your PSPP Pension (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Report",
+        "slug": "report"
+      },
+      "type": "publications",
+      "date": "2023-05-15 08:04:08",
+      "link": "/publications/opb-news-apr-2016.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Transfer",
+        "slug": "transfer"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB News - April 2016"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 18:20:17",
+      "link": "/publications/planning-today-for-tomorrow-opp.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Enrollment",
+        "slug": "enrollment"
+      },
+      "description": "A guide for contributing members who are OPP Officers or Civilians of the PSPP with information on our membership group, contribution rates, PSPP pension formula, retirement options, death benefits and more.",
+      "title": "Planning Today For Tomorrow OPP (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 18:20:08",
+      "link": "/publications/planning-today-for-tomorrow.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Enrollment",
+        "slug": "enrollment"
+      },
+      "description": "A guide for contributing members of the PSPP with information on our membership group, contribution rates, PSPP pension formula, retirement options, death benefits and more.",
+      "title": "Planning Today For Tomorrow (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:04:57",
+      "link": "/publications/guide-to-your-grow-in-termination-benefit-options-members-under-age-55.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Termination",
+        "slug": "termination"
+      },
+      "description": "A guide with information on grow-in termination benefit options for members of the PSPP under age 55 who were involuntarily terminated without cause.",
+      "title": "Guide to Your Grow-in Termination Benefit Options for members under age 55 (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guides",
+        "slug": "guides"
+      },
+      "type": "publications",
+      "date": "2023-05-15 08:13:45",
+      "link": "/publications/dividing-pensions-old-rules.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "Dividing Pensions - Old Rules"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:05:27",
+      "link": "/publications/guide-to-your-termination-benefit-options-members-under-age-55.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Termination",
+        "slug": "termination"
+      },
+      "description": "A guide with information on the available termination benefit options for members of the PSPP under age 55.",
+      "title": "Guide to Your Termination Benefit Options for members under age 55 (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:05:13",
+      "link": "/publications/guide-to-your-grow-in-termination-benefit-options-members-age-55-to-64.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Termination",
+        "slug": "termination"
+      },
+      "description": "A guide with information on grow-in termination benefit options for members of the PSPP age 55 to 64 who were involuntarily terminated without cause.",
+      "title": "Guide to Your Grow-in Termination Benefit Options for members age 55 to 64 (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Report",
+        "slug": "report"
+      },
+      "type": "publications",
+      "date": "2023-05-15 08:03:37",
+      "link": "/publications/opb-news-apr-2015.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Governance",
+        "slug": "governance"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB News - April 2015"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:05:35",
+      "link": "/publications/guide-to-your-termination-benefit-options-members-age-55-to-64.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Termination",
+        "slug": "termination"
+      },
+      "description": "A guide with information on the available termination benefit options for members of the PSPP age 55 to 64.",
+      "title": "Guide to Your Termination Benefit Options for members age 55 to 64 (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 19:14:22",
+      "link": "/publications/divesting-into-pspp.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Enrollment",
+        "slug": "enrollment"
+      },
+      "description": "A guide with information on divesting into the PSPP for members whose employer sold, assigned, transferred, or disposed of all or a part of its business to a PSPP employer.",
+      "title": "Divesting Into the PSPP (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guides",
+        "slug": "guides"
+      },
+      "type": "publications",
+      "date": "2023-05-15 08:13:14",
+      "link": "/publications/opb-news-apr-2019.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB News for Members"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 18:17:47",
+      "link": "/publications/understanding-your-pension-credit.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Buyback",
+        "slug": "buyback"
+      },
+      "description": "A guide for contributing members of the PSPP with information to help you understand pension credit and the eligible buyback options.",
+      "title": "Understanding Your Pension Credit (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 19:15:39",
+      "link": "/publications/divesting-out-of-pspp.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Termination",
+        "slug": "termination"
+      },
+      "description": "A guide with information on divesting out of the PSPP for members whose PSPP employer sold, assigned, transferred or disposed of all or a part of its business to a new \"successor\" employer, and who become employed by the new \"successor\" employer and become a member of its pension plan.",
+      "title": "Divesting Out of the PSPP (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 18:20:43",
+      "link": "/publications/pspp-pre-1966-rules.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide to the PSPP Pre-1966 Rules for calculating the retirement benefit.",
+      "title": "PSPP Pre-1966 Rules (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guides",
+        "slug": "guides"
+      },
+      "type": "publications",
+      "date": "2023-05-15 08:06:40",
+      "link": "/publications/dividing-pensions-new-rules-ret-members.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "Dividing Pensions - New Rules for Retired Members"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:20:00",
+      "link": "/publications/insured-benefits-optional-upgrade-fact-sheet.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Information about optional upgrades for post-retirement insured benefits coverages for eligible retired PSPP members and their survivors.",
+      "title": "Insured Benefits Optional Upgrade Fact Sheet (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:28:59",
+      "link": "/publications/insured-benefits-legacy-plan-changes-fact-sheet.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Information about changes the Government of Ontario implemented in 2022 for Post Retirement Benefits Legacy Plan for retired PSPP members.",
+      "title": "Insured Benefits Legacy Plan Changes Fact Sheet (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Letter",
+        "slug": "letter"
+      },
+      "type": "publications",
+      "date": "2023-05-15 08:14:30",
+      "link": "/publications/opb-news-jan-2018.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB News - Member Edition - Jan 2018"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-05-15 08:05:15",
+      "link": "/publications/opb-news-jan-2018-opp.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB News - OPP Member Edition - Jan 2018"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-05-15 08:05:15",
+      "link": "/publications/opb-news-jan-2018-opp.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "OPB News - OPP Member Edition - Jan 2019"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 19:39:24",
+      "link": "/publications/survivor-pension-for-new-spouse.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "A guide for retired members of the PSPP who establish a new spousal relationship in retirement with information on applying for a survivor pension.",
+      "title": "Survivor Pensions For New Spouse (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Report",
+        "slug": "report"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:30:28",
+      "link": "/business-plans-archive/2023-2025-business-plan.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Governance",
+        "slug": "governance"
+      },
+      "description": "OPB's business plan for 2023-2025 with its strategic approach and initiatives to support the new and continuing provincial priorities.",
+      "title": "Business Plan 2023-2025 (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guides",
+        "slug": "guides"
+      },
+      "type": "publications",
+      "date": "2023-05-15 08:06:16",
+      "link": "/publications/dividing-pensions-new-rules-members.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Document description to help user understand what they can use it for. This description may also span to multiple lines. We can set a character limit.",
+      "title": "Dividing Pensions - New Rules for Members"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 18:18:30",
+      "link": "/publications/transferring-credit-out-of-pspp.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Transfer",
+        "slug": "transfer"
+      },
+      "description": "A guide for contributing members with information on eligibility and timelines to transfer pension credit from the PSPP to another pension plan under a MOPPs, RTA and NPSPTA transfer agreement.",
+      "title": "Transferring Credit Out Of PSPP (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-08 18:20:03",
+      "link": "/publications/insured-benefits-optional-upgrade-pamphlet.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Retirement",
+        "slug": "retirement"
+      },
+      "description": "Information about optional upgrades for post-retirement insured benefits coverages for eligible retired PSPP members and their survivors.",
+      "title": "Insured Benefits Optional Upgrade Pamphlet (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Report",
+        "slug": "report"
+      },
+      "type": "publications",
+      "date": "2023-08-30 17:12:13",
+      "link": "/annual-reports-archive/2002-annual-report.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Investments",
+        "slug": "investments"
+      },
+      "description": "OPB 2002 Annual Report for members and other stakeholders with the PSPP's investment performance, including the rate of return and funded status.",
+      "title": "2002 Annual Report (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Report",
+        "slug": "report"
+      },
+      "type": "publications",
+      "date": "2023-08-30 17:12:29",
+      "link": "/annual-reports-archive/2003-annual-report.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Investments",
+        "slug": "investments"
+      },
+      "description": "OPB 2003 Annual Report for members and other stakeholders with the PSPP's investment performance, including the rate of return and funded status.",
+      "title": "2003 Annual Report (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Guide",
+        "slug": "guide"
+      },
+      "type": "publications",
+      "date": "2023-09-06 18:18:34",
+      "link": "/publications/transferring-credit-into-pspp.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Transfer",
+        "slug": "transfer"
+      },
+      "description": "A guide for contributing members with information on eligibility and timelines to transfer pension credit from a former pension plan into the PSPP under a MOPPs, RTA, and NPSPTA transfer agreement.",
+      "title": "Transferring Credit Into PSPP (PDF)"
+    },
+    {
+      "filetype": "pdf",
+      "name": {
+        "name": "Report",
+        "slug": "report"
+      },
+      "type": "publications",
+      "date": "2023-08-30 17:17:40",
+      "link": "/annual-reports-archive/2016-annual-report.pdf",
+      "publish": "2023",
+      "category": {
+        "name": "Investments",
+        "slug": "investments"
+      },
+      "description": "OPB 2016 Annual Report for members and other stakeholders with the PSPP's investment performance, including the rate of return and funded status.",
+      "title": "2016 Annual Report (PDF)"
+    }
+  ],
+  "totalCount": 134 ,"pagesCount": 37 ,"formsCount": 31 ,"pubCount": 41 ,"newsCount": 25 ,
+  "keywords":["24\/7 after-sales service hotline","5-star hotels","Account management","Activation services","Additive manufacturing","Advertising compliance check","After-sales services","Agricultural Equipment","Alcon","Analyst coverage","Annual General Meeting","Anthropological instrumentation","Anthropology","Anthropometers","Application training and support","Asia Pacific markets","Asian consumers","Baby and child care","Bakery fillings","Bakeware","Baxter","Bayer","Beauty (Manicure)","Bedat","Beverages","Billabong","BiO-LiFE","Biophysical characterization","Boutiques","Bovet","Brand activation","Brand awareness","Brand counters","Brand management","Brand value","Bristles","Bristol-Myers Squibb","Broker firms","Brush industry","Brushes","Business Lines","Business locations","Business Units","Calibration","Calipers","Capital expenditure equipment","Car care","Cardiac devices","Cash collection","Category management","Ceramic","cGMP","Change control","Clients","Clinical trial logistics","Clinics","Club Gourmet","Coating equipment","Coating thickness","Collection","Commissioning","Competitor analysis","Compliance check","Compressors, power generation and engines","Configuration","Consignment inventory management","Construction","Consumer electronics and technology","Consumer Goods","Consumer health","Consumer health medicines","Cookware","Cosmetic ingredients","Counterfeit products","Craniophors","Credit control","Customer and consumer loyalty schemes","Customers","Custom-made packaging and assembly","Customs clearance","Dairy","Data center - and uninterruptible power supply solutions","Davidoff","Day surgery clinics","Demand creation","Demonstration kitchens","Dental care","Dental clinics","Dentists","Diagnostic imaging","Diagnostic laboratories","Dietary fibers","Dioptographs","Disposables","Distribution and logistics","Distribution centers","Distribution network","Distributors","Dividend","Dividend history","Dividend payment","DKSH Group","DKSH stock price","Dockers®","Dossier preparation","Dossier submission","Dr. Wolff","Drugstores","Dry grocery","Dryer","Dyeing and Finishing","E-commerce channels","Elemental analysis","Emulsifiers","Enameled cast iron","Endoscopy","Environmental technologies","Enzymes","Esthetic salons","Event management","Fabric","Fashion Apparel","Fast Moving Consumer Goods","Favorex","Feasibility studies","Field marketing","Field merchandising","Financing and rental solutions","Flatware","Flavors","Flow injection analysis","FMCG","Food & Beverage","Food additives","Food ingredients","Food processing and packaging solutions","Forward and reverse logistics","Fruit and vegetable juice concentrates","Fulfillment","General lab equipment and consumables","Genomics, proteomics and forensics","Giftware","Glazors","Global sourcing network","Glycine","Good Distribution Practice (GDP)","Good Manufacturing Practice (GMP)","Gourmet Academy","Gourmet Fine Foods","Gourmet Points","GPM anthropological instruments","Graf von Faber-Castell","Graphics & electronics","GSK","Hair & Skin Cosmetics","Hair and beauty institutes","Hair salons","Hairs and vegetables fibers","Harvester","Haw Par","Health ingredients","Healthcare","Healthcare outlets","Home care","HORECA channel","Hospital supplies","Hospitality Equipment","Hospitality industry","Hospitals","Implements","In vitro diagnostics","Industrial Materials & Supplies","Industrial specialities","Infrastructure Equipment","Innovation centers","Installation","In-store services","International quality requirements","Inventory management","Investment banks","Investors","Invoicing","ISO 13485","ISO 9001","IT infrastructure","Johnson & Johnson LifeScan","Kitchen and hospitality process design","Kitchen gadgets","Kitchenware","Knives","La Manufacture des Franches-Montagnes","Lab automation solutions","Labeling requirement assessment","Lamy","Levi’s®","Lifestyle & Household","Luxurious spas","Luxury & Lifestyle","Luxury Accessories","Market entry","Market Expansion Services","Market insights","Market penetration","Market research","Market share","Marketing","Marketing and sales","Marketing Authorization (MA) holding, maintenance and transfer","Mass spectrometry","Material testing and material analysis","Maurice Lacroix","Measurement surveys","Measuring tools","Media relations","Medical Devices","Medinova","Medtronic","Merchandising","MES","Metal cutting and forming","Microbiological identification","Microhardness","Milk constituents","Minerals","Mom-and-pop shops","Mondaine","Montblanc","Mystery shoppers","Named patient supplies","Natural colors","Near infrared spectroscopy","Nike","Nutritional products","Nutritional supplements","On-the-ground logistics","Operating costs","Operating theaters","Operational services","Ophthalmic","Optical outlets","Order fulfillment\/delivery","Order taking or processing","Orthopedics","OTC & Consumer Health","Outpatient surgery units","Outsourcing","Outsourcing partner","Over-the-counter (OTC)","Paints & coatings","Parallelographs","Particle characterization","Path to country","Patient monitoring solutions","Performance Materials","Personal Care","Pet care","Pharmaceutical formulation and synthesis","Pharmaceuticals","Pharmacies","Pharmacovigilance","Physical distribution","Polymers, fibers & adhesives","Post-marketing","Precision Machinery","Premium Stationery","Preparative and analytical chromathography","Pre-registration","Preservatives","Preventive maintenance","Prime shopping malls","Print related machinery","Printing","Process optimization","Processing aids","Product reach","Product sample submission","Promoter advisors","Promoter services","Promotion management","Puma","Pumps","Quarry and mining","Queloz","R&D","Rational","Raw materials","REACH","Recipe development","Reckitt Benckiser","Recycling and resource recovery equipment","Redressing","Refurbishment","Registration","Registration follow-up and monitoring","Registration to importation","Regulatory affairs","Regulatory approval","Regulatory authorities","Regulatory consulting","Regulatory feasibility assessment","Remote sensing","Renewal","Repairs and maintenance service programs","Research and analysis","Retail channels","Retailers","Return management","Rheology and viscosity","Roche","Roche Diagnostics","Rolex","Sales","Salvatore Ferragamo","Sample preparation","Sampling","Sanofi","Scientific Instrumentation","Self-medication","Semiconductor, Photovoltaic & Electronics","Semi-finished pastry field","SEQRA","Share information","Shareholder information","Shareholder structure","Shelf management programs","Shopper engagement","Shops-in-shops","Silos","Snacks and confectionery","Sorter","Sourcing","Spare parts and consumables","Specialized Industrial Applications","Specialty Chemicals","Specialty services","Stabilizers","Staff hosting","Start-up support","Stock and sales data","Stock-keeping units (SKUs)","Straumann","Success stories","Suppliers","Surface tension analysis","Sustainable sales growth","Sweeteners","Technical services","Technology","Telemarketing and telesales","Temperature-controlled distribution facilities","Tender management","Testing and measuring","Textile Machinery","Thermal analysis","Time and feasibility studies","Time-to-market","Timex","Toys","Tracing needles","Tractors","Trade marketing","Transport and lifting","Transportation","Turnkey solutions","Up-market department stores","Value chain","Variations (minor and major)","Warehousing","Warranty services","Watch parts manufacturing","Watches","Wood working","Wound care","X-ray diffraction","X-ray fluorescence spectroscopy","Yarn"]
+}
