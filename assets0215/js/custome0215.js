@@ -87,9 +87,8 @@ jQuery(document).ready(function ($) {
       } else {
         localStorage.removeItem("changePage");
       }
-
       let changePage = localStorage.getItem("changePage");
-      if (changePage && changePage !== null) {
+      if (changePage !== null) {
         localStorage.removeItem("changePage");
         $(".c-tab-menu_list li:first-child").removeClass("item-active");
       }
@@ -103,6 +102,9 @@ jQuery(document).ready(function ($) {
       }
 
       if (inputId === "search-data") {
+        if (!searchValue) {
+          localStorage.removeItem("changePage");
+        }
         localStorage.removeItem("searchValue");
         localStorage.setItem("searchValue", $("#search-data").val());
       } else if (inputId === "search-data3") {
@@ -233,7 +235,6 @@ jQuery(document).ready(function ($) {
                 "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
               );
           }
-
           isInitialSearch = true;
         }
         error_free = false;
@@ -262,8 +263,10 @@ jQuery(document).ready(function ($) {
                 typeName = searchParams.get("group"),
                 typeActive = searchParams.get("type"),
                 textSearch = searchParams.get("s");
-              if ($("#search-data").val() == "" && textSearch) {
-                $("#search-data").val(textSearch);
+              if ($input.val() !== "") {
+                searchParams.set("s", $input.val());
+              } else if ($input.val() == "" && textSearch) {
+                $input.val(textSearch);
               }
               searchByType(typeActive, typeCate, null, typeName);
             } else {
@@ -311,6 +314,7 @@ jQuery(document).ready(function ($) {
             "is-active"
           );
           $("html").toggleClass("is-hidden");
+          $("html").toggleClass("disableScroll");
         }
         return false;
       }
@@ -940,6 +944,8 @@ jQuery(document).ready(function ($) {
   function customizeSelect() {
     $(".js-select-nws").each(function () {
       var $this = $(this);
+      $this.find(".select-selected").remove();
+      $this.find(".select-items").remove();
       var $select = $this.find("select");
       var $options = $select.find("option");
 
@@ -1360,6 +1366,7 @@ jQuery(document).ready(function ($) {
         if (valCode !== "all") data["name"] = valCode;
       }
     }
+
     $.ajax({
       url: searchjson,
       type: "GET",
@@ -1514,7 +1521,9 @@ jQuery(document).ready(function ($) {
               if (!isCustomized) {
                 let getCate = searchParams.get("cate");
                 let $select = $("#selectPage");
+                $select.empty();
                 let $radioSP = $(".cat-filter-item.item-page ul.list");
+                $radioSP.empty();
 
                 let selectOptionHTML = `<option ${
                   getCate == null ? "selected" : ""
@@ -1577,7 +1586,9 @@ jQuery(document).ready(function ($) {
               if (!isCustomized) {
                 let getCate = searchParams.get("cate");
                 let $select = $("#selectArticle");
+                $select.empty();
                 let $radioSP = $(".cat-filter-item.item-articles ul.list");
+                $radioSP.empty();
                 let selectOptionHTML = `<option ${
                   getCate == null ? "selected" : ""
                 } value="all">All articles</option>`;
@@ -1641,10 +1652,13 @@ jQuery(document).ready(function ($) {
 
                 let $select = $("#formsSelectCategory");
                 let $selectCode = $("#formsSelectCode");
+                $select.empty();
+                $selectCode.empty();
                 let $radioSP, $radioCodeSP;
 
                 if (pagesType === "form") {
                   $radioSP = $(".filter-advanced-content .content-cat ul.list");
+
                   $radioCodeSP = $(
                     ".filter-advanced-content .content-code ul.list"
                   );
@@ -1656,6 +1670,8 @@ jQuery(document).ready(function ($) {
                     ".cat-filter-item.item-forms .content-code ul.list"
                   );
                 }
+                $radioSP.empty();
+                $radioCodeSP.empty();
 
                 let selectOptionHTML = [];
                 let radioInputHTML = [];
@@ -1799,6 +1815,8 @@ jQuery(document).ready(function ($) {
 
                 let $select = $("#publicationsSelectCategory");
                 let $selectCode = $("#publicationsSelectType");
+                $select.empty();
+                $selectCode.empty();
                 let $radioSP, $radioCodeSP;
 
                 if (pagesType === "publications") {
@@ -1814,7 +1832,8 @@ jQuery(document).ready(function ($) {
                     ".cat-filter-item.item-publications .content-code ul.list"
                   );
                 }
-
+                $radioSP.empty();
+                $radioCodeSP.empty();
                 let selectOptionHTML = [];
                 let radioInputHTML = [];
 
@@ -2021,7 +2040,7 @@ jQuery(document).ready(function ($) {
           if (!isCustomized) {
             customizeSelect();
           }
-          isCustomized = true;
+          // isCustomized = true;
           search0215();
           setItemImageHeight();
           removeLoadingClasses();
@@ -2318,6 +2337,7 @@ jQuery(document).ready(function ($) {
       beforeSend: function () {
         $(".fa-spin").show();
         $(".opb-icon-search-more").hide();
+        $(".cat-more").addClass("onLoad");
       },
       success: function (response) {
         let dataFilter = response.data;
@@ -2437,7 +2457,7 @@ jQuery(document).ready(function ($) {
         let responseData = dataFilter.slice(startIndex, endIndex);
         let displayedResults = responseData.length;
         const values2 = responseData || [];
-
+        isCustomized = false;
         let dynamicHtml = "";
         values2.forEach((iitem) => {
           const htmlRedner = renderSubItemForGetAll(iitem);
@@ -2477,6 +2497,7 @@ jQuery(document).ready(function ($) {
 
           $cat_list.append(dynamicHtml);
           $(".fa-spin").hide();
+          $(".cat-more").removeClass("onLoad");
           $(".opb-icon-search-more").show();
           if (displayedResults < limit || endIndex >= totalResults) {
             $(".cat-more").addClass("hideBtn");
@@ -2728,6 +2749,7 @@ jQuery(document).ready(function ($) {
       $(this).toggleClass("is-active");
       $(".search-header-from").toggleClass("is-active");
       $("html").toggleClass("is-hidden");
+      $("html").toggleClass("disableScroll");
       return false;
     });
     let $inputs = $(
@@ -2739,6 +2761,7 @@ jQuery(document).ready(function ($) {
           $(".search-header-icon").removeClass("is-active");
           $(".search-header-from").removeClass("is-active");
           $("html").removeClass("is-hidden");
+          $("html").removeClass("disableScroll");
         }
       }
     }
