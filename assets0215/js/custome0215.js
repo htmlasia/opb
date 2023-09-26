@@ -79,9 +79,11 @@ jQuery(document).ready(function ($) {
 
   $("#search-data, #search-data2, #search-data3").keypress(function (event) {
     if (event.which === 13) {
+      page = 1;
       let inputId = event.target.id;
       let searchValue = localStorage.getItem("searchValue");
       let $input = $("#search-page-form .opb-form-text");
+
       if (!$input.val()) {
         localStorage.setItem("changePage", true);
       } else {
@@ -92,17 +94,17 @@ jQuery(document).ready(function ($) {
         localStorage.removeItem("changePage");
         $(".c-tab-menu_list li:first-child").removeClass("item-active");
       }
-
-      if (!searchValue) {
+      if (searchValue == null) {
         searchValue = $("#search-header .opb-form-text").val();
         localStorage.setItem("searchValue", searchValue);
       } else {
         localStorage.setItem("changePage", true);
+
         // $(".c-tab-menu_list li:first-child").removeClass("item-active");
       }
 
       if (inputId === "search-data") {
-        if (!searchValue) {
+        if (searchValue) {
           localStorage.removeItem("changePage");
         }
         localStorage.removeItem("searchValue");
@@ -115,14 +117,15 @@ jQuery(document).ready(function ($) {
         localStorage.setItem("searchValue", searchValue);
         currentURL = $(location).attr("href");
         if (currentURL.localeCompare(originPathOne + "/search/") !== 0) {
-          if ($("#" + inputId).val() == "") {
+          searchValue = $("#search-header .opb-form-text").val();
+          if ($("#" + inputId).val() == "" || $("#search-data").val() == "") {
             localStorage.setItem("changePage", true);
           }
           // window.location.href = originPathOne + "/search/";
           let getSearch = searchValue ? "?s=" + searchValue : "";
           window.location.href = originPathOne + "/search/" + getSearch;
         } else {
-          if ($("#" + inputId).val() == "") {
+          if ($("#" + inputId).val() == "" || $("#search-data").val() == "") {
             $(".cat-more").addClass("hideBtn");
             if (pagesType !== "form" || pagesType !== "publications") {
               $(".c-tab-menu_list li").removeClass("item-active");
@@ -142,15 +145,17 @@ jQuery(document).ready(function ($) {
         }
       } else if (inputId === "search-data2") {
         let currentURL = $(location).attr("href");
+
         if (currentURL.localeCompare(originPathOne + "/search/") !== 0) {
-          if ($("#" + inputId).val() == "") {
+          searchValue = $("#search-header .opb-form-text").val();
+          if ($("#" + inputId).val() == "" || $("#search-data").val() == "") {
             localStorage.setItem("changePage", true);
           }
           // window.location.href = originPathOne + "/search/";
           let getSearch = searchValue ? "?s=" + searchValue : "";
           window.location.href = originPathOne + "/search/" + getSearch;
         } else {
-          if ($("#" + inputId).val() == "") {
+          if ($("#" + inputId).val() == "" || $("#search-data").val() == "") {
             $(".cat-more").addClass("hideBtn");
             if (pagesType !== "form" || pagesType !== "publications") {
               $(".c-tab-menu_list li").removeClass("item-active");
@@ -282,7 +287,7 @@ jQuery(document).ready(function ($) {
   function initEvent() {
     $("#search-header .opb-btn-submit").click(function (event) {
       event.preventDefault();
-
+      page = 1;
       let changePage = localStorage.getItem("changePage");
       if (changePage && changePage !== null) {
         localStorage.removeItem("changePage");
@@ -327,6 +332,7 @@ jQuery(document).ready(function ($) {
     let $form = $("#search-page-form");
     let $input = $("#search-page-form .opb-form-text");
     $("#search-page-form .opb-btn-submit").click(function (event) {
+      page = 1;
       window.scrollTo(0, 0);
       localStorage.removeItem("searchValue");
       if (!$input.val()) {
@@ -1021,16 +1027,12 @@ jQuery(document).ready(function ($) {
         });
         result.all = response.data.length;
 
-        const dataRender = result || {};
-        let liHtml = ``;
         let changePage = localStorage.getItem("changePage");
         let count = 0;
 
         for (const [key, value] of Object.entries(type)) {
           count++;
-          var $menuItem = $(
-            ".c-tab-menu_item:nth-child(" + count + ") a > span"
-          );
+
           if (searchParams.has("type") && searchParams.get("type") == key) {
             $(".c-tab-menu_item:nth-child(" + count + ")").addClass(
               "item-active"
@@ -1433,6 +1435,7 @@ jQuery(document).ready(function ($) {
             }
           }
         }
+
         if (category && category !== "") {
           dataFilter = dataFilter.filter(function (item) {
             return (
@@ -1477,11 +1480,13 @@ jQuery(document).ready(function ($) {
         let uniqueCategories = [];
         let groupedDataCode = {};
         let uniqueCode = [];
+        let selectedValues = null;
+        let selectedCode = null;
         values?.forEach((item) => {
           const htmlRedner = renderSubItemForGetAll(item);
           dynamicHtml += htmlRedner;
         });
-        const listCate = dataFilterCate || [];
+        let listCate = dataFilterCate || [];
         listCate?.forEach((item) => {
           let categorySlug = item.category.slug;
 
@@ -1504,6 +1509,12 @@ jQuery(document).ready(function ($) {
             uniqueCode.push(codeSlug);
           }
         });
+        if (selectedValues === null) {
+          selectedValues = uniqueCategories;
+        }
+        if (selectedCode === null) {
+          selectedCode = uniqueCode;
+        }
         if (searchData != "") {
           getSearchText = " for “" + searchData + "”";
         }
@@ -1516,6 +1527,7 @@ jQuery(document).ready(function ($) {
             $(".cat-more").removeClass("hideBtn");
           }
           let render = "";
+
           switch (type) {
             case "page":
               if (!isCustomized) {
@@ -1524,7 +1536,6 @@ jQuery(document).ready(function ($) {
                 $select.empty();
                 let $radioSP = $(".cat-filter-item.item-page ul.list");
                 $radioSP.empty();
-
                 let selectOptionHTML = `<option ${
                   getCate == null ? "selected" : ""
                 } value="all">All web pages</option>`;
@@ -1536,6 +1547,9 @@ jQuery(document).ready(function ($) {
                 $select.append(selectOptionHTML);
                 $radioSP.append(radioInputHTML);
 
+                uniqueCategories = [
+                  ...new Set(selectedValues.concat(uniqueCategories)),
+                ];
                 let htmlOptions = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -1565,10 +1579,10 @@ jQuery(document).ready(function ($) {
                     };
                   }
                 );
-
                 $select.append(
                   htmlOptions.map((option) => option.option).join("")
                 );
+
                 $radioSP.append(
                   htmlOptions.map((option) => option.radio).join("")
                 );
@@ -1599,7 +1613,9 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTML);
                 $radioSP.append(radioInputHTML);
-
+                uniqueCategories = [
+                  ...new Set(selectedValues.concat(uniqueCategories)),
+                ];
                 let htmlOptions = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -1720,7 +1736,9 @@ jQuery(document).ready(function ($) {
 
                 $selectCode.append(selectOptionHTML.join(""));
                 $radioCodeSP.append(radioInputHTML.join(""));
-
+                uniqueCategories = [
+                  ...new Set(selectedValues.concat(uniqueCategories)),
+                ];
                 let selectOptionHTMLArray = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -1755,7 +1773,7 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTMLArray.join(""));
                 $radioSP.append(radioInputHTMLArray.join(""));
-
+                uniqueCode = [...new Set(selectedCode.concat(uniqueCode))];
                 let selectCodeOptionHTMLArray = uniqueCode.map(
                   (codeSlug, index) => {
                     let codeItems = groupedDataCode[codeSlug];
@@ -1881,7 +1899,9 @@ jQuery(document).ready(function ($) {
 
                 $selectCode.append(selectOptionHTML.join(""));
                 $radioCodeSP.append(radioInputHTML.join(""));
-
+                uniqueCategories = [
+                  ...new Set(selectedValues.concat(uniqueCategories)),
+                ];
                 let selectOptionHTMLArray = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -1916,7 +1936,7 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTMLArray.join(""));
                 $radioSP.append(radioInputHTMLArray.join(""));
-
+                uniqueCode = [...new Set(selectedCode.concat(uniqueCode))];
                 let selectCodeOptionHTMLArray = uniqueCode.map(
                   (codeSlug, index) => {
                     let codeItems = groupedDataCode[codeSlug];
@@ -2133,8 +2153,10 @@ jQuery(document).ready(function ($) {
             const htmlRedner = renderSubItemForGetAll(item);
             dynamicHtml += htmlRedner;
           });
+
           setTimeout(() => {
             if (searchData != "") {
+              localStorage.removeItem("changePage");
               getSearchText = " for “" + searchData + "”";
               $("#menu-tab-id .c-tab-menu_item:nth-child(1)").addClass(
                 "item-active"
@@ -2340,7 +2362,12 @@ jQuery(document).ready(function ($) {
         $(".cat-more").addClass("onLoad");
       },
       success: function (response) {
-        let dataFilter = response.data;
+        let dataFilter = response.data,
+          dataFilterCate = response.data;
+
+        dataFilterCate = dataFilter.filter(function (item) {
+          return item.type.toLowerCase().indexOf(type.toLowerCase()) !== -1;
+        });
         dataFilter = dataFilter.filter(function (item) {
           return item.type.toLowerCase().indexOf(type.toLowerCase()) !== -1;
         });
@@ -2457,14 +2484,464 @@ jQuery(document).ready(function ($) {
         let responseData = dataFilter.slice(startIndex, endIndex);
         let displayedResults = responseData.length;
         const values2 = responseData || [];
-        isCustomized = false;
         let dynamicHtml = "";
         values2.forEach((iitem) => {
           const htmlRedner = renderSubItemForGetAll(iitem);
           dynamicHtml += htmlRedner;
         });
+        let groupedData = {};
+        let uniqueCategories = [];
+        let groupedDataCode = {};
+        let uniqueCode = [];
+        let selectedValues = null;
+        let selectedCode = null;
+        let listCate = dataFilterCate || [];
+        listCate?.forEach((item) => {
+          let categorySlug = item.category.slug;
 
+          if (!groupedData[categorySlug]) {
+            groupedData[categorySlug] = [];
+          }
+          groupedData[categorySlug].push(item);
+
+          if (!uniqueCategories.includes(categorySlug)) {
+            uniqueCategories.push(categorySlug);
+          }
+
+          let codeSlug = item.name ? item.name.slug : [];
+          if (!groupedDataCode[codeSlug]) {
+            groupedDataCode[codeSlug] = [];
+          }
+          groupedDataCode[codeSlug].push(item);
+
+          if (!uniqueCode.includes(codeSlug)) {
+            uniqueCode.push(codeSlug);
+          }
+        });
+        if (selectedValues === null) {
+          selectedValues = uniqueCategories;
+        }
+        if (selectedCode === null) {
+          selectedCode = uniqueCode;
+        }
         setTimeout(() => {
+          switch (type) {
+            case "page":
+              if (!isCustomized) {
+                let getCate = searchParams.get("cate");
+                let $select = $("#selectPage");
+                $select.empty();
+                let $radioSP = $(".cat-filter-item.item-page ul.list");
+                $radioSP.empty();
+                let selectOptionHTML = `<option ${
+                  getCate == null ? "selected" : ""
+                } value="all">All web pages</option>`;
+                let radioInputHTML = `<li><input type="radio" name="filter-advanced-page" id="filter-advanced-1" dt-value="all" ${
+                  getCate == null ? "checked" : ""
+                }>`;
+                radioInputHTML += `<label for="filter-advanced-1">All web pages</label></li>`;
+
+                $select.append(selectOptionHTML);
+                $radioSP.append(radioInputHTML);
+
+                uniqueCategories = [
+                  ...new Set(selectedValues.concat(uniqueCategories)),
+                ];
+                let htmlOptions = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                        getCate && getCate === categorySlug ? "selected" : "",
+                      checked =
+                        getCate && getCate === categorySlug ? "checked" : "";
+
+                    let optionHTML = `<option value="${categorySlug}" ${selected}>${categoryName}</option>`;
+                    let radioHTML = `<li><input type="radio" name="filter-advanced-page" id="filter-advanced-${
+                      index + 2
+                    }" dt-value="${categorySlug}" ${checked}><label for="filter-advanced-${
+                      index + 2
+                    }">${categoryName}</label></li>`;
+                    getCate && getCate === categorySlug
+                      ? $(
+                          ".cat-filter-item.item-page .cat-filter-advanced_ttl span span span"
+                        )
+                          .empty()
+                          .text(categoryName)
+                      : "";
+
+                    return {
+                      option: optionHTML,
+                      radio: radioHTML,
+                    };
+                  }
+                );
+                $select.append(
+                  htmlOptions.map((option) => option.option).join("")
+                );
+
+                $radioSP.append(
+                  htmlOptions.map((option) => option.radio).join("")
+                );
+              }
+              break;
+            case "articles":
+              if (!isCustomized) {
+                let getCate = searchParams.get("cate");
+                let $select = $("#selectArticle");
+                $select.empty();
+                let $radioSP = $(".cat-filter-item.item-articles ul.list");
+                $radioSP.empty();
+                let selectOptionHTML = `<option ${
+                  getCate == null ? "selected" : ""
+                } value="all">All articles</option>`;
+                let radioInputHTML = `<li><input type="radio" name="filter-advanced-article" id="filter-advanced-article-1" dt-value="all" ${
+                  getCate == null ? "checked" : ""
+                }>`;
+                radioInputHTML += `<label for="filter-advanced-article-1">All articles</label></li>`;
+
+                $select.append(selectOptionHTML);
+                $radioSP.append(radioInputHTML);
+                uniqueCategories = [
+                  ...new Set(selectedValues.concat(uniqueCategories)),
+                ];
+                let htmlOptions = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                        getCate && getCate === categorySlug ? "selected" : "",
+                      checked =
+                        getCate && getCate === categorySlug ? "checked" : "";
+
+                    let optionHTML = `<option value="${categorySlug}" ${selected}>${categoryName}</option>`;
+                    let radioHTML = `<li><input type="radio" name="filter-advanced-article" id="filter-advanced-article-${
+                      index + 2
+                    }" dt-value="${categorySlug}" ${checked}><label for="filter-advanced-article-${
+                      index + 2
+                    }">${categoryName}</label></li>`;
+                    getCate && getCate === categorySlug
+                      ? $(
+                          ".cat-filter-item.item-articles .cat-filter-advanced_ttl span span span"
+                        )
+                          .empty()
+                          .text(categoryName)
+                      : "";
+                    return {
+                      option: optionHTML,
+                      radio: radioHTML,
+                    };
+                  }
+                );
+
+                $select.append(
+                  htmlOptions.map((option) => option.option).join("")
+                );
+                $radioSP.append(
+                  htmlOptions.map((option) => option.radio).join("")
+                );
+              }
+              break;
+            case "forms":
+              if (!isCustomized) {
+                let getCate = searchParams.get("cate");
+                let getCode = searchParams.get("group");
+
+                let $select = $("#formsSelectCategory");
+                let $selectCode = $("#formsSelectCode");
+                $select.empty();
+                $selectCode.empty();
+                let $radioSP, $radioCodeSP;
+
+                if (pagesType === "form") {
+                  $radioSP = $(".filter-advanced-content .content-cat ul.list");
+
+                  $radioCodeSP = $(
+                    ".filter-advanced-content .content-code ul.list"
+                  );
+                } else {
+                  $radioSP = $(
+                    ".cat-filter-item.item-forms .content-cat ul.list"
+                  );
+                  $radioCodeSP = $(
+                    ".cat-filter-item.item-forms .content-code ul.list"
+                  );
+                }
+                $radioSP.empty();
+                $radioCodeSP.empty();
+
+                let selectOptionHTML = [];
+                let radioInputHTML = [];
+
+                if (getCate == null) {
+                  selectOptionHTML.push(
+                    '<option selected value="all">All categories</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-1" dt-value="all" checked>',
+                    '<label for="filter-advanced-form-1">All categories</label></li>'
+                  );
+                } else {
+                  selectOptionHTML.push(
+                    '<option value="all">All categories</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-1" dt-value="all">',
+                    '<label for="filter-advanced-form-1">All categories</label></li>'
+                  );
+                }
+
+                $select.append(selectOptionHTML.join(""));
+                $radioSP.append(radioInputHTML.join(""));
+
+                selectOptionHTML = [];
+                radioInputHTML = [];
+
+                if (getCode == null) {
+                  selectOptionHTML.push(
+                    '<option selected value="all">All code groups</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="code-advanced-form" id="code-advanced-form-1" dt-value="all" checked>',
+                    '<label for="code-advanced-form-1">All code groups</label></li>'
+                  );
+                } else {
+                  selectOptionHTML.push(
+                    '<option value="all">All code groups</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="code-advanced-form" id="code-advanced-form-1" dt-value="all">',
+                    '<label for="code-advanced-form-1">All code groups</label></li>'
+                  );
+                }
+
+                $selectCode.append(selectOptionHTML.join(""));
+                $radioCodeSP.append(radioInputHTML.join(""));
+                uniqueCategories = [
+                  ...new Set(selectedValues.concat(uniqueCategories)),
+                ];
+                let selectOptionHTMLArray = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                      getCate && getCate === categorySlug ? "selected" : "";
+
+                    return `<option ${selected} value="${categorySlug}">${categoryName}</option>`;
+                  }
+                );
+
+                let radioInputHTMLArray = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                      getCate && getCate === categorySlug ? "checked" : "";
+                    getCate && getCate === categorySlug
+                      ? $(
+                          ".cat-filter-item.item-forms .cat-filter-advanced_ttl span span,.cat-filter-advanced .list .cat-filter-advanced_ttl span span"
+                        )
+                          .empty()
+                          .text(categoryName)
+                      : "";
+                    return `<li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-${
+                      index + 2
+                    }" dt-value="${categorySlug}" ${selected}><label for="filter-advanced-form-${
+                      index + 2
+                    }">${categoryName}</label></li>`;
+                  }
+                );
+
+                $select.append(selectOptionHTMLArray.join(""));
+                $radioSP.append(radioInputHTMLArray.join(""));
+                uniqueCode = [...new Set(selectedCode.concat(uniqueCode))];
+                let selectCodeOptionHTMLArray = uniqueCode.map(
+                  (codeSlug, index) => {
+                    let codeItems = groupedDataCode[codeSlug];
+                    let codeName = codeItems[0].name.name;
+                    let selected =
+                      getCode && getCode === codeSlug ? "selected" : "";
+
+                    return `<option ${selected} value="${codeSlug}">${codeName}</option>`;
+                  }
+                );
+
+                let radioCodeInputHTMLArray = uniqueCode.map(
+                  (codeSlug, index) => {
+                    let codeItems = groupedDataCode[codeSlug];
+                    let codeName = codeItems[0].name.name;
+                    let selected =
+                      getCode && getCode === codeSlug ? "checked" : "";
+                    getCode && getCode === codeSlug
+                      ? $(
+                          ".cat-filter-item.item-forms .code-filter-advanced_ttl span span,.cat-filter-advanced .code-filter-advanced_ttl span span"
+                        )
+                          .empty()
+                          .text(codeName)
+                      : "";
+                    return `<li><input type="radio" name="code-advanced-form" id="code-advanced-form-${
+                      index + 2
+                    }" dt-value="${codeSlug}" ${selected}><label for="code-advanced-form-${
+                      index + 2
+                    }">${codeName}</label></li>`;
+                  }
+                );
+
+                $selectCode.append(selectCodeOptionHTMLArray.join(""));
+                $radioCodeSP.append(radioCodeInputHTMLArray.join(""));
+              }
+              break;
+            case "publications":
+              if (!isCustomized) {
+                let getCate = searchParams.get("cate");
+                let getCode = searchParams.get("group");
+
+                let $select = $("#publicationsSelectCategory");
+                let $selectCode = $("#publicationsSelectType");
+                $select.empty();
+                $selectCode.empty();
+                let $radioSP, $radioCodeSP;
+
+                if (pagesType === "publications") {
+                  $radioSP = $(".filter-advanced-content .content-cat ul.list");
+                  $radioCodeSP = $(
+                    ".filter-advanced-content .content-code ul.list"
+                  );
+                } else {
+                  $radioSP = $(
+                    ".cat-filter-item.item-publications .content-cat ul.list"
+                  );
+                  $radioCodeSP = $(
+                    ".cat-filter-item.item-publications .content-code ul.list"
+                  );
+                }
+                $radioSP.empty();
+                $radioCodeSP.empty();
+                let selectOptionHTML = [];
+                let radioInputHTML = [];
+
+                if (getCate == null) {
+                  selectOptionHTML.push(
+                    '<option selected value="all">All categories</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-1" dt-value="all" checked>',
+                    '<label for="filter-advanced-publications-1">All categories</label></li>'
+                  );
+                } else {
+                  selectOptionHTML.push(
+                    '<option value="all">All categories</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-1" dt-value="all">',
+                    '<label for="filter-advanced-publications-1">All categories</label></li>'
+                  );
+                }
+
+                $select.append(selectOptionHTML.join(""));
+                $radioSP.append(radioInputHTML.join(""));
+
+                selectOptionHTML = [];
+                radioInputHTML = [];
+
+                if (getCode == null) {
+                  selectOptionHTML.push(
+                    '<option selected value="all">All types</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-1" dt-value="all" checked>',
+                    '<label for="code-advanced-publications-1">All types</label></li>'
+                  );
+                } else {
+                  selectOptionHTML.push(
+                    '<option value="all">All types</option>'
+                  );
+                  radioInputHTML.push(
+                    '<li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-1" dt-value="all">',
+                    '<label for="code-advanced-publications-1">All types</label></li>'
+                  );
+                }
+
+                $selectCode.append(selectOptionHTML.join(""));
+                $radioCodeSP.append(radioInputHTML.join(""));
+                uniqueCategories = [
+                  ...new Set(selectedValues.concat(uniqueCategories)),
+                ];
+                let selectOptionHTMLArray = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                      getCate && getCate === categorySlug ? "selected" : "";
+
+                    return `<option ${selected} value="${categorySlug}">${categoryName}</option>`;
+                  }
+                );
+
+                let radioInputHTMLArray = uniqueCategories.map(
+                  (categorySlug, index) => {
+                    let categoryItems = groupedData[categorySlug];
+                    let categoryName = categoryItems[0].category.name;
+                    let selected =
+                      getCate && getCate === categorySlug ? "checked" : "";
+                    getCate && getCate === categorySlug
+                      ? $(
+                          ".cat-filter-item.item-publications .cat-filter-advanced_ttl span span, .cat-filter-advanced .list .cat-filter-advanced_ttl span span"
+                        )
+                          .empty()
+                          .text(categoryName)
+                      : "";
+                    return `<li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-${
+                      index + 2
+                    }" dt-value="${categorySlug}" ${selected}><label for="filter-advanced-publications-${
+                      index + 2
+                    }">${categoryName}</label></li>`;
+                  }
+                );
+
+                $select.append(selectOptionHTMLArray.join(""));
+                $radioSP.append(radioInputHTMLArray.join(""));
+                uniqueCode = [...new Set(selectedCode.concat(uniqueCode))];
+                let selectCodeOptionHTMLArray = uniqueCode.map(
+                  (codeSlug, index) => {
+                    let codeItems = groupedDataCode[codeSlug];
+                    let codeName = codeItems[0].name.name;
+                    let selected =
+                      getCode && getCode === codeSlug ? "selected" : "";
+
+                    return `<option ${selected} value="${codeSlug}">${codeName}</option>`;
+                  }
+                );
+
+                let radioCodeInputHTMLArray = uniqueCode.map(
+                  (codeSlug, index) => {
+                    let codeItems = groupedDataCode[codeSlug];
+                    let codeName = codeItems[0].name.name;
+                    let selected =
+                      getCode && getCode === codeSlug ? "checked" : "";
+                    getCode && getCode === codeSlug
+                      ? $(
+                          ".cat-filter-item.item-publications .code-filter-advanced_ttl span span,.cat-filter-advanced .code-filter-advanced_ttl span span"
+                        )
+                          .empty()
+                          .text(codeName)
+                      : "";
+                    return `<li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-${
+                      index + 2
+                    }" dt-value="${codeSlug}" ${selected}><label for="code-advanced-publications-${
+                      index + 2
+                    }">${codeName}</label></li>`;
+                  }
+                );
+
+                $selectCode.append(selectCodeOptionHTMLArray.join(""));
+                $radioCodeSP.append(radioCodeInputHTMLArray.join(""));
+              }
+
+              break;
+            default:
+              break;
+          }
           if (pagesType == "form" || pagesType == "publications") {
             totalResults = dataFilter.length;
             let current = parseInt($(".itemofshow span").text());
@@ -2496,12 +2973,16 @@ jQuery(document).ready(function ($) {
           let $cat_list = $(`#cat-${typeNumber[typeActive]} .cat-list`);
 
           $cat_list.append(dynamicHtml);
+          if (!isCustomized) {
+            customizeSelect();
+          }
           $(".fa-spin").hide();
           $(".cat-more").removeClass("onLoad");
           $(".opb-icon-search-more").show();
           if (displayedResults < limit || endIndex >= totalResults) {
             $(".cat-more").addClass("hideBtn");
           }
+
           setItemImageHeight();
         }, 1000);
       },
@@ -3263,4 +3744,13 @@ jQuery(document).ready(function ($) {
     $(".note").removeClass("loada");
     $("html").removeClass("disableScroll");
   }
+  $("#search-data2").on("input", function () {
+    var inputValue = $(this).val();
+    $("#search-data3").val(inputValue);
+  });
+
+  $("#search-data3").on("input", function () {
+    var inputValue = $(this).val();
+    $("#search-data2").val(inputValue);
+  });
 });
