@@ -3226,13 +3226,14 @@ jQuery(document).ready(function ($) {
     }
   }
   function headerSearch0216() {
-    $(".search-header-icon").click(function () {
-      $(this).toggleClass("is-active");
+    $(".search-header-icon,.search-header-from .overlay").click(function () {
+      $(".search-header-icon").toggleClass("is-active");
       $(".search-header-from").toggleClass("is-active");
       $("html").toggleClass("is-hidden");
       $("html").toggleClass("disableScroll");
       return false;
     });
+
     let $inputs = $(
       ".form-control.opb-form-text,.opb-form-text.search-header-input"
     );

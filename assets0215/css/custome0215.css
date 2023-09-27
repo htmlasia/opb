@@ -125,7 +125,7 @@
     /* height: calc(100vh - 50px); */
     height: calc(50vh - 50px);
   }
-  .search-header-from:before {
+  .search-header-from .overlay {
     content: "";
     position: absolute;
     width: 100%;
@@ -138,7 +138,7 @@
     pointer-events: none;
     transition: opacity 0.3s ease-out;
   }
-  .search-header-from.is-active:before {
+  .search-header-from.is-active .overlay {
     opacity: 0.25;
     pointer-events: auto;
   }
