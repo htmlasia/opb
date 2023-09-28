@@ -26,6 +26,7 @@ jQuery(document).ready(function ($) {
   let page = 1;
   let localValue = "";
   let isCustomized = false;
+  let saveListCate, saveListCode;
 
   const type = {
     all: "All",
@@ -1100,6 +1101,8 @@ jQuery(document).ready(function ($) {
   function handleClickFromTab() {
     let changePage = localStorage.getItem("changePage");
     $(".c-tab-menu_list li a").click(function () {
+      localStorage.removeItem("selectedCode");
+      localStorage.removeItem("selectedValues");
       isCustomized = false;
       $(".select-selected, .select-items").remove();
       $(".cat-filter select").empty();
@@ -1511,10 +1514,23 @@ jQuery(document).ready(function ($) {
         });
         if (selectedValues === null) {
           selectedValues = uniqueCategories;
+          saveListCate = localStorage.setItem(
+            "selectedValues",
+            JSON.stringify(selectedValues)
+          );
         }
+
         if (selectedCode === null) {
           selectedCode = uniqueCode;
+          saveListCode = localStorage.setItem(
+            "selectedCode",
+            JSON.stringify(selectedCode)
+          );
         }
+        let saveCateResults = JSON.parse(
+          localStorage.getItem("selectedValues")
+        );
+        let saveCodeResults = JSON.parse(localStorage.getItem("selectedCode"));
         if (searchData != "") {
           getSearchText = " for “" + searchData + "”";
         }
@@ -1546,10 +1562,12 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTML);
                 $radioSP.append(radioInputHTML);
+                if (saveCateResults !== null) {
+                  uniqueCategories = [
+                    ...new Set(saveCateResults.concat(uniqueCategories)),
+                  ];
+                }
 
-                uniqueCategories = [
-                  ...new Set(selectedValues.concat(uniqueCategories)),
-                ];
                 let htmlOptions = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -1613,9 +1631,12 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTML);
                 $radioSP.append(radioInputHTML);
-                uniqueCategories = [
-                  ...new Set(selectedValues.concat(uniqueCategories)),
-                ];
+
+                if (saveCateResults !== null) {
+                  uniqueCategories = [
+                    ...new Set(saveCateResults.concat(uniqueCategories)),
+                  ];
+                }
                 let htmlOptions = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -1736,9 +1757,11 @@ jQuery(document).ready(function ($) {
 
                 $selectCode.append(selectOptionHTML.join(""));
                 $radioCodeSP.append(radioInputHTML.join(""));
-                uniqueCategories = [
-                  ...new Set(selectedValues.concat(uniqueCategories)),
-                ];
+                if (saveCateResults !== null) {
+                  uniqueCategories = [
+                    ...new Set(saveCateResults.concat(uniqueCategories)),
+                  ];
+                }
                 let selectOptionHTMLArray = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -1773,7 +1796,10 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTMLArray.join(""));
                 $radioSP.append(radioInputHTMLArray.join(""));
-                uniqueCode = [...new Set(selectedCode.concat(uniqueCode))];
+
+                if (saveCodeResults !== null) {
+                  uniqueCode = [...new Set(saveCodeResults.concat(uniqueCode))];
+                }
                 let selectCodeOptionHTMLArray = uniqueCode.map(
                   (codeSlug, index) => {
                     let codeItems = groupedDataCode[codeSlug];
@@ -1899,9 +1925,11 @@ jQuery(document).ready(function ($) {
 
                 $selectCode.append(selectOptionHTML.join(""));
                 $radioCodeSP.append(radioInputHTML.join(""));
-                uniqueCategories = [
-                  ...new Set(selectedValues.concat(uniqueCategories)),
-                ];
+                if (saveCateResults !== null) {
+                  uniqueCategories = [
+                    ...new Set(saveCateResults.concat(uniqueCategories)),
+                  ];
+                }
                 let selectOptionHTMLArray = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -1936,7 +1964,9 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTMLArray.join(""));
                 $radioSP.append(radioInputHTMLArray.join(""));
-                uniqueCode = [...new Set(selectedCode.concat(uniqueCode))];
+                if (saveCodeResults !== null) {
+                  uniqueCode = [...new Set(saveCodeResults.concat(uniqueCode))];
+                }
                 let selectCodeOptionHTMLArray = uniqueCode.map(
                   (codeSlug, index) => {
                     let codeItems = groupedDataCode[codeSlug];
@@ -1994,6 +2024,7 @@ jQuery(document).ready(function ($) {
               break;
           }
           let $allData = $("#all-data");
+
           if (pagesType == "form" || pagesType == "publications") {
             $allData = $("#form-list-v1");
           }
@@ -2039,13 +2070,36 @@ jQuery(document).ready(function ($) {
                   response.pubCount,
                   response.newsCount,
                 ];
-
+                let checkFirstLoad;
                 const $txtNumElements = $(".txt-num");
                 $txtNumElements.empty();
 
                 $txtNumElements.each(function (i) {
                   $(this).append("(" + listNumbResult[i] + ")");
                 });
+
+                switch (typeNumber[typeActive]) {
+                  case "01":
+                    checkFirstLoad = listNumbResult[0];
+                    break;
+                  case "02":
+                    checkFirstLoad = listNumbResult[1];
+                    break;
+                  case "03":
+                    checkFirstLoad = listNumbResult[2];
+                    break;
+                  case "04":
+                    checkFirstLoad = listNumbResult[3];
+                    break;
+                  case "05":
+                    checkFirstLoad = listNumbResult[4];
+                    break;
+                  default:
+                    break;
+                }
+                if (checkFirstLoad <= 20) {
+                  $(".cat-more").addClass("hideBtn");
+                }
               }
 
               $("#all-data").html(render);
@@ -2524,6 +2578,17 @@ jQuery(document).ready(function ($) {
         if (selectedCode === null) {
           selectedCode = uniqueCode;
         }
+        if (selectedCode === null) {
+          selectedCode = uniqueCode;
+          saveListCode = localStorage.setItem(
+            "selectedCode",
+            JSON.stringify(selectedCode)
+          );
+        }
+        let saveCateResults = JSON.parse(
+          localStorage.getItem("selectedValues")
+        );
+        let saveCodeResults = JSON.parse(localStorage.getItem("selectedCode"));
         setTimeout(() => {
           switch (type) {
             case "page":
@@ -2544,9 +2609,11 @@ jQuery(document).ready(function ($) {
                 $select.append(selectOptionHTML);
                 $radioSP.append(radioInputHTML);
 
-                uniqueCategories = [
-                  ...new Set(selectedValues.concat(uniqueCategories)),
-                ];
+                if (saveCateResults !== null) {
+                  uniqueCategories = [
+                    ...new Set(saveCateResults.concat(uniqueCategories)),
+                  ];
+                }
                 let htmlOptions = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -2602,9 +2669,11 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTML);
                 $radioSP.append(radioInputHTML);
-                uniqueCategories = [
-                  ...new Set(selectedValues.concat(uniqueCategories)),
-                ];
+                if (saveCateResults !== null) {
+                  uniqueCategories = [
+                    ...new Set(saveCateResults.concat(uniqueCategories)),
+                  ];
+                }
                 let htmlOptions = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -2717,9 +2786,11 @@ jQuery(document).ready(function ($) {
 
                 $selectCode.append(selectOptionHTML.join(""));
                 $radioCodeSP.append(radioInputHTML.join(""));
-                uniqueCategories = [
-                  ...new Set(selectedValues.concat(uniqueCategories)),
-                ];
+                if (saveCateResults !== null) {
+                  uniqueCategories = [
+                    ...new Set(saveCateResults.concat(uniqueCategories)),
+                  ];
+                }
                 let selectOptionHTMLArray = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -2754,7 +2825,9 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTMLArray.join(""));
                 $radioSP.append(radioInputHTMLArray.join(""));
-                uniqueCode = [...new Set(selectedCode.concat(uniqueCode))];
+                if (saveCodeResults !== null) {
+                  uniqueCode = [...new Set(saveCodeResults.concat(uniqueCode))];
+                }
                 let selectCodeOptionHTMLArray = uniqueCode.map(
                   (codeSlug, index) => {
                     let codeItems = groupedDataCode[codeSlug];
@@ -2864,9 +2937,11 @@ jQuery(document).ready(function ($) {
 
                 $selectCode.append(selectOptionHTML.join(""));
                 $radioCodeSP.append(radioInputHTML.join(""));
-                uniqueCategories = [
-                  ...new Set(selectedValues.concat(uniqueCategories)),
-                ];
+                if (saveCateResults !== null) {
+                  uniqueCategories = [
+                    ...new Set(saveCateResults.concat(uniqueCategories)),
+                  ];
+                }
                 let selectOptionHTMLArray = uniqueCategories.map(
                   (categorySlug, index) => {
                     let categoryItems = groupedData[categorySlug];
@@ -2901,7 +2976,9 @@ jQuery(document).ready(function ($) {
 
                 $select.append(selectOptionHTMLArray.join(""));
                 $radioSP.append(radioInputHTMLArray.join(""));
-                uniqueCode = [...new Set(selectedCode.concat(uniqueCode))];
+                if (saveCodeResults !== null) {
+                  uniqueCode = [...new Set(saveCodeResults.concat(uniqueCode))];
+                }
                 let selectCodeOptionHTMLArray = uniqueCode.map(
                   (codeSlug, index) => {
                     let codeItems = groupedDataCode[codeSlug];

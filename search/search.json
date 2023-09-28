@@ -3,30 +3,8 @@
     {
       "type": "page",
       "category": {
-        "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
-      },
-      "title": "Retirement Compensation Arrangement (RCA)",
-      "description": "On January 1, 2022, the existing Public Service Supplementary Benefits Account (PSSBA) was replaced by a new RCA which provides additional tax benefits and portability options for members.",
-      "breadcrums": [
-        {
-          "name": "Home",
-          "link": "/home"
-        },
-        {
-          "name": "Current Members",
-          "link": "/current-members"
-        }
-      ],
-      "date": "2022-01-04 15:57:41",
-      "image": "",
-      "link": "/current-members/retirement-compensation-arrangement"
-    },
-    {
-      "type": "page",
-      "category": {
-        "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "name": "Members pages only",
+        "slug": "members_pages_only"
       },
       "title": "New Definition of Eligible Child",
       "description": "A recent amendment to the Public Service Pension Plan (PSPP) changed the definition of 'eligible child' to allow eligible disabled dependant children to receive a lifetime survivor pension even if the child is over 18 and not attending post secondary school.",
@@ -55,8 +33,30 @@
     {
       "type": "page",
       "category": {
+        "name": "Members pages only",
+        "slug": "members_pages_only"
+      },
+      "title": "Retirement Compensation Arrangement (RCA)",
+      "description": "On January 1, 2022, the existing Public Service Supplementary Benefits Account (PSSBA) was replaced by a new RCA which provides additional tax benefits and portability options for members.",
+      "breadcrums": [
+        {
+          "name": "Home",
+          "link": "/home"
+        },
+        {
+          "name": "Current Members",
+          "link": "/current-members"
+        }
+      ],
+      "date": "2022-01-04 15:57:41",
+      "image": "",
+      "link": "/current-members/retirement-compensation-arrangement"
+    },
+    {
+      "type": "page",
+      "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Upcoming Mailing to Members",
       "description": "On July 4, 2000, the attached Pension Bulletins #4 and #5 will be mailed to members of the Public Service Pension Plan.",
@@ -86,7 +86,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Planning for Retirement in Mid-Career",
       "description": "Mid-career tends to be when people start paying attention to their retirement plan. Learn more about how to plan for your retirement in mid-career.",
@@ -112,7 +112,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Planning for Retirement in Late Career",
       "description": "For many members, the final ten or so years of work prior to retirement is an exciting time to start looking forward to what lies after that important date. Learn what you need to be paying attention to in Late Career in order to have a successful retirement. ",
@@ -138,7 +138,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "OPB News for Retired Members",
       "description": "OPBnews",
@@ -156,7 +156,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "OPB News for Retired Members",
       "description": "OPBnews",
@@ -174,7 +174,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "OPB News for Members",
       "description": "OPBnews",
@@ -192,7 +192,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Insured benefits",
       "description": "If you meet certain eligibility criteria, you may receive certain insured medical benefits in retirement.",
@@ -218,7 +218,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Estate planning",
       "description": "If you're creating or refining your estate plan don't forget to include your pension. OPB's Advisors are Certified Financial Planners who can assist you.",
@@ -244,7 +244,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Survivor benefits to protect your loved ones",
       "description": "It’s important to be aware of the PSPP's survivor benefits and how they can support your loved ones after you pass away. ",
@@ -270,7 +270,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Starting or ending a relationship in retirement",
       "description": "Whether you're ending or beginning a relationship, it's important to understand how these life changes may impact your PSPP pension.",
@@ -296,7 +296,7 @@
       "type": "page",
       "category": {
         "name": "Members pages only",
-        "slug": "Members_pages_only"
+        "slug": "members_pages_only"
       },
       "title": "Managing your taxes",
       "description": "Retirement comes with distinct tax advantages and responsibilities that you must be aware of, especially if you want to minimize your tax liabilities.",
@@ -321,8 +321,8 @@
     {
       "type": "page",
       "category": {
-        "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "name": "Members pages only",
+        "slug": "members_pages_only"
       },
       "title": "CPP integration",
       "description": "CPP integration refers to how the PSPP and CPP plans work together during a member's working years, early retirement, and after age 65.",
@@ -348,7 +348,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Overview",
       "description": "Whether you're a retired member or a surviving spouse/beneficiary, there's some critical information you need to know about your pension benefits. ",
@@ -374,7 +374,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Defined benefit plans 101",
       "description": "A defined benefit plan provides you with a pension that’s payable for your lifetime so you don’t need to worry about outliving your money in retirement.",
@@ -404,7 +404,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Open information sessions are here",
       "description": "Learning about the Public Service Pension Plan (PSPP) will help you make informed decisions about your pension. And now, you no longer have to wait until a session takes place where you work.",
@@ -430,7 +430,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Pension application process",
       "description": "An overview of pension application process.",
@@ -456,7 +456,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Retirement administration",
       "description": "Overview of the mechanics related to pension payments; i.e., pension formula, payment dates, CPP integration",
@@ -482,7 +482,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Surviving spouse and beneficiaries",
       "description": "An overview of topics related to surviving spouses & beneficiaries.\r\n\r\n",
@@ -508,7 +508,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Post-retirement death",
       "description": "Overview of the topics related to a member's post-retirement death.\r\n\r\n\r\n",
@@ -534,7 +534,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Pre-retirement death",
       "description": "Overview page related to pre-retirement death.\r\n\r\n",
@@ -560,7 +560,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Designating beneficiaries",
       "description": "Overview of topics related to designating pension beneficiaries.",
@@ -586,7 +586,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Terminating PSPP membership",
       "description": "Learn more about the different reasons that can cause an employee's PSPP membership to be terminated.",
@@ -612,7 +612,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Transfers",
       "description": "The introductory page for the Employer Manual section related to reciprocal transfer agreements (RTAs).",
@@ -638,7 +638,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Tools to help you meet your goals",
       "description": "OPB provides members with free online tools so you can forecast everything from your potential pension income to your complete financial retirement picture.",
@@ -650,7 +650,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "About your pension",
       "description": "As a member of the Public Service Pension Plan (the PSPP or the Plan), there is some information you need to know to understand how pensions fit into your overall retirement plan. ",
@@ -672,7 +672,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Designating or changing beneficiaries",
       "description": "Your pension may be one of your most significant assets and it comes with valuable survivor benefits to help protect your loved ones when you pass away.",
@@ -698,7 +698,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Retirement forms",
       "description": "To help you officially start retirement, there are forms you need to review and fill out including some you'll see mentioned in your retirement package.",
@@ -724,7 +724,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Publications",
       "description": "summary ",
@@ -736,7 +736,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Divestment",
       "description": "Divestment is the term used within the Ontario Public Service (OPS) to describe a sale, assignment or disposal of an operation from the Ontario government, or one of its agencies, boards or commissions to other government or private sector employers, or vice-versa. We've prepared this section to help you to understand how divestments are treated in the PSPP.",
@@ -762,7 +762,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Death",
       "description": "Overview of topics related to the death of a PSPP member or retired member.",
@@ -784,7 +784,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Glossary",
       "description": "Terms and words relating to the administration and advocacy of the Public Service Pension Plan.",
@@ -796,7 +796,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Forms",
       "description": "Here you will find a listing of our commonly used forms.",
@@ -808,7 +808,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Site map",
       "description": "Site map for www.opb.ca",
@@ -820,7 +820,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Separation or divorce",
       "description": "Because your pension is considered a family asset, it's important to understand how it's affected when you start, or end, a spousal relationship.",
@@ -846,7 +846,7 @@
       "type": "page",
       "category": {
         "name": "Current members pages only",
-        "slug": "Current_members_pages_only"
+        "slug": "current_members_pages_only"
       },
       "title": "Updating member information",
       "description": "Scenarios where employers must notify OPB about any member information changes..\r\n\r\n\r\n",
@@ -870,20 +870,20 @@
     },
     {
       "type": "articles",
-      "category":{"slug":"new_article","name":"News articles"} ,
-      "title": "Cost-of-living increases for Retired Members",
-      "date": "2023-02-10 10:18:52",
+      "category":{"slug":"new_letter","name":"News letters"} ,
+      "title": "Pensions to increase by 1.6 per cent for 2018 cost-of-living adjustment",
+      "date": "2023-02-13 10:18:51",
       "description": "News article description to help user understand more context as they search. Should be character limited.",
-      "image": "https://promise.opb.ca/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498702091&ssbinary=true",
+      "image": "https://promise.opb.ca/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498699933&ssbinary=true",
       "link": "https://www.w3.org/Provider/Style/dummy.html"
     },
     {
       "type": "articles",
       "category":{"slug":"new_article","name":"News articles"} ,
-      "title": "Pensions to increase by 1.6 per cent for 2018 cost-of-living adjustment",
-      "date": "2023-02-13 10:18:51",
+      "title": "Cost-of-living increases for Retired Members",
+      "date": "2023-02-10 10:18:52",
       "description": "News article description to help user understand more context as they search. Should be character limited.",
-      "image": "https://promise.opb.ca/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498699933&ssbinary=true",
+      "image": "https://promise.opb.ca/sites/Satellite?blobcol=urldata&blobkey=id&blobtable=MungoBlobs&blobwhere=1676498702091&ssbinary=true",
       "link": "https://www.w3.org/Provider/Style/dummy.html"
     },
     {
@@ -1955,8 +1955,8 @@
     {
       "filetype": "pdf",
       "name": {
-        "name": "Guides",
-        "slug": "guides"
+        "name": "Guide",
+        "slug": "guide"
       },
       "type": "publications",
       "date": "2023-05-15 08:13:45",
@@ -2057,8 +2057,8 @@
     {
       "filetype": "pdf",
       "name": {
-        "name": "Guides",
-        "slug": "guides"
+        "name": "Guide",
+        "slug": "guide"
       },
       "type": "publications",
       "date": "2023-05-15 08:13:14",
@@ -2125,8 +2125,8 @@
     {
       "filetype": "pdf",
       "name": {
-        "name": "Guides",
-        "slug": "guides"
+        "name": "Guide",
+        "slug": "guide"
       },
       "type": "publications",
       "date": "2023-05-15 08:06:40",
@@ -2261,8 +2261,8 @@
     {
       "filetype": "pdf",
       "name": {
-        "name": "Guides",
-        "slug": "guides"
+        "name": "Guide",
+        "slug": "guide"
       },
       "type": "publications",
       "date": "2023-05-15 08:06:16",
