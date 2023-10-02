@@ -1250,6 +1250,7 @@ jQuery(document).ready(function ($) {
     sortCondition = null,
     name = ""
   ) {
+    page = 1;
     const data = {
       action: "getByType",
       type: type,
@@ -1425,7 +1426,6 @@ jQuery(document).ready(function ($) {
               },
               Type: {
                 desc: (a, b) => b.name.slug.localeCompare(a.name.slug),
-
                 asc: (a, b) => a.name.slug.localeCompare(b.name.slug),
               },
             };
@@ -1434,7 +1434,13 @@ jQuery(document).ready(function ($) {
               sortFunctions.hasOwnProperty(sortType) &&
               sortFunctions[sortType].hasOwnProperty(sortVal)
             ) {
-              dataFilter.sort(sortFunctions[sortType][sortVal]);
+              dataFilter.sort((a, b) => {
+                const result = sortFunctions[sortType][sortVal](a, b);
+                if (result === 0) {
+                  return sortFunctions["Title"]["asc"](a, b);
+                }
+                return result;
+              });
             }
           }
         }
@@ -2471,14 +2477,12 @@ jQuery(document).ready(function ($) {
                 asc: (a, b) => a.category.slug.localeCompare(b.category.slug),
               },
               Code: {
-                desc: (a, b) =>
-                  type === "publications"
-                    ? b.name.slug.localeCompare(a.name.slug)
-                    : b.code.localeCompare(a.code),
-                asc: (a, b) =>
-                  type === "publications"
-                    ? a.name.slug.localeCompare(b.name.slug)
-                    : a.code.localeCompare(b.code),
+                desc: (a, b) => b.code.localeCompare(a.code),
+                asc: (a, b) => a.code.localeCompare(b.code),
+              },
+              Type: {
+                desc: (a, b) => b.name.slug.localeCompare(a.name.slug),
+                asc: (a, b) => a.name.slug.localeCompare(b.name.slug),
               },
             };
 
@@ -2486,7 +2490,13 @@ jQuery(document).ready(function ($) {
               sortFunctions.hasOwnProperty(sortType) &&
               sortFunctions[sortType].hasOwnProperty(sortVal)
             ) {
-              dataFilter.sort(sortFunctions[sortType][sortVal]);
+              dataFilter.sort((a, b) => {
+                const result = sortFunctions[sortType][sortVal](a, b);
+                if (result === 0) {
+                  return sortFunctions["Title"]["asc"](a, b);
+                }
+                return result;
+              });
             }
           }
         }
