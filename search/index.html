@@ -962,7 +962,7 @@
                       <svg class="icon-resize opb-icon opb-icon-search-all" viewBox="0 0 16 16">
                         <use xlink:href="#icon-search-all"></use>
                       </svg>
-                      <span>All <span class="txt-num " id="allct">(55)</span></span>
+                      <span>All <span class="txt-num " id="allct"></span></span>
                     </a>
                   </li>
                   <li class="c-tab-menu_item">
@@ -970,7 +970,7 @@
                       <svg class="icon-resize opb-icon opb-icon-search-page" viewBox="0 0 16 16">
                         <use xlink:href="#icon-search-page"></use>
                       </svg>
-                      <span>Pages <span class="txt-num" id="pagect">(4)</span></span>
+                      <span>Pages <span class="txt-num" id="pagect"></span></span>
                     </a>
                   </li>
                   <li class="c-tab-menu_item">
@@ -978,7 +978,7 @@
                       <svg class="icon-resize opb-icon opb-icon-search-forms" viewBox="0 0 16 16">
                         <use xlink:href="#icon-search-forms"></use>
                       </svg>
-                      <span>Forms <span class="txt-num" id="formct">(11)</span></span>
+                      <span>Forms <span class="txt-num" id="formct"></span></span>
                     </a>
                   </li>
                   <li class="c-tab-menu_item">
@@ -986,7 +986,7 @@
                       <svg class="icon-resize opb-icon  opb-icon-search-publications" viewBox="0 0 16 16">
                         <use xlink:href="#icon-search-publications"></use>
                       </svg>
-                      <span>Publications <span class="txt-num" id="pubct">(22)</span></span>
+                      <span>Publications <span class="txt-num" id="pubct"></span></span>
                     </a>
                   </li>
                   <li class="c-tab-menu_item">
@@ -994,7 +994,7 @@
                       <svg class="icon-resize opb-icon opb-icon-search-articles" viewBox="0 0 16 16">
                         <use xlink:href="#icon-search-articles"></use>
                       </svg>
-                      <span>Articles <span class="txt-num" id="newsct">(5)</span></span>
+                      <span>Articles <span class="txt-num" id="newsct"></span></span>
                     </a>
                   </li>
                 </ul>
@@ -1008,7 +1008,11 @@
               </span>
               <div class="cat-filter-item item-page">
                 <div class="cat-filter-select js-select-nws">
-                  <select id="selectPage" name="selectPage" class="js-custom-select"></select>
+                  <select id="selectPage" name="selectPage" class="js-custom-select">
+                    <option selected value="all">All web pages</option>
+                    <option value="members_pages_only">Members pages only</option>
+                    <option value="current_members_pages_only">Current members pages only</option>
+                  </select>
                 </div>
                 <div class="cat-filter-advanced">
                   <h3 class="cat-filter-advanced_ttl">
@@ -1033,7 +1037,11 @@
                       <div class="content-body">
                         <h3>Pages</h3>
                         <h4>Filter by</h4>
-                        <ul class="list"></ul>
+                        <ul class="list">
+                          <li><input type="radio" name="filter-advanced-page" id="filter-advanced-1" dt-value="all" checked><label for="filter-advanced-1">All web pages</label></li>
+                          <li><input type="radio" name="filter-advanced-page" id="filter-advanced-2" dt-value="members_pages_only"><label for="filter-advanced-2">Members pages only</label></li>
+                          <li><input type="radio" name="filter-advanced-page" id="filter-advanced-3" dt-value="current_members_pages_only"><label for="filter-advanced-3">Current members pages only</label></li>
+                        </ul>
                       </div>
                       <div class="content-body_btn"><a href="javascript:void(0);">Filter Results</a></div>
                     </div>
@@ -1042,7 +1050,12 @@
               </div>
               <div class="cat-filter-item item-articles">
                 <div class="cat-filter-select js-select-nws">
-                  <select id="selectArticle" name="selectArticle" class="js-custom-select"></select>
+                  <select id="selectArticle" name="selectArticle" class="js-custom-select">
+                    <option selected="" value="all">All articles</option>
+                    <option value="new_letter">Newsletters</option>
+                    <option value="new_article">News articles</option>
+                    <option value="Blog">Blog articles</option>
+                  </select>
                 </div>
                 <div class="cat-filter-advanced">
                   <h3 class="cat-filter-advanced_ttl">
@@ -1067,7 +1080,12 @@
                       <div class="content-body">
                         <h3>Articles</h3>
                         <h4>Filter by</h4>
-                        <ul class="list"></ul>
+                        <ul class="list">
+                          <li><input type="radio" name="filter-advanced-article" id="filter-advanced-article-1" dt-value="all" checked=""><label for="filter-advanced-article-1">All articles</label></li>
+                          <li><input type="radio" name="filter-advanced-article" id="filter-advanced-article-2" dt-value="new_letter"><label for="filter-advanced-article-2">Newsletters</label></li>
+                          <li><input type="radio" name="filter-advanced-article" id="filter-advanced-article-3" dt-value="new_article"><label for="filter-advanced-article-3">News articles</label></li>
+                          <li><input type="radio" name="filter-advanced-article" id="filter-advanced-article-4" dt-value="Blog"><label for="filter-advanced-article-4">Blog articles</label></li>
+                        </ul>
                       </div>
                       <div class="content-body_btn"><a href="javascript:void(0);">Filter Results</a></div>
                     </div>
@@ -1076,12 +1094,21 @@
               </div>
               <div class="cat-filter-item item-forms">
                 <div class="cat-filter-select js-select-nws">
-                  <!-- <select id="selectForm" name="selectForm" class="js-custom-select"></select> -->
-                  <select id="formsSelectCategory" name="formsSelectCategory" class="js-custom-select "></select>
+                  <select id="formsSelectCategory" name="formsSelectCategory" class="js-custom-select ">
+                    <option selected="" value="all">All categories</option>
+                    <option value="transfer">Transfer</option>
+                    <option value="retirement">Retirement</option>
+                    <option value="enrollment">Enrollment</option>
+                    <option value="buyback">Buyback</option>
+                  </select>
                 </div>
                 <div class="code-filter-selectV1 js-select-nws">
-                  <!-- <select id="selectFormV1" name="selectFormV1" class="js-custom-select"></select> -->
-                  <select id="formsSelectCode" name="formsSelectCode" class="js-custom-select"></select>
+                  <select id="formsSelectCode" name="formsSelectCode" class="js-custom-select">
+                    <option selected="" value="all">All code groups</option>
+                    <option value="opb">OPB</option>
+                    <option value="fsra">FSRA</option>
+                    <option value="canada_life">Canada Life</option>
+                  </select>
                 </div>
                 <div class="cat-filter-advanced">
                   <div class="list-filter">
@@ -1116,11 +1143,22 @@
                         <div class="content-body content-cat">
                           <h3>Forms</h3>
                           <h4>Filter by category</h4>
-                          <ul class="list"></ul>
+                          <ul class="list">
+                            <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-1" dt-value="all" checked=""><label for="filter-advanced-form-1">All categories</label></li>
+                            <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-2" dt-value="transfer"><label for="filter-advanced-form-2">Transfer</label></li>
+                            <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-3" dt-value="retirement"><label for="filter-advanced-form-3">Retirement</label></li>
+                            <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-4" dt-value="enrollment"><label for="filter-advanced-form-4">Enrollment</label></li>
+                            <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-5" dt-value="buyback"><label for="filter-advanced-form-5">Buyback</label></li>
+                          </ul>
                         </div>
                         <div class="content-body content-code">
                           <h4>Filter by code group</h4>
-                          <ul class="list"></ul>
+                          <ul class="list">
+                            <li><input type="radio" name="code-advanced-form" id="code-advanced-form-1" dt-value="all" checked=""><label for="code-advanced-form-1">All code groups</label></li>
+                            <li><input type="radio" name="code-advanced-form" id="code-advanced-form-2" dt-value="opb"><label for="code-advanced-form-2">OPB</label></li>
+                            <li><input type="radio" name="code-advanced-form" id="code-advanced-form-3" dt-value="fsra"><label for="code-advanced-form-3">FSRA</label></li>
+                            <li><input type="radio" name="code-advanced-form" id="code-advanced-form-4" dt-value="canada_life"><label for="code-advanced-form-4">Canada Life</label></li>
+                          </ul>
                         </div>
                         <div class="content-body_btn"><a href="javascript:void(0);">Filter Results</a></div>
                       </div>
@@ -1130,10 +1168,24 @@
               </div>
               <div class="cat-filter-item item-publications">
                 <div class="code-filter-select js-select-nws">
-                  <select id="publicationsSelectType" name="publicationsSelectType" class="js-custom-select"></select>
+                  <select id="publicationsSelectType" name="publicationsSelectType" class="js-custom-select">
+                    <option selected="" value="all">All types</option>
+                    <option value="guide">Guide</option>
+                    <option value="letter">Letter</option>
+                    <option value="report">Report</option>
+                  </select>
                 </div>
                 <div class="cat-filter-select js-select-nws">
-                  <select id="publicationsSelectCategory" name="publicationsSelectCategory" class="js-custom-select"></select>
+                  <select id="publicationsSelectCategory" name="publicationsSelectCategory" class="js-custom-select">
+                    <option selected="" value="all">All categories</option>
+                    <option value="governance">Governance</option>
+                    <option value="retirement">Retirement</option>
+                    <option value="transfer">Transfer</option>
+                    <option value="enrollment">Enrollment</option>
+                    <option value="termination">Termination</option>
+                    <option value="buyback">Buyback</option>
+                    <option value="investments">Investments</option>
+                  </select>
                 </div>
                 <div class="cat-filter-advanced">
                   <div class="list-filter">
@@ -1168,11 +1220,25 @@
                         <div class="content-body content-cat">
                           <h3>Publications</h3>
                           <h4>Filter by types</h4>
-                          <ul class="list"></ul>
+                          <ul class="list">
+                            <li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-1" dt-value="all" checked=""><label for="filter-advanced-publications-1">All categories</label></li>
+                            <li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-2" dt-value="governance"><label for="filter-advanced-publications-2">Governance</label></li>
+                            <li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-3" dt-value="retirement"><label for="filter-advanced-publications-3">Retirement</label></li>
+                            <li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-4" dt-value="transfer"><label for="filter-advanced-publications-4">Transfer</label></li>
+                            <li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-5" dt-value="enrollment"><label for="filter-advanced-publications-5">Enrollment</label></li>
+                            <li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-6" dt-value="termination"><label for="filter-advanced-publications-6">Termination</label></li>
+                            <li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-7" dt-value="buyback"><label for="filter-advanced-publications-7">Buyback</label></li>
+                            <li><input type="radio" name="filter-advanced-publications" id="filter-advanced-publications-8" dt-value="investments"><label for="filter-advanced-publications-8">Investments</label></li>
+                          </ul>
                         </div>
                         <div class="content-body content-code">
                           <h4>Filter by categories</h4>
-                          <ul class="list"></ul>
+                          <ul class="list">
+                            <li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-1" dt-value="all" checked=""><label for="code-advanced-publications-1">All types</label></li>
+                            <li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-2" dt-value="guide"><label for="code-advanced-publications-2">Guide</label></li>
+                            <li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-3" dt-value="letter"><label for="code-advanced-publications-3">Letter</label></li>
+                            <li><input type="radio" name="code-advanced-publications" id="code-advanced-publications-4" dt-value="report"><label for="code-advanced-publications-4">Report</label></li>
+                          </ul>
                         </div>
                         <div class="content-body_btn"><a href="#">Filter Results</a></div>
                       </div>

@@ -2292,7 +2292,8 @@
   text-align: center;
   margin-top: 58px;
 }
-.cat-more.onLoad {
+.cat-more.onLoad,
+.c-tab-menu_list.loada {
   pointer-events: none;
 }
 .cat-more.loada,
