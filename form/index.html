@@ -923,12 +923,21 @@
               </div>
               <div class="page-sub-header_select">
                 <div class="cat-filter-selectV1 js-select-nws">
-                  <!-- <select id="selectForm" name="selectForm" class="js-custom-select "></select> -->
-                  <select id="formsSelectCategory" name="formsSelectCategory" class="js-custom-select "></select>
+                  <select id="formsSelectCategory" name="formsSelectCategory" class="js-custom-select ">
+                    <option selected="" value="all">All categories</option>
+                    <option value="transfer">Transfer</option>
+                    <option value="retirement">Retirement</option>
+                    <option value="enrollment">Enrollment</option>
+                    <option value="buyback">Buyback</option>
+                  </select>
                 </div>
                 <div class="code-filter-selectV1 js-select-nws">
-                  <!-- <select id="selectFormV1" name="selectFormV1" class="js-custom-select"></select> -->
-                  <select id="formsSelectCode" name="formsSelectCode" class="js-custom-select"></select>
+                  <select id="formsSelectCode" name="formsSelectCode" class="js-custom-select">
+                    <option selected="" value="all">All code groups</option>
+                    <option value="opb">OPB</option>
+                    <option value="fsra">FSRA</option>
+                    <option value="canada_life">Canada Life</option>
+                  </select>
                 </div>
               </div>
               <div class="cat-filter-advanced">
@@ -965,11 +974,21 @@
                         <h3>Forms</h3>
                         <h4>Filter by category</h4>
                         <ul class="list">
+                          <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-1" dt-value="all" checked=""><label for="filter-advanced-form-1">All categories</label></li>
+                          <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-2" dt-value="transfer"><label for="filter-advanced-form-2">Transfer</label></li>
+                          <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-3" dt-value="retirement"><label for="filter-advanced-form-3">Retirement</label></li>
+                          <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-4" dt-value="enrollment"><label for="filter-advanced-form-4">Enrollment</label></li>
+                          <li><input type="radio" name="filter-advanced-form" id="filter-advanced-form-5" dt-value="buyback"><label for="filter-advanced-form-5">Buyback</label></li>
                         </ul>
                       </div>
                       <div class="content-body content-code">
                         <h4>Filter by code group</h4>
-                        <ul class="list"></ul>
+                        <ul class="list">
+                          <li><input type="radio" name="code-advanced-form" id="code-advanced-form-1" dt-value="all" checked=""><label for="code-advanced-form-1">All code groups</label></li>
+                          <li><input type="radio" name="code-advanced-form" id="code-advanced-form-2" dt-value="opb"><label for="code-advanced-form-2">OPB</label></li>
+                          <li><input type="radio" name="code-advanced-form" id="code-advanced-form-3" dt-value="fsra"><label for="code-advanced-form-3">FSRA</label></li>
+                          <li><input type="radio" name="code-advanced-form" id="code-advanced-form-4" dt-value="canada_life"><label for="code-advanced-form-4">Canada Life</label></li>
+                        </ul>
                       </div>
                       <div class="content-body_btn"><a href="javascript:void(0);">Filter Results</a></div>
                     </div>
