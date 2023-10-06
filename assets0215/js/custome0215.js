@@ -2365,6 +2365,22 @@ jQuery(document).ready(function ($) {
         }
       }
     }
+    $(
+      '[aria-controls="opbNavbarMenuContent"],[data-dismiss="opbNavbarMenuContent"]'
+    ).click(function () {
+      if ($(".search-header-icon").hasClass("is-active")) {
+        $(".search-header-icon").removeClass("is-active");
+        $(".search-header-from").removeClass("is-active");
+        $("html").removeClass("is-hidden");
+        $("html").removeClass("disableScroll");
+      }
+      if ($(".opb-login > .dropdown").hasClass("show")) {
+        $(".opb-login  .dropdown").removeClass("show");
+        $(".opb-login   .dropdown a").attr("aria-expanded", "false");
+        $(".opb-login .dropdown-menu").removeClass("show");
+      }
+    });
+
     checkAndRemoveClass();
     $(window).resize(function () {
       checkAndRemoveClass();
