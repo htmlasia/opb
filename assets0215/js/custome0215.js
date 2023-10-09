@@ -5,8 +5,8 @@ jQuery(document).ready(function ($) {
 
   var pathOne = window.location.pathname.split("/");
 
-  var originPathOne = window.location.origin + "/" + pathOne[1];
-  // var originPathOne = window.location.origin;
+  // var originPathOne = window.location.origin + "/" + pathOne[1];
+  var originPathOne = window.location.origin;
 
   let searchjson = originPathOne + "/search/search.json";
 
@@ -816,7 +816,10 @@ jQuery(document).ready(function ($) {
       if (fixedDiv.length > 0) {
         var fixedDivPosition = fixedDiv.offset().top - 104;
         if (fixedDivPosition < $(window).scrollTop()) {
-          if ($(window).width() > 768) {
+          if (
+            $(window).width() > 768 &&
+            $(window).width() < $(window).height()
+          ) {
             fixedDiv.addClass("active");
           } else {
             fixedDiv.removeClass("active");
