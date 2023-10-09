@@ -816,7 +816,11 @@ jQuery(document).ready(function ($) {
       if (fixedDiv.length > 0) {
         var fixedDivPosition = fixedDiv.offset().top - 104;
         if (fixedDivPosition < $(window).scrollTop()) {
-          fixedDiv.addClass("active");
+          if ($(window).width() > 768) {
+            fixedDiv.addClass("active");
+          } else {
+            fixedDiv.removeClass("active");
+          }
         } else {
           fixedDiv.removeClass("active");
         }
