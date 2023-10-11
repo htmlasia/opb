@@ -3745,6 +3745,9 @@ html.disableScroll body {
   }
 }
 @media (max-width: 1199.98px) {
+  .opb-open-menu .opb-navbar > div:last-child:before {
+    content: none;
+  }
   #page-menu-header .opb-login .dropdown::before {
     content: "";
     position: absolute;

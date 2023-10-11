@@ -12978,19 +12978,6 @@ a.text-dark:hover {
     overflow: hidden;
   }
 
-  .opb-open-menu .opb-navbar > div:last-child:before {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    content: "";
-    background: #000;
-    z-index: 1020;
-    opacity: 0.3;
-    display: none;
-  }
-
   .opb-navbar.navbar {
     height: 52px;
     padding: 0;
