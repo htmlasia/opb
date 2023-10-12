@@ -26,6 +26,8 @@ jQuery(document).ready(function ($) {
   let page = 1;
   let localValue = "";
   let isCustomized = false;
+  let isInitialSearch = false;
+  let fixedDiv = $(".opb-search-page");
 
   const type = {
     all: "All",
@@ -72,8 +74,46 @@ jQuery(document).ready(function ($) {
   headerSearch0216();
   homepage0215();
   initEvent();
-  let isInitialSearch = false;
 
+  $(window).on("load", function () {
+    if (fixedDiv.length > 0) {
+      if ($(window).width() > 768 && !/Mobi/.test(navigator.userAgent)) {
+        fixedDiv.addClass("active");
+        if (pagesType == "form" || pagesType == "publications") {
+          fixedDiv.addClass("opb-page-header-form-fixed");
+        } else {
+          fixedDiv.addClass("opb-page-header-main-fixed");
+        }
+      } else {
+        fixedDiv.removeClass("active");
+        fixedDiv.removeClass("opb-page-header-main-fixed");
+        fixedDiv.removeClass("opb-page-header-form-fixed");
+      }
+    }
+  });
+  $(window).scroll(function () {
+    if (fixedDiv.length > 0) {
+      let fixedDivPosition = fixedDiv.offset().top - 104;
+      if (fixedDivPosition < $(window).scrollTop()) {
+        if ($(window).width() > 768 && !/Mobi/.test(navigator.userAgent)) {
+          fixedDiv.addClass("active");
+          if (pagesType == "form" || pagesType == "publications") {
+            fixedDiv.addClass("opb-page-header-form-fixed");
+          } else {
+            fixedDiv.addClass("opb-page-header-main-fixed");
+          }
+        } else {
+          fixedDiv.removeClass("active");
+          fixedDiv.removeClass("opb-page-header-main-fixed");
+          fixedDiv.removeClass("opb-page-header-form-fixed");
+        }
+      } else {
+        fixedDiv.removeClass("active");
+        fixedDiv.removeClass("opb-page-header-main-fixed");
+        fixedDiv.removeClass("opb-page-header-form-fixed");
+      }
+    }
+  });
   $("#search-data, #search-data2, #search-data3").keypress(function (event) {
     if (event.which === 13) {
       page = 1;
@@ -808,24 +848,6 @@ jQuery(document).ready(function ($) {
         handleSelectChange();
       }
     });
-
-    $(window).scroll(function () {
-      var fixedDiv = $(
-        ".opb-page-header-form-fixed,.opb-page-header-main-fixed"
-      );
-      if (fixedDiv.length > 0) {
-        var fixedDivPosition = fixedDiv.offset().top - 104;
-        if (fixedDivPosition < $(window).scrollTop()) {
-          if ($(window).width() > 768 && !/Mobi/.test(navigator.userAgent)) {
-            fixedDiv.addClass("active");
-          } else {
-            fixedDiv.removeClass("active");
-          }
-        } else {
-          fixedDiv.removeClass("active");
-        }
-      }
-    });
     $(".cat-filter").removeClass("is-active");
     headerSearch0215();
     if (pagesType !== "form" && pagesType !== "publications") {
@@ -984,8 +1006,46 @@ jQuery(document).ready(function ($) {
             .addClass("same-as-selected")
             .siblings()
             .removeClass("same-as-selected");
+          // tranthanh
           $selectSelected.click();
         });
+        if (searchParams.has("cate")) {
+          let cate = searchParams.get("cate");
+          if (cate === $option.val()) {
+            $item
+              .addClass("same-as-selected")
+              .siblings()
+              .removeClass("same-as-selected");
+            $selectSelected.html($option.html());
+            if ($(".item-forms.is-active").length > 0 || pagesType == "form") {
+              $("select[name='formsSelectCategory']").val(cate);
+            } else if (
+              $(".item-publications.is-active").length > 0 ||
+              pagesType == "publications"
+            ) {
+              $("select[name='publicationsSelectCategory']").val(cate);
+            }
+          }
+        }
+        if (searchParams.has("group")) {
+          let group = searchParams.get("group");
+          if (group === $option.val()) {
+            $item
+              .addClass("same-as-selected")
+              .siblings()
+              .removeClass("same-as-selected");
+            $selectSelected.html($option.html());
+            if ($(".item-forms.is-active").length > 0 || pagesType == "form") {
+              $("select[name='formsSelectCode']").val(group);
+            } else if (
+              $(".item-publications.is-active").length > 0 ||
+              pagesType == "publications"
+            ) {
+              $("select[name='publicationsSelectType']").val(group);
+            }
+          }
+        }
+
         $selectItems.append($item);
       });
       $this.append($selectItems);
