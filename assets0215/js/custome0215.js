@@ -182,7 +182,7 @@ jQuery(document).ready(function ($) {
 
         if (currentURL.localeCompare(originPathOne + "/search/") !== 0) {
           searchValue = $("#search-header .opb-form-text").val();
-          if ($("#" + inputId).val() == "" || $("#search-data").val() == "") {
+          if ($("#" + inputId).val() == "" && $("#search-data").val() == "") {
             localStorage.setItem("changePage", true);
           }
           // window.location.href = originPathOne + "/search/";
