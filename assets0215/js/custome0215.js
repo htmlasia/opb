@@ -353,7 +353,12 @@ jQuery(document).ready(function ($) {
             "is-active"
           );
           $("html").toggleClass("is-hidden");
-          $("html").toggleClass("disableScroll");
+          if (
+            $("#search-content").length > 0 ||
+            $(".opb-search-page").length > 0
+          ) {
+            $("html").toggleClass("disableScroll");
+          }
         }
         return false;
       }
@@ -2412,7 +2417,10 @@ jQuery(document).ready(function ($) {
       $(".search-header-icon").toggleClass("is-active");
       $(".search-header-from").toggleClass("is-active");
       $("html").toggleClass("is-hidden");
-      $("html").toggleClass("disableScroll");
+      if ($("#search-content").length > 0 || $(".opb-search-page").length > 0) {
+        $("html").toggleClass("disableScroll");
+      }
+      // $("html").toggleClass("disableScroll");
       return false;
     });
 
