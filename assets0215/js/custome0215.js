@@ -13,6 +13,45 @@ jQuery(document).ready(function ($) {
   let searchParams = new URLSearchParams(window.location.search);
   let newURL = new URL(window.location.href);
 
+  let lang = $("html").attr("lang");
+  const doc = document.documentElement;
+  doc.style.setProperty("--back", '"Back"');
+  let howcanwe = "How can we help you? Please enter a search 2term.";
+  let allresutls = "All search results";
+  let pageresults = "Pages search results";
+  let formresults = "search results";
+  let pubresutls = "Publications search results";
+  let artresutls = "Articles search results";
+  let forlabel = "for";
+  let oflabel = "of ";
+  let results = "results";
+  let showing = "Showing";
+  let webpage = "Web Page";
+  let sform = "Form";
+  let spublication = "Publication";
+  let titleField = "Title";
+  let cateField = "Title";
+  if (lang === "fr") {
+    doc.style.setProperty("--back", '"retour"');
+    howcanwe =
+      "Comment pouvons-nous vous aider? Veuillez saisir un terme pour la recherche.";
+    allresutls = "Tous les résultats de recherche";
+    pageresults = "Résultats de recherche de pages";
+    formresults = "Résultats de recherche";
+    pubresutls = "Résultats de recherche de publications";
+    artresutls = "Résultats de recherche d’articles";
+    forlabel = "pour";
+    oflabel = "de";
+    results = "résultats";
+    showing = "Affichage";
+    webpage = "page Web";
+    sform = "Formulaire";
+    spublication = "Publication";
+    titleField = "Titre";
+    cateField = "Catégorie";
+  } else if (lang === "en") {
+  }
+
   if ($("#content").attr("data-page") != undefined) {
     var pagesType = $("#content").data("page");
   }
@@ -151,7 +190,9 @@ jQuery(document).ready(function ($) {
         ).val();
         localStorage.setItem("searchValue", searchValue);
         currentURL = $(location).attr("href");
-        if (currentURL.localeCompare(originPathOne + "/search/") !== 0) {
+        if (
+          (currentURL.localeCompare(originPathOne + "/search/") !== 0, lang)
+        ) {
           searchValue = $("#search-header .opb-form-text").val();
           if ($("#" + inputId).val() == "" || $("#search-data").val() == "") {
             localStorage.setItem("changePage", true);
@@ -180,7 +221,9 @@ jQuery(document).ready(function ($) {
       } else if (inputId === "search-data2") {
         let currentURL = $(location).attr("href");
 
-        if (currentURL.localeCompare(originPathOne + "/search/") !== 0) {
+        if (
+          (currentURL.localeCompare(originPathOne + "/search/") !== 0, lang)
+        ) {
           searchValue = $("#search-header .opb-form-text").val();
           if ($("#" + inputId).val() == "" && $("#search-data").val() == "") {
             localStorage.setItem("changePage", true);
@@ -341,7 +384,7 @@ jQuery(document).ready(function ($) {
       // if (valid) {
       let currentURL = $(location).attr("href");
       let getSearch = searchValue ? "?s=" + searchValue : "";
-      if (currentURL.localeCompare(originPathOne + "/search/") !== 0) {
+      if ((currentURL.localeCompare(originPathOne + "/search/") !== 0, lang)) {
         window.location.href = originPathOne + "/search/" + getSearch;
       } else {
         newURL.search = searchParams.toString();
@@ -632,7 +675,7 @@ jQuery(document).ready(function ($) {
             sortCondition =
               activeCondition.text() + "-" + activeCondition.attr("data-sort");
           } else {
-            sortCondition = "Title-asc";
+            sortCondition = titleField + "-asc";
           }
 
           if (val && valcode) {
@@ -732,7 +775,7 @@ jQuery(document).ready(function ($) {
             sortCondition =
               activeCondition.text() + "-" + activeCondition.attr("data-sort");
           } else {
-            sortCondition = "Title-asc";
+            sortCondition =  titleField + "-asc";
           }
 
           if (val && valcode) {
@@ -883,7 +926,7 @@ jQuery(document).ready(function ($) {
         sortCondition =
           activeCondition.text() + "-" + activeCondition.attr("data-sort");
       } else {
-        sortCondition = "Title-asc";
+        sortCondition =  titleField + "-asc";
       }
     } else {
       activeCondition = $(
@@ -932,7 +975,7 @@ jQuery(document).ready(function ($) {
         sortCondition =
           activeCondition.text() + "-" + activeCondition.attr("data-sort");
       } else {
-        sortCondition = "Title-asc";
+        sortCondition =  titleField + "-asc";
       }
     } else {
       activeCondition = $(".cat-filter-sort-list.sort-forms li.is-active");
@@ -1363,7 +1406,7 @@ jQuery(document).ready(function ($) {
           sortCondition =
             activeCondition.text() + "-" + activeCondition.attr("data-sort");
         } else {
-          sortCondition = "Title-asc";
+          sortCondition =  titleField + "-asc";
         }
         if (sortCondition) {
           data["sort"] = sortCondition;
@@ -1398,7 +1441,7 @@ jQuery(document).ready(function ($) {
           sortCondition =
             activeCondition.text() + "-" + activeCondition.attr("data-sort");
         } else {
-          sortCondition = "Title-asc";
+          sortCondition =  titleField + "-asc";
         }
         if (sortCondition) {
           data["sort"] = sortCondition;
@@ -1441,11 +1484,11 @@ jQuery(document).ready(function ($) {
         });
         if (data["sort"] === "desc") {
           dataFilter.sort(function (a, b) {
-            return b.title.localeCompare(a.title);
+            return b.title.localeCompare(a.title, lang);
           });
         } else if (data["sort"] === "asc") {
           dataFilter.sort(function (a, b) {
-            return a.title.localeCompare(b.title);
+            return a.title.localeCompare(b.title, lang);
           });
         }
         if (
@@ -1460,33 +1503,47 @@ jQuery(document).ready(function ($) {
             data["sort"] !== null
           ) {
             const [sortType, sortVal] = data["sort"].split("-");
+
             const sortFunctions = {
               Title: {
-                desc: (a, b) => b.title.localeCompare(a.title),
-                asc: (a, b) => a.title.localeCompare(b.title),
+                desc: (a, b) => b.title.localeCompare(a.title, lang),
+                asc: (a, b) => a.title.localeCompare(b.title, lang),
               },
               Category: {
-                desc: (a, b) => b.category.slug.localeCompare(a.category.slug),
-                asc: (a, b) => a.category.slug.localeCompare(b.category.slug),
+                desc: (a, b) =>
+                  b.category.slug.localeCompare(a.category.slug, lang),
+                asc: (a, b) =>
+                  a.category.slug.localeCompare(b.category.slug, lang),
+              },
+              Titre: {
+                desc: (a, b) => b.title.localeCompare(a.title, lang),
+                asc: (a, b) => a.title.localeCompare(b.title, lang),
+              },
+              Catégorie: {
+                desc: (a, b) =>
+                  b.category.slug.localeCompare(a.category.slug, lang),
+                asc: (a, b) =>
+                  a.category.slug.localeCompare(b.category.slug, lang),
               },
               Code: {
-                desc: (a, b) => b.code.localeCompare(a.code),
-                asc: (a, b) => a.code.localeCompare(b.code),
+                desc: (a, b) => b.code.localeCompare(a.code, lang),
+                asc: (a, b) => a.code.localeCompare(b.code, lang),
               },
               Type: {
-                desc: (a, b) => b.name.slug.localeCompare(a.name.slug),
-                asc: (a, b) => a.name.slug.localeCompare(b.name.slug),
+                desc: (a, b) => b.name.slug.localeCompare(a.name.slug, lang),
+                asc: (a, b) => a.name.slug.localeCompare(b.name.slug, lang),
               },
             };
-
+            console.log(sortType);
             if (
               sortFunctions.hasOwnProperty(sortType) &&
               sortFunctions[sortType].hasOwnProperty(sortVal)
             ) {
+
               dataFilter.sort((a, b) => {
                 const result = sortFunctions[sortType][sortVal](a, b);
                 if (result === 0) {
-                  return sortFunctions["Title"]["asc"](a, b);
+                  return sortFunctions[titleField]["asc"](a, b);
                 }
                 return result;
               });
@@ -1908,7 +1965,7 @@ jQuery(document).ready(function ($) {
           sortCondition =
             activeCondition.text() + "-" + activeCondition.attr("data-sort");
         } else {
-          sortCondition = "Title-asc";
+          sortCondition =  titleField + "-asc";
         }
         if (sortCondition) {
           data["sort"] = sortCondition;
@@ -1953,7 +2010,7 @@ jQuery(document).ready(function ($) {
           sortCondition =
             activeCondition.text() + "-" + activeCondition.attr("data-sort");
         } else {
-          sortCondition = "Title-asc";
+          sortCondition =  titleField + "-asc";
         }
         if (sortCondition) {
           data["sort"] = sortCondition;
@@ -2022,7 +2079,7 @@ jQuery(document).ready(function ($) {
           });
         } else if (data["sort"] === "desc") {
           dataFilter.sort(function (a, b) {
-            return b.title.localeCompare(a.title);
+            return b.title.localeCompare(a.title, lang);
           });
         } else if (data["sort"] === "asc") {
           dataFilter.sort(function (a, b) {
@@ -2044,20 +2101,32 @@ jQuery(document).ready(function ($) {
             const [sortType, sortVal] = data["sort"].split("-");
             const sortFunctions = {
               Title: {
-                desc: (a, b) => b.title.localeCompare(a.title),
-                asc: (a, b) => a.title.localeCompare(b.title),
+                desc: (a, b) => b.title.localeCompare(a.title, lang),
+                asc: (a, b) => a.title.localeCompare(b.title, lang),
               },
               Category: {
-                desc: (a, b) => b.category.slug.localeCompare(a.category.slug),
-                asc: (a, b) => a.category.slug.localeCompare(b.category.slug),
+                desc: (a, b) =>
+                  b.category.slug.localeCompare(a.category.slug, lang),
+                asc: (a, b) =>
+                  a.category.slug.localeCompare(b.category.slug, lang),
+              },
+              Titre: {
+                desc: (a, b) => b.title.localeCompare(a.title, lang),
+                asc: (a, b) => a.title.localeCompare(b.title, lang),
+              },
+              Catégorie: {
+                desc: (a, b) =>
+                  b.category.slug.localeCompare(a.category.slug, lang),
+                asc: (a, b) =>
+                  a.category.slug.localeCompare(b.category.slug, lang),
               },
               Code: {
-                desc: (a, b) => b.code.localeCompare(a.code),
-                asc: (a, b) => a.code.localeCompare(b.code),
+                desc: (a, b) => b.code.localeCompare(a.code, lang),
+                asc: (a, b) => a.code.localeCompare(b.code, lang),
               },
               Type: {
-                desc: (a, b) => b.name.slug.localeCompare(a.name.slug),
-                asc: (a, b) => a.name.slug.localeCompare(b.name.slug),
+                desc: (a, b) => b.name.slug.localeCompare(a.name.slug, lang),
+                asc: (a, b) => a.name.slug.localeCompare(b.name.slug, lang),
               },
             };
 
@@ -2068,7 +2137,7 @@ jQuery(document).ready(function ($) {
               dataFilter.sort((a, b) => {
                 const result = sortFunctions[sortType][sortVal](a, b);
                 if (result === 0) {
-                  return sortFunctions["Title"]["asc"](a, b);
+                  return sortFunctions[titleField]["asc"](a, b);
                 }
                 return result;
               });
