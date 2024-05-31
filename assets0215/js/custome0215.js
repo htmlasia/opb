@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
   let lang = $("html").attr("lang");
   const doc = document.documentElement;
   doc.style.setProperty("--back", '"Back"');
-  let howcanwe = "How can we help you? Please enter a search 2term.";
+  let howcanwe = "How can we help you? Please enter a search term.";
   let allresutls = "All search results";
   let pageresults = "Pages search results";
   let formresults = "search results";
@@ -31,6 +31,12 @@ jQuery(document).ready(function ($) {
   let spublication = "Publication";
   let titleField = "Title";
   let cateField = "Title";
+  let fCatePages = "All web pages";
+  let fCateArticles = "All articles";
+  let fCateForms = "All categories";
+  let fTypeForms = "All code groups";
+  let fCatePublications = "All categories";
+  let fTypePublications = "All types";
   if (lang === "fr") {
     doc.style.setProperty("--back", '"retour"');
     howcanwe =
@@ -49,8 +55,15 @@ jQuery(document).ready(function ($) {
     spublication = "Publication";
     titleField = "Titre";
     cateField = "Catégorie";
-  } else if (lang === "en") {
+    fCatePages = "Toutes les pages Web";
+    fCateArticles = "Tous les articles";
+    fCateForms = "Toutes les catégories";
+    fTypeForms = "Tous les groupes de codes";
+    fCatePublications = "Toutes les catégories";
+    fTypePublications = "Tous les types";
   }
+  // else if (lang === "en") {
+  // }
 
   if ($("#content").attr("data-page") != undefined) {
     var pagesType = $("#content").data("page");
@@ -208,7 +221,7 @@ jQuery(document).ready(function ($) {
               $("#all-data")
                 .empty()
                 .html(
-                  "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+                  "<h3 class='search-null'>"+howcanwe+"</h3>"
                 );
             }
           } else {
@@ -240,7 +253,7 @@ jQuery(document).ready(function ($) {
               $("#all-data")
                 .empty()
                 .html(
-                  "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+                  "<h3 class='search-null'>"+howcanwe+"</h3>"
                 );
             }
           } else {
@@ -314,7 +327,7 @@ jQuery(document).ready(function ($) {
             $("#all-data")
               .empty()
               .html(
-                "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+                "<h3 class='search-null'>"+howcanwe+"</h3>"
               );
           }
           isInitialSearch = true;
@@ -447,7 +460,7 @@ jQuery(document).ready(function ($) {
               $("#all-data")
                 .empty()
                 .html(
-                  "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+                  "<h3 class='search-null'>"+howcanwe+"</h3>"
                 );
             } else {
               searchAll();
@@ -490,7 +503,7 @@ jQuery(document).ready(function ($) {
           $("#all-data")
             .empty()
             .html(
-              "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+              "<h3 class='search-null'>"+howcanwe+"</h3>"
             );
         }
         error_free = false;
@@ -1192,7 +1205,7 @@ jQuery(document).ready(function ($) {
       $("#all-data")
         .empty()
         .html(
-          "<h3 class='search-null'>How can we help you? Please enter a search term.</h3>"
+          "<h3 class='search-null'>"+howcanwe+"</h3>"
         );
     }
   }
@@ -1240,10 +1253,10 @@ jQuery(document).ready(function ($) {
             ).empty();
             $(
               ".cat-filter-item.item-page .cat-filter-advanced_ttl span span span"
-            ).append("All web pages");
+            ).append(fCatePages);
             $('input[name="filter-advanced-page"]:first').prop("checked", true);
 
-            $(".cat-filter-select .select-selected").text("All web pages");
+            $(".cat-filter-select .select-selected").text(fCatePages);
             $('input[name="selectPage"]:first').prop("checked", true);
             break;
           case 4:
@@ -1257,12 +1270,12 @@ jQuery(document).ready(function ($) {
             ).empty();
             $(
               ".cat-filter-item.item-articles .cat-filter-advanced_ttl span span span"
-            ).append("All articles");
+            ).append(fCateArticles);
             $('input[name="filter-advanced-article"]:first').prop(
               "checked",
               true
             );
-            $(".cat-filter-select .select-selected").text("All articles");
+            $(".cat-filter-select .select-selected").text(fCateArticles);
             $('input[name="selectArticle"]:first').prop("checked", true);
             break;
           case 2:
@@ -1276,19 +1289,19 @@ jQuery(document).ready(function ($) {
             ).empty();
             $(
               ".cat-filter-item.item-forms .cat-filter-advanced_ttl span span"
-            ).append("All categories");
+            ).append(fCateForms);
             $('input[name="filter-advanced-forms"]:first').prop(
               "checked",
               true
             );
-            $(".cat-filter-select .select-selected").text("All categories");
-            $(".code-filter-selectV1 .select-selected").text("All code groups");
+            $(".cat-filter-select .select-selected").text(fCateForms);
+            $(".code-filter-selectV1 .select-selected").text(fTypeForms);
             $(
               ".cat-filter-item.item-forms .code-filter-advanced_ttl span span"
             ).empty();
             $(
               ".cat-filter-item.item-forms .code-filter-advanced_ttl span span"
-            ).append("All code groups");
+            ).append(fTypeForms);
             $('input[name="code-advanced-forms"]:first').prop("checked", true);
             if (pagesType == "form") {
               $(
@@ -1307,11 +1320,11 @@ jQuery(document).ready(function ($) {
             ).empty();
             $(
               ".cat-filter-item.item-publications .cat-filter-advanced_ttl span span "
-            ).append("All publications");
+            ).append(fCatePublications);
 
             $(
               ".cat-filter-item.item-publications .code-filter-advanced_ttl span span"
-            ).append("All types");
+            ).append(fTypePublications);
             $('input[name="code-advanced-publications"]:first').prop(
               "checked",
               true
@@ -1320,15 +1333,15 @@ jQuery(document).ready(function ($) {
               "checked",
               true
             );
-            $(".cat-filter-select .select-selected").text("All publications");
-            $(".code-filter-select .select-selected").text("All type");
+            $(".cat-filter-select .select-selected").text(fCatePublications);
+            $(".code-filter-select .select-selected").text(fTypePublications);
             if (pagesType == "publications") {
               $(
                 ".cat-filter-item.item-publications .cat-filter-advanced_ttl span span, .code-filter-item.item-publications .cat-filter-advanced_ttl span span"
               ).empty();
               $(
                 ".cat-filter-item.item-publications .cat-filter-advanced_ttl span span"
-              ).append("All publications");
+              ).append(fCatePublications);
             }
             break;
         }
@@ -1597,7 +1610,7 @@ jQuery(document).ready(function ($) {
         });
 
         if (searchData != "") {
-          getSearchText = " for “" + searchData + "”";
+          getSearchText = " "+forlabel+" “" + searchData + "”";
         }
         let changePage = localStorage.getItem("changePage");
         setTimeout(() => {
@@ -1612,7 +1625,7 @@ jQuery(document).ready(function ($) {
             case "page":
               render = `<div id="cat-02" class="opb-search-page-cat">
                           <div class="cat-inner">
-                            <h3 class="body-ttl">Pages search results ${
+                            <h3 class="body-ttl">${pageresults} ${
                               searchData != "" ? getSearchText : ""
                             }</h3>
                             <div class="cat-list">${dynamicHtml}</div>
@@ -1622,7 +1635,7 @@ jQuery(document).ready(function ($) {
             case "articles":
               render = `<div id="cat-05" class="opb-search-page-cat">
                       <div class="cat-inner">
-                        <h3 class="body-ttl">Articles search results ${
+                        <h3 class="body-ttl">${artresutls} ${
                           searchData != "" ? getSearchText : ""
                         }</h3>
                         <div class="cat-list">${dynamicHtml}</div>
@@ -1639,7 +1652,7 @@ jQuery(document).ready(function ($) {
               } else {
                 render = `<div id="cat-03" class="opb-search-page-cat opb-search-page-form ">
                         <div class="cat-inner">
-                          <h3 class="body-ttl">Forms search results ${
+                          <h3 class="body-ttl">Forms ${formresults} ${
                             searchData != "" ? getSearchText : ""
                           }</h3>
                           <div class="cat-list">${dynamicHtml}</div>
@@ -1657,7 +1670,7 @@ jQuery(document).ready(function ($) {
               } else {
                 render = `<div id="cat-04" class="opb-search-page-cat opb-search-page-form ">
                         <div class="cat-inner">
-                          <h3 class="body-ttl">Publications search results ${
+                          <h3 class="body-ttl">${pubresutls} ${
                             searchData != "" ? getSearchText : ""
                           }</h3>
                           <div class="cat-list">${dynamicHtml}</div>
@@ -1697,16 +1710,16 @@ jQuery(document).ready(function ($) {
             if (pagesType == "form" || pagesType == "publications") {
               let current = displayedResults;
               $(".itemofshow").html(
-                `Showing <span>${current}</span> of ${
+                `${showing} <span>${current}</span> ${oflabel}${
                   totalResults || 0
-                } results`
+                } ${results}`
               );
               $("#form-list-v1").html(render);
             } else {
               if (changePage !== null || searchData === "") {
                 $(".cat-more").addClass("hideBtn");
                 $(".txt-num").empty();
-                render = `<h3 class='search-null'>How can we help you? Please enter a search term.</h3>`;
+                render = `<h3 class='search-null'>${howcanwe}</h3>`;
               } else {
                 const listNumbResult = [
                   response.totalCount,
@@ -1856,7 +1869,7 @@ jQuery(document).ready(function ($) {
           setTimeout(() => {
             if (searchData != "") {
               localStorage.removeItem("changePage");
-              getSearchText = " for “" + searchData + "”";
+              getSearchText = " "+forlabel+" “" + searchData + "”";
               $("#menu-tab-id .c-tab-menu_item:nth-child(1)").addClass(
                 "item-active"
               );
@@ -1883,13 +1896,13 @@ jQuery(document).ready(function ($) {
             } else if (changePage !== null || searchData === "") {
               $(".cat-more").addClass("hideBtn");
               $(".txt-num").empty();
-              render = `<h3 class='search-null'>How can we help you? Please enter a search term.</h3>`;
+              render = `<h3 class='search-null'>${howcanwe}</h3>`;
             } else {
               $("#all-data").removeClass("none");
 
               render = `<div id="cat-01" class="opb-search-page-cat is-active">
                   <div class="cat-inner">
-                    <h3 class="body-ttl">All search results ${
+                    <h3 class="body-ttl">${allresutls} ${
                       searchData != null ? getSearchText : ""
                     }</h3>
                     <div class="cat-list"> ${dynamicHtml} </div>
@@ -2203,7 +2216,7 @@ jQuery(document).ready(function ($) {
             let current = parseInt($(".itemofshow span").text());
             current = current + displayedResults;
             $(".itemofshow").html(
-              `Showing <span>${current}</span> of ${totalResults || 0} results`
+              `${showing} <span>${current}</span> ${oflabel}${totalResults || 0} ${results}`
             );
           } else {
             switch (typeNumber[typeActive]) {
@@ -2265,7 +2278,7 @@ jQuery(document).ready(function ($) {
                 <svg class="opb-icon opb-icon-search-page">
                   <use xlink:href="#icon-search-page"></use>
                 </svg>
-                <strong>Web Page</strong>
+                <strong>${webpage}</strong>
               </h3>
             </div>
             <h2 class="item-ttl ">${item.title}</h2>
@@ -2399,7 +2412,7 @@ jQuery(document).ready(function ($) {
                                     <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0.818115 0V16H13.298V0H0.818115ZM4.0835 10.9024L2.90127 9.6593L3.43726 9.0967L4.0835 9.78095L5.40638 8.38204L5.94237 8.94464L4.0835 10.9024ZM4.0797 7.61416L2.90127 6.37111L3.43726 5.80851L4.0835 6.49275L5.40638 5.08624L5.94237 5.64885L4.0797 7.61416ZM10.945 10.2789H7.13601V9.48444H10.945V10.2789ZM10.945 6.98693H7.13601V6.18864H10.945V6.98693Z" fill="#424242"/>
                                     </svg>
-                                      <strong>Form ${item.code}</strong>
+                                      <strong>${sform} ${item.code}</strong>
                                     </h3>
                                   </div>
                                   <h2 class="item-ttl ${item.filetype}">${item.title}</h2>
@@ -2448,7 +2461,7 @@ jQuery(document).ready(function ($) {
                                     <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.71963 4.41121V3.14019C10.1308 2.96573 10.5515 2.83489 10.9817 2.74766C11.4113 2.66044 11.8629 2.61682 12.3364 2.61682C12.6604 2.61682 12.9782 2.64174 13.2897 2.69159C13.6012 2.74143 13.9065 2.80374 14.2056 2.8785V4.07477C13.9065 3.96262 13.6045 3.87863 13.2994 3.8228C12.9939 3.76648 12.6729 3.73832 12.3364 3.73832C11.8629 3.73832 11.4081 3.79763 10.972 3.91626C10.5358 4.03439 10.1184 4.19938 9.71963 4.41121ZM9.71963 8.52336V7.25234C10.1308 7.07788 10.5515 6.94704 10.9817 6.85981C11.4113 6.77259 11.8629 6.72897 12.3364 6.72897C12.6604 6.72897 12.9782 6.75389 13.2897 6.80374C13.6012 6.85358 13.9065 6.91589 14.2056 6.99065V8.18692C13.9065 8.07477 13.6045 7.99078 13.2994 7.93495C12.9939 7.87863 12.6729 7.85047 12.3364 7.85047C11.8629 7.85047 11.4081 7.90654 10.972 8.01869C10.5358 8.13084 10.1184 8.29907 9.71963 8.52336ZM9.71963 6.46729V5.19626C10.1308 5.02181 10.5515 4.89097 10.9817 4.80374C11.4113 4.71651 11.8629 4.6729 12.3364 4.6729C12.6604 4.6729 12.9782 4.69782 13.2897 4.74766C13.6012 4.79751 13.9065 4.85981 14.2056 4.93458V6.13084C13.9065 6.01869 13.6045 5.9347 13.2994 5.87888C12.9939 5.82255 12.6729 5.79439 12.3364 5.79439C11.8629 5.79439 11.4081 5.85371 10.972 5.97234C10.5358 6.09047 10.1184 6.25545 9.71963 6.46729ZM4.11215 8.97196C4.69782 8.97196 5.26804 9.03726 5.8228 9.16785C6.37707 9.29894 6.92835 9.49533 7.47664 9.75701V2.39252C6.96573 2.09346 6.42368 1.86916 5.85047 1.71963C5.27726 1.57009 4.69782 1.49533 4.11215 1.49533C3.66355 1.49533 3.21819 1.53894 2.77607 1.62617C2.33346 1.7134 1.90654 1.84424 1.49533 2.01869V9.42056C1.93146 9.27103 2.36461 9.15888 2.79477 9.08411C3.22442 9.00935 3.66355 8.97196 4.11215 8.97196ZM8.97196 9.75701C9.52025 9.49533 10.0718 9.29894 10.6265 9.16785C11.1808 9.03726 11.7508 8.97196 12.3364 8.97196C12.785 8.97196 13.2244 9.00935 13.6546 9.08411C14.0842 9.15888 14.5171 9.27103 14.9533 9.42056V2.01869C14.5421 1.84424 14.1154 1.7134 13.6733 1.62617C13.2307 1.53894 12.785 1.49533 12.3364 1.49533C11.7508 1.49533 11.1713 1.57009 10.5981 1.71963C10.0249 1.86916 9.48287 2.09346 8.97196 2.39252V9.75701ZM8.2243 11.9626C7.62617 11.4891 6.97819 11.1215 6.28037 10.8598C5.58255 10.5981 4.85981 10.4673 4.11215 10.4673C3.45171 10.4673 2.76012 10.5919 2.03738 10.8411C1.31464 11.0903 0.635514 11.4766 0 12V1.15888C0.548287 0.785047 1.19327 0.498442 1.93495 0.299065C2.67614 0.0996885 3.40187 0 4.11215 0C4.83489 0 5.54218 0.0934579 6.23402 0.280374C6.92536 0.46729 7.58879 0.747664 8.2243 1.1215C8.85981 0.747664 9.52349 0.46729 10.2153 0.280374C10.9067 0.0934579 11.6137 0 12.3364 0C13.0467 0 13.7727 0.0996885 14.5144 0.299065C15.2556 0.498442 15.9003 0.785047 16.4486 1.15888V12C15.8255 11.4766 15.1497 11.0903 14.4209 10.8411C13.6917 10.5919 12.9969 10.4673 12.3364 10.4673C11.5888 10.4673 10.866 10.5981 10.1682 10.8598C9.47041 11.1215 8.82243 11.4891 8.2243 11.9626Z" fill="#656565"/>
                                     </svg>
-                                      <strong>${item.name.name} Publication</strong>
+                                      <strong>${item.name.name} ${spublication}</strong>
                                     </h3>
                                   </div>
                                   <h2 class="item-ttl ${item.filetype}">${item.title}</h2>
@@ -2850,27 +2863,27 @@ jQuery(document).ready(function ($) {
             const filterText = {
               page: {
                 categoryItem: ".cat-filter-item.item-page",
-                selectText: "All web pages",
-                advancedText: "All web pages",
+                selectText: fCatePages,
+                advancedText: fCatePages,
               },
               articles: {
                 categoryItem: ".cat-filter-item.item-articles",
-                selectText: "All articles",
-                advancedText: "All articles",
+                selectText: fCateArticles,
+                advancedText: fCateArticles,
               },
               forms: {
                 categoryItem: ".cat-filter-item.item-forms",
-                selectText: "All categories",
-                codeText: "All code groups",
-                advancedCategoryText: "All categories",
-                advancedCodeText: "All code groups",
+                selectText: fCateForms,
+                codeText: fTypeForms,
+                advancedCategoryText: fCateForms,
+                advancedCodeText: fTypeForms,
               },
               publications: {
                 categoryItem: ".cat-filter-item.item-publications",
-                selectText: "All publications",
-                codeText: "All type",
-                advancedCategoryText: "All publications",
-                advancedCodeText: "All type",
+                selectText: fCatePublications,
+                codeText: fTypePublications,
+                advancedCategoryText: fCatePublications,
+                advancedCodeText: fTypePublications,
               },
             };
 
@@ -2969,12 +2982,12 @@ jQuery(document).ready(function ($) {
         catFilterItems.find(".code-filter-advanced_ttl span span").empty(),
         catFilterItems
           .find(".cat-filter-advanced_ttl span span")
-          .text("All categories"),
+          .text(fCateForms),
         catFilterItems
           .find(".code-filter-advanced_ttl span span")
-          .text("All code groups"),
-        catSelect.text("All categories"),
-        codeSelect.text("All code groups"),
+          .text(fTypeForms),
+        catSelect.text(fCateForms),
+        codeSelect.text(fTypeForms),
         $(".cat-filter-selectV1 option").eq(0).prop("selected", true),
         $(".code-filter-selectV1 option").eq(0).prop("selected", true),
         formChecked.prop("checked", true),
@@ -2984,16 +2997,16 @@ jQuery(document).ready(function ($) {
         catFilterItems.find(".code-filter-advanced_ttl span span").empty(),
         catFilterItems
           .find(".cat-filter-advanced_ttl span span")
-          .text("All publications"),
+          .text(fCatePublications),
         catFilterItems
           .find(".code-filter-advanced_ttl span span")
-          .text("All types"),
-        catSelect.text("All categories"),
-        codeSelect.text("All code groups"),
+          .text(fTypePublications),
+        catSelect.text(fCatePublications),
+        codeSelect.text(fTypePublications),
         $(".cat-filter-selectV1 option").eq(0).prop("selected", true),
         $(".code-filter-selectV1 option").eq(0).prop("selected", true),
-        catSelect.text("All types"),
-        codeSelect.text("All publications"),
+        catSelect.text(fTypePublications),
+        codeSelect.text(fCatePublications),
         pubChecked.prop("checked", true),
         catPubChecked.prop("checked", true))
       : null;
